@@ -54,14 +54,14 @@ Node.js 는 fs(file system) 모듈을 이용하여 파일과 디렉토리에 관
 const http = require('http');
 const fs = require('fs');
 　
-const server = http.createServer(function(req, res) {
-    fs.readFile('index.html', function(err, data) {
+const server = http.createServer((req, res) => {
+    fs.readFile('index.html', (err, data) => {
         res.writeHead(200, {'Content-Type': 'text/html'});
         res.end(data);
     });
 });
 　
-server.listen(4000, function() {
+server.listen(4000, () => {
     console.log('server running');
 });
 ```
@@ -75,7 +75,7 @@ app.js 를 실행 후 `localhost:4000` 을 접속하면 index.html 페이지를 
 1. [readFile][link1]
     비동기 방식으로 파일을 읽는 메서드 입니다. file, option, callback 3개의 매개변수를 가지며 callback 을 통하여 error 또는 data를 반환합니다.
     data는 기본적으로 Buffer 객체를 반환 하지만 option을 통하여 encoding type을 지정할 수 있습니다.
-    `fs.readFile('index.html', 'utf-8', function(err, data) {});` 이와 같이 encoding type을 utf-8로 변환 후 console.log 를 통하여 data를 찍어보면 html 파일을 string 형태로 보여줄 것 입니다.
+    `fs.readFile('index.html', 'utf-8', (err, data) => {});` 이와 같이 encoding type을 utf-8로 변환 후 console.log 를 통하여 data를 찍어보면 html 파일을 string 형태로 보여줄 것 입니다.
 
 2. writeHead
     시작하기에서 언급했듯이 응답값의 헤더를 작성합니다. 이전 예제에서와는 다르게 html 문서를 응답해주므로 `Content-Type` 을 text/html로 작성하였습니다.

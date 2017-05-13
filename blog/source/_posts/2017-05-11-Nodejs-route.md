@@ -65,8 +65,8 @@ const http = require('http');
 const url = require('url');
 const fs = require('fs');
 　
-function start(route, handle) {
-    http.createServer(function (req, res) {
+const start = (route, handle) => {
+    http.createServer((req, res) => {
         const pathname = url.parse(req.url).pathname;
         route(handle, pathname, res, req);
     }).listen(4000);
@@ -81,7 +81,7 @@ exports.start = start;
 const fs = require('fs');
 const path = require('path'); // file 경로를 다루기 위한 모듈 (기본)
 　
-function route(handle, pathname, res, req) {
+const route = (handle, pathname, res, req) => {
     const extension = path.extname(pathname); // 확장자를 구하는 메서드
     const staticMap = {
         '.ico': 'image/x-icon',
@@ -100,12 +100,12 @@ function route(handle, pathname, res, req) {
     } else {
         if( staticMap[extension] ) {
             //static file
-            fs.readFile( staticPath + pathname, function(err, data) {
+            fs.readFile( staticPath + pathname, (err, data) => {
                 res.writeHead(200, {'Content-Type': staticMap[extension]});
                 res.end(data);
             });
         } else {
-            fs.readFile('./views/404.html', function(err, data) {
+            fs.readFile('./views/404.html', (err, data) => {
                 res.writeHead(404, {'Content-Type': 'text/html'});
                 res.end(data);
             });
@@ -123,14 +123,14 @@ exports.route = route;
 const fs = require('fs');
 　
 module.exports = {
-    home: function(res) {
-        fs.readFile('./views/index.html', function(err, data) {
+    home: (res) => {
+        fs.readFile('./views/index.html', (err, data) => {
             res.writeHead(200, {'Content-Type': 'text/html'});
             res.end(data)
         });
     },
-    about: function(res) {
-        fs.readFile('./views/about.html', function(err, data) {
+    about: (res) => {
+        fs.readFile('./views/about.html', (err, data) => {
             res.writeHead(200, {'Content-Type': 'text/html'});
             res.end(data);
         });

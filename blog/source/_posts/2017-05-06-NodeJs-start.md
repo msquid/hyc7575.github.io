@@ -36,10 +36,10 @@ http 통신을 하는 hello world 어플리케이션을 만들기 위해 app.js 
 const http = require('http'); // http 모듈을 불러온다.
 const port = 4000;
 　
-http.createServer(function(req, res) {
+http.createServer((req, res) => {
     res.writeHead(200, {'Content-Type': 'text/plain'});
     res.end('Hello World');
-}).listen(port, function() {
+}).listen(port, () => {
     // callback
     console.log('server running');    
 });
