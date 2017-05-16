@@ -17,6 +17,8 @@ tags:
 published: true
 ---
 
+[link1]: http://expressjs.com/ko/4x/api.html#app.use
+
 ## Router
 
 express에서 router는 기본적으로 아래와 같은 형태를 가집니다.
@@ -66,7 +68,7 @@ app.route('/user')
 - app.js
 ```javascript
 const express = require('express');
-const router = require('./route.js');
+const router = require('./route'); // 모듈화된 router를 불러옵니다.
 const app = express();
 　
 app.use(router);
@@ -94,3 +96,5 @@ router.post('/user', function(req, res) {
 　
 module.exports = router;
 ```
+
+route.js 파일을 만들어서 router 모듈을 만들었습니다. 우리는 app.js에 router를 불러와 [app.use()][link1]를 통하여 마운트한 것 입니다. (사용할 수 있도록 설정한 것 이라고 생각하면 됩니다.)
