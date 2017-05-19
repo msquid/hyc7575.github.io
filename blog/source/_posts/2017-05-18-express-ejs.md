@@ -22,7 +22,7 @@ published: true
 [link2]: https://github.com/Soarez/express-ejs-layouts
 
 ## Render ejs
-### directory
+### Directory
 - project
     - node_modules
     - views
@@ -38,9 +38,9 @@ npm init
 .
 .
 .
-npm i --save express express-ejs-layouts
+npm i --save express ejs express-ejs-layouts
 ```
-프로젝트 폴더에 접속하여 npm init으로 package.json 파일을 생성 후 express와 express-ejs-layouts를 설치합니다. ejs가 아닌 express-ejs-layouts인 이유는 이 모듈이 express에서 ejs의 다양한 layout 기능을 추가적으로 제공해주기 때문입니다.
+프로젝트 폴더에 접속하여 npm init으로 package.json 파일을 생성 후 express와 ejs, express-ejs-layouts를 설치합니다. express-ejs-layouts는 express에서 ejs의 다양한 layout 기능을 추가적으로 제공해줍니다.
 
 - layout.ejs
 ```html
@@ -88,7 +88,7 @@ app.set('layout', 'layout');
 app.set("layout extractScripts", true);
 app.use(expressLayouts);
 　
-app.get('/', function(req, res) {
+app.get('/', (req, res) => {
     res.render('index', {
         title: '타이틀 입니다.',
         description: '타이틀에 대한 설명이 들어오게 되겠지요?'
