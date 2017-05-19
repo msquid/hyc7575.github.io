@@ -19,7 +19,7 @@ published: true
 ---
 
 [link1]: http://expressjs.com/ko/4x/api.html#res.render
-
+[link2]: https://github.com/Soarez/express-ejs-layouts
 
 ## Render ejs
 ### directory
@@ -40,8 +40,40 @@ npm init
 .
 npm i --save express express-ejs-layouts
 ```
-express와 express-ejs-layouts를 설치합니다. ejs가 아닌 express-ejs-layouts인 이유는 이 모듈이 express에서 ejs의 다양한 layout 기능을 추가적으로 제공해주기 때문입니다.
+프로젝트 폴더에 접속하여 npm init으로 package.json 파일을 생성 후 express와 express-ejs-layouts를 설치합니다. ejs가 아닌 express-ejs-layouts인 이유는 이 모듈이 express에서 ejs의 다양한 layout 기능을 추가적으로 제공해주기 때문입니다.
 
+- layout.ejs
+```html
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{margin: 0; padding: 0;}
+        html, body {
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        헤더영역
+    </header>
+    <div id="main" style="border: 1px solid #dedede;">
+        <%- body %>
+    </div>
+    <footer>
+        푸터영역
+    </footer>
+    <%- script %>
+</body>
+</html>
+```
+view 페이지들의 layout 페이지입니다. `<%- body %>`부분에 컨텐츠가 들어가고, `<%- script %>`부분에 추출된 script 태그들이 들어갑니다. 설정 방법은 app.js에서 살펴보겠습니다.
+~~code를 html형태로 했더니 하이라이팅이 조금 이상합니다 ㅠㅠ~~
 - app.js
 ```javascript
 const express = require('express');
@@ -54,7 +86,7 @@ app.set('view engine', 'ejs');
 // ejs-layouts setting
 app.set('layout', 'layout');
 app.set("layout extractScripts", true);
-app.use(expressLayouts); //
+app.use(expressLayouts);
 　
 app.get('/', function(req, res) {
     res.render('index', {
@@ -72,3 +104,15 @@ app.listen(3000);
 `app.set('layout', 'layout');` views/layout.ejs를 기본 레이아웃으로 설정합니다. layout.ejs의 `<%- body %>` 부분에 랜더링된 html 문자열이 들어갑니다.
 
 `app.set("layout extractScripts", true);` 랜더링된 html에서 모든 script태그를 추출합니다. 이 script태그들은 layout.ejs에서 `<%- script %>` 부분에 들어가게 됩니다.
+
+`res.render('index', [,locals], [,callback])` index.ejs 파일을 랜더링 합니다. locals는 객체형태이며 이 객체의 프로퍼티들은 랜더링 되는 view 페이지에서 변수로 사용이 가능합니다.
+
+
+- index.ejs
+```html
+<h1><%= title %></h1>
+<script>console.log('script tag between h1 and p but..')</script>
+<p><%= description %></p>
+```
+
+app.js 실행 후 접속하면 완성된 결과를 볼 수 있습니다. express-ejs-layouts 모듈은 이 외에도 꽤 다양한 기능을 제공하고 있으니 [링크][link2]에 접속하여 한번 읽어보시기 바랍니다.
