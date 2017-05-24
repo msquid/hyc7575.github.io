@@ -70,3 +70,6 @@ theme: overdose
 deploy:
   type: git
   repo: https://github.com/hyc7575/hyc7575.github.io
+
+# Comment
+disqus_shortname: hyc7575
