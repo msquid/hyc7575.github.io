@@ -114,7 +114,7 @@ app.get('/', (req, res) => {
 });
 app.post('/userForm', (req, res) => {
     console.log(req.body);
-    res.json(req.body); // '/'로 이동
+    res.json(req.body);
 });
 　
 app.listen(3000);
