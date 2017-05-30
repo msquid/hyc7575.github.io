@@ -62,4 +62,4 @@ cookie-parser 불러와서 미들웨어로 사용하겠다고 선언만 해주�
 
 
 ## 참고
-[cookie-parser][https://github.com/expressjs/cookie-parser]
+[cookie-parser][link1]
