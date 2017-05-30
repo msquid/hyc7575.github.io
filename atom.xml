@@ -1,0 +1,568 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>hyc7575 blog</title>
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://hyc7575.github.com/"/>
+  <updated>2017-05-30T05:20:19.000Z</updated>
+  <id>http://hyc7575.github.com/</id>
+  
+  <author>
+    <name>keunhyeok jeon</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Node.js(express) - body-parser와 multer</title>
+    <link href="http://hyc7575.github.com/2017/05/24/2017-05-24-node-js-bodyparserAndMulter/"/>
+    <id>http://hyc7575.github.com/2017/05/24/2017-05-24-node-js-bodyparserAndMulter/</id>
+    <published>2017-05-24T05:31:33.000Z</published>
+    <updated>2017-05-30T05:20:19.000Z</updated>
+    
+    <content type="html"><![CDATA[<img src="https://cloud.githubusercontent.com/assets/14171723/25853095/7bf3be3a-3506-11e7-8421-0a2287dd6278.png"/><p>Node.js에서 form양식을 submit을 하기위해 사용되는 <a href="https://github.com/expressjs/body-parser" target="_blank" rel="external">body-parser</a>와 <a href="https://github.com/expressjs/multer" target="_blank" rel="external">multer</a> 미들웨어에 대해서 간단하게 알아보려 합니다. 각 미들웨어의 용도를 짧게 소개하면 <code>body-parser</code>는 <a href="https://hyc7575.github.io/2017/05/16/2017-05-16-nodejs-express-router-middleware/" target="_blank" rel="external">라우터와 미들웨어</a> 예제때 언급하였듯 요청 바디를 파싱하여서 req.body 객체로 접근할 수 있도록 도와주고, <code>multer</code>는 파일을 업로드를 도와주는 미들웨어 입니다.</p>
+<h2 id="Directory"><a href="#Directory" class="headerlink" title="Directory"></a>Directory</h2><ul>
+<li>project<ul>
+<li>uploads</li>
+<li>views<ul>
+<li>form.ejs</li>
+</ul>
+</li>
+<li>app.js</li>
+<li>package.json</li>
+</ul>
+</li>
+</ul>
+<p>uploads폴더는 업로드한 파일들이 들어가는 폴더입니다.</p>
+<h2 id="설치"><a href="#설치" class="headerlink" title="설치"></a>설치</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">npm init</div><div class="line">.</div><div class="line">.</div><div class="line">.</div><div class="line">npm i --save body-parser multer express ejs</div></pre></td></tr></table></figure>
+<h2 id="예제"><a href="#예제" class="headerlink" title="예제"></a>예제</h2><p>body-parser부터 차근차근 진행하도록 하겠습니다.</p>
+<ul>
+<li>form.ejs<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"ko"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></div><div class="line">        *&#123;margin:0; padding: 0;&#125;</div><div class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"/userForm"</span> <span class="attr">method</span>=<span class="string">"post"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">table</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">tbody</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">tr</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">td</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"userName"</span>&gt;</span>이름<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">td</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"userName"</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"userName"</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">                <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">tr</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">td</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"userAge"</span>&gt;</span>나이<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">td</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"userAge"</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"userAge"</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">                <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">tr</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">td</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"userJob"</span>&gt;</span>직업<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">td</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"userJob"</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"userJob"</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">                <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">tbody</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">table</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"전송"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><code>/userForm</code> 포인트로 post요청을 보내는 form을 생성합니다.</p>
+<ul>
+<li>app.js<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</div><div class="line"><span class="keyword">const</span> app = express();</div><div class="line"><span class="keyword">const</span> bodyParser = <span class="built_in">require</span>(<span class="string">'body-parser'</span>);</div><div class="line">　</div><div class="line">app.set(<span class="string">'views'</span>, __dirname + <span class="string">'/views'</span>);</div><div class="line">app.set(<span class="string">'view engine'</span>, <span class="string">'ejs'</span>);</div><div class="line">　</div><div class="line">app.use(bodyParser.urlencoded(&#123;<span class="attr">extended</span>: <span class="literal">false</span>&#125;));</div><div class="line">app.use(bodyParser.json()); <span class="comment">// 이번예제에서는 사용되지 않습니다...</span></div><div class="line">　</div><div class="line">app.get(<span class="string">'/'</span>, (req, res) =&gt; &#123;</div><div class="line">    res.render(<span class="string">'form'</span>);</div><div class="line">&#125;);</div><div class="line">app.post(<span class="string">'/userForm'</span>, (req, res) =&gt; &#123;</div><div class="line">    <span class="built_in">console</span>.log(req.body);</div><div class="line">    res.json(req.body);</div><div class="line">&#125;);</div><div class="line">　</div><div class="line">app.listen(<span class="number">3000</span>);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><code>/userForm</code>으로 post요청이 들어오게되면 req.body객체를 웹페이지에 json형태로 뿌려주도록 하였습니다. 이 상태로 어플리케이션을 실행하여 테스트 해봅니다.</p>
+<p><code>{&quot;userName&quot;: &quot;hyeok&quot;, &quot;userAge&quot;: &quot;20&quot;, &quot;userJob&quot;: &quot;Front-end developer&quot;}</code> 아마 이러한 형태의 결과를 보실 수 있으시라 생각합니다. 이전 포스팅에서 언급하였듯 form submit이 발생시 기본적으로 Content-Type이 x-www-form-urlencoded로 요청이 들어오는데 이 경우 <code>bodyParser.urlencoded()</code>가 input의 name과 매칭된 req.body 객체를 생성해줍니다. 이제 파일 업로드를 추가해보도록 하겠습니다.</p>
+<ul>
+<li>form.ejs<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"/userForm"</span> <span class="attr">enctype</span>=<span class="string">"multipart/form-data"</span> <span class="attr">method</span>=<span class="string">"post"</span>&gt;</span></div><div class="line">.</div><div class="line">.</div><div class="line">.</div><div class="line"><span class="tag">&lt;<span class="name">tr</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"userImage"</span>&gt;</span>사진<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"userImage"</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">name</span>=<span class="string">"userImage"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>input file이 들어간 로우 하나를 테이블에 추가하고, form태그의 enctype을 multipart/form-data로 명시해줍니다. 인코딩 타입을 이렇게 지정해야지만 form태그로 file전송을 할 수 있습니다.</p>
+<ul>
+<li>app.js<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</div><div class="line"><span class="keyword">const</span> app = express();</div><div class="line"><span class="keyword">const</span> bodyParser = <span class="built_in">require</span>(<span class="string">'body-parser'</span>); <span class="comment">// 이 예제에서는 bodyParser가 필요하지 않지만...</span></div><div class="line"><span class="keyword">const</span> multer = <span class="built_in">require</span>(<span class="string">'multer'</span>);</div><div class="line"><span class="keyword">const</span> upload = multer(&#123;<span class="attr">dest</span>: <span class="string">'uploads/'</span>&#125;); <span class="comment">// uploads 폴더에 파일을 저장</span></div><div class="line">　</div><div class="line">app.set(<span class="string">'views'</span>, __dirname + <span class="string">'/views'</span>);</div><div class="line">app.set(<span class="string">'view engine'</span>, <span class="string">'ejs'</span>);</div><div class="line">　</div><div class="line">app.use(bodyParser.urlencoded(&#123;<span class="attr">extended</span>: <span class="literal">false</span>&#125;)); <span class="comment">// 이번예제에서는 사용되지 않지만...</span></div><div class="line">app.use(bodyParser.json()); <span class="comment">// 이번예제에서는 사용되지 않지만...</span></div><div class="line">　</div><div class="line">app.use(express.static(<span class="string">'uploads'</span>)); <span class="comment">// 업로드된 이미지를 요청하여 표시한다면 넣어줍시다.</span></div><div class="line">　</div><div class="line">app.get(<span class="string">'/'</span>, (req, res) =&gt; &#123;</div><div class="line">    res.render(<span class="string">'form'</span>);</div><div class="line">&#125;);</div><div class="line">app.post(<span class="string">'/userForm'</span>, upload.single(<span class="string">'userImage'</span>), (req, res) =&gt; &#123;</div><div class="line">    <span class="built_in">console</span>.log(req.body);</div><div class="line">    <span class="built_in">console</span>.log(req.file);</div><div class="line">    res.send(<span class="string">`</span></div><div class="line">        body: <span class="subst">$&#123;<span class="built_in">JSON</span>.stringify(req.body)&#125;</span>,&lt;br/&gt;</div><div class="line">        file: <span class="subst">$&#123;<span class="built_in">JSON</span>.stringify(req.file)&#125;</span></div><div class="line">    `);</div><div class="line">&#125;);</div><div class="line">　</div><div class="line">app.listen(<span class="number">3000</span>);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><code>multer({dest: &#39;uploads/&#39;});</code> 이 함수는 미들웨어를 리턴하며, 옵션으로 들어간 dest의 value인 uploads에(폴더) 파일을 저장하겠다고 설정한 것 입니다. 그리고 리턴된 이 미들웨어는 <code>/userForm</code>에 post요청이 왔을 때 인자로 전해지는 <code>upload.single(&#39;userImage&#39;)</code> 미들웨어( 인자는 input file의 name값 )로 사용됩니다. 이 단계에서 req.body와 req.file에 접근 가능하도록 도와줍니다.( Content-Type이 multipart/form-data여서 body-parser가 해주지 않아요 ) 이제 어플리케이션을 실행하고 테스트를 진행합니다.</p>
+<p>body와 file의 정보가 객체형태로 넘어오고 uploads폴더에 파일이 저장되는것을 볼 수 있지만 이름이 랜덤하고 확장자도 없이 들어오고 있습니다. <code>storage</code>라는 것을 사용하여 파일이 디스크에 저장될때를 컨트롤할 수 있다고 하니 사용해보도록 합시다.</p>
+<ul>
+<li>app.js<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> multer = <span class="built_in">require</span>(<span class="string">'multer'</span>);</div><div class="line"><span class="keyword">const</span> storage = multer.diskStorage(&#123;</div><div class="line">    <span class="attr">destination</span>: <span class="function">(<span class="params">req, file, cb</span>) =&gt;</span> &#123;</div><div class="line">        cb(<span class="literal">null</span>, <span class="string">'uploads/'</span>)</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">filename</span>: <span class="function">(<span class="params">req, file, cb</span>) =&gt;</span> &#123;</div><div class="line">        cb(<span class="literal">null</span>, <span class="built_in">Date</span>.now() + <span class="string">'_'</span> + file.originalname);</div><div class="line">    &#125;</div><div class="line">&#125;)</div><div class="line"><span class="keyword">const</span> upload = multer(&#123;<span class="attr">storage</span>: storage&#125;);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>큰 변화는 없고 multer의 인자로 dest대신 storage를 설정해줍니다. destination은 파일이 저장될 위치이고, filename은 저장되는 파일의 이름을 설정합니다. 임시방편으로 Date.now()를 사용하였지만 유니크한 값을 만들어주는 모듈들을 설치하여서 사용하는 것을 추천 드립니다. 다시 한번 저장 후 어플리케이션을 실행하면 원본이름을 포함하고 있는 파일이 저장되어 있는 것을 볼 수 있습니다.</p>
+<h2 id="맺음"><a href="#맺음" class="headerlink" title="맺음"></a>맺음</h2><p>예제에서는 upload.single()을 사용하여 하나의 파일만을 업로드하는 경우를 살펴보았지만, upload.array()나 upload.fields() 등 을 사용하면 여러 파일을 업로드할 수 있습니다. 자세한 내용은 <a href="https://github.com/expressjs/multer" target="_blank" rel="external">링크</a>에서 확인해 보실 수 있습니다.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;img src=&quot;https://cloud.githubusercontent.com/assets/14171723/25853095/7bf3be3a-3506-11e7-8421-0a2287dd6278.png&quot;/&gt;&lt;p&gt;Node.js에서 form양식을 submi
+    
+    </summary>
+    
+      <category term="Node.js" scheme="http://hyc7575.github.com/categories/Node-js/"/>
+    
+    
+      <category term="nodejs" scheme="http://hyc7575.github.com/tags/nodejs/"/>
+    
+      <category term="javascript" scheme="http://hyc7575.github.com/tags/javascript/"/>
+    
+      <category term="javascript server" scheme="http://hyc7575.github.com/tags/javascript-server/"/>
+    
+      <category term="server" scheme="http://hyc7575.github.com/tags/server/"/>
+    
+      <category term="express" scheme="http://hyc7575.github.com/tags/express/"/>
+    
+      <category term="body-parser" scheme="http://hyc7575.github.com/tags/body-parser/"/>
+    
+      <category term="bodyParser" scheme="http://hyc7575.github.com/tags/bodyParser/"/>
+    
+      <category term="multer" scheme="http://hyc7575.github.com/tags/multer/"/>
+    
+      <category term="form submit" scheme="http://hyc7575.github.com/tags/form-submit/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Node.js - mysql 연결</title>
+    <link href="http://hyc7575.github.com/2017/05/19/2017-05-19-nodejs-mysql/"/>
+    <id>http://hyc7575.github.com/2017/05/19/2017-05-19-nodejs-mysql/</id>
+    <published>2017-05-19T08:37:55.000Z</published>
+    <updated>2017-05-29T07:00:20.000Z</updated>
+    
+    <content type="html"><![CDATA[<img src="https://cloud.githubusercontent.com/assets/14171723/25853095/7bf3be3a-3506-11e7-8421-0a2287dd6278.png"/><h2 id="mysql-연결하기"><a href="#mysql-연결하기" class="headerlink" title="mysql 연결하기"></a>mysql 연결하기</h2><p>데이터베이스에 관한 설명은 최대한 배제하고 node.js에서 mysql을 사용하는 방법 위주로 다루겠습니다. <del>(제가 db를 잘 몰라요 ㅠ..)</del><br>예제를 시작하기 앞서 로컬 또는 개인서버에 mysql 설치 후 예제에서 사용하는 table을 만들어야 합니다. 저는 <a href="https://www.freemysqlhosting.net/" target="_blank" rel="external">https://www.freemysqlhosting.net/</a>에서 테스트용 mysql 서버를 무료로 호스팅 받았습니다.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Projects (</div><div class="line">    <span class="keyword">id</span> <span class="built_in">INT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</div><div class="line">    <span class="keyword">name</span> <span class="built_in">VARCHAR</span>(<span class="number">30</span>),</div><div class="line">    description <span class="built_in">VARCHAR</span>(<span class="number">255</span>),</div><div class="line">    author <span class="built_in">VARCHAR</span>(<span class="number">30</span>),</div><div class="line">    PRIMARY <span class="keyword">KEY</span>(<span class="keyword">id</span>)</div><div class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8;;</div><div class="line">　</div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> Projects (<span class="keyword">name</span>, description, author) <span class="keyword">VALUES</span> (<span class="string">'node example'</span>,<span class="string">'node js 연습 프로젝트'</span>, <span class="string">'hyeok'</span>);</div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> Projects (<span class="keyword">name</span>, description, author) <span class="keyword">VALUES</span> (<span class="string">'javascript example'</span>,<span class="string">'javascript 연습 프로젝트'</span>, <span class="string">'kh_j'</span>);</div></pre></td></tr></table></figure>
+<p>DB 서버에 접속하여서 Projects라는 테이블과 2개 정도의 테스트용 데이터를 생성하였습니다.<br>이제 본격적으로 node.js에서 mysql에 접속하는 방법을 살펴보겠습니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">npm init</div><div class="line">.</div><div class="line">.</div><div class="line">.</div><div class="line">npm i --save express ejs express-ejs-layouts mysql</div></pre></td></tr></table></figure>
+<p>예제를 진행하기 위한 폴더에서 package.json 파일을 만들고 몇가지 모듈들을 설치합니다.</p>
+<h3 id="Directory"><a href="#Directory" class="headerlink" title="Directory"></a>Directory</h3><ul>
+<li>project<ul>
+<li>config<ul>
+<li>dbconfig.js</li>
+</ul>
+</li>
+<li>routes<ul>
+<li>route.js</li>
+</ul>
+</li>
+<li>views<ul>
+<li>index.ejs</li>
+</ul>
+</li>
+<li>app.js</li>
+<li>package.json</li>
+</ul>
+</li>
+</ul>
+<h3 id="예제"><a href="#예제" class="headerlink" title="예제"></a>예제</h3><ul>
+<li>dbconfig.js<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line">    <span class="attr">host</span>     : <span class="string">'&lt;host&gt;'</span>,</div><div class="line">    <span class="attr">user</span>     : <span class="string">'&lt;username&gt;'</span>,</div><div class="line">    <span class="attr">password</span> : <span class="string">'&lt;password&gt;'</span>,</div><div class="line">    <span class="attr">database</span> : <span class="string">'&lt;db_name&gt;'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>데이터베이스 접속 정보를 모듈화 시켜줍니다. 로컬에 mysql을 설치하셨다면 host는 localhost이며 나머지는 mysql을 설치하면서 설정한 값을 넣어주면 됩니다. 제가 사용한 mysql 호스팅은 가입시 메일로 정보를 보내주더군요.</p>
+<ul>
+<li>app.js<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</div><div class="line"><span class="keyword">const</span> app = express();</div><div class="line"><span class="keyword">const</span> expressLayouts = <span class="built_in">require</span>(<span class="string">'express-ejs-layouts'</span>);</div><div class="line"><span class="keyword">const</span> router = <span class="built_in">require</span>(<span class="string">'./routes/route.js'</span>);</div><div class="line"></div><div class="line">app.set(<span class="string">'views'</span>,__dirname + <span class="string">'/views'</span>);</div><div class="line">app.set(<span class="string">'view engine'</span>, <span class="string">'ejs'</span>);</div><div class="line">　</div><div class="line">app.use(expressLayouts);</div><div class="line">app.use(router);</div><div class="line">　</div><div class="line">app.listen(<span class="number">4000</span>);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>이전까지 예제와 차이가 없습니다. 간단한 세팅과 서버 실행을 담당합니다.</p>
+<ul>
+<li>route.js<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</div><div class="line"><span class="keyword">const</span> router = express.Router();</div><div class="line">　</div><div class="line"><span class="keyword">const</span> mysql = <span class="built_in">require</span>(<span class="string">'mysql'</span>);</div><div class="line"><span class="keyword">const</span> connection = mysql.createConnection(<span class="built_in">require</span>(<span class="string">'../config/dbconfig.js'</span>));</div><div class="line">　</div><div class="line">connection.connect(<span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</div><div class="line">    <span class="keyword">if</span>(err) &#123;</div><div class="line">        <span class="built_in">console</span>.log(err);</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">console</span>.log( <span class="string">'mysql connect completed'</span> );</div><div class="line">&#125;);</div><div class="line">router.get(<span class="string">'/'</span>, (req, res) =&gt; &#123;</div><div class="line">    <span class="keyword">const</span> sql = <span class="string">'SELECT * FROM Projects'</span>;</div><div class="line">    connection.query(sql, (err, results, field) =&gt; &#123;</div><div class="line">        <span class="built_in">console</span>.log(results); <span class="comment">// 배열 형태로 결과가 떨어짐</span></div><div class="line">        res.render(<span class="string">'index'</span>, &#123;</div><div class="line">            <span class="attr">layout</span>: <span class="literal">false</span>, <span class="comment">// express-ejs-layouts는 기본으로 layout.ejs가 설정되어야 하는데 이를 사용하지 않을 경우</span></div><div class="line">            projects: results</div><div class="line">        &#125;);</div><div class="line">    &#125;);</div><div class="line">&#125;);</div><div class="line">　</div><div class="line"><span class="built_in">module</span>.exports = router;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>route.js에서 mysql 모듈을 불러옵니다.<br>mysql 모듈의 <code>mysql.createConnection</code>을 사용하면 db에 접근할 수 있는 객체(?)를 생성할 수 있습니다. 이 메서드는 인자로 dbconfig.js에서 설정한 정보를 가져옵니다. 이제 우리는 connection 객체로 db에 접근할 수 있게 되었습니다. 다음으로 <code>connection.connect()</code>는 db 접속시 발생하는 이벤트입니다. 에러를 인자로 받아 db접속에 실패할 경우 어떠한 에러인지 판별할 수 있고 성공 로그를 남길수도 있습니다. 마지막으로 <code>connection.query()</code>입니다. 이 메서드는 db에 쿼리문을 전달하여 결과 값을 받아오는 기능을 합니다. 우리는 첫번째 인자로 string 형태의 쿼리문을 전달하였고 그에대한 callback의 2번째 인자로 결과를 가져왔습니다. 콘솔에 results의 로그를 남겨보면 맨 처음 추가했던 2개의 데이터가 <code>배열</code> 형태로 넘어오는 것을 볼 수 있습니다.</p>
+<ul>
+<li>index.ejs<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>프로젝트 리스트<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">table</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">thead</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">tr</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">th</span>&gt;</span>id<span class="tag">&lt;/<span class="name">th</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">th</span>&gt;</span>description<span class="tag">&lt;/<span class="name">th</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">th</span>&gt;</span>author<span class="tag">&lt;/<span class="name">th</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">thead</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">tbody</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">%</span> <span class="attr">projects.forEach</span>((<span class="attr">item</span>) =&gt;</span> &#123; %&gt;</div><div class="line">            <span class="tag">&lt;<span class="name">tr</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">%=</span> <span class="attr">item.id</span> %&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">%=</span> <span class="attr">item.description</span> %&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">%=</span> <span class="attr">item.author</span> %&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">%</span> &#125;); %&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">tbody</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">table</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>route.js에서 <code>res.render</code>부분을 보면 쿼리문에대한 결과를 넘겨주는 것을 볼 수 있습니다. 그로인해 우리는 projects라는 이름의 변수를 사용할 수 있고, 그 변수는 하나의 배열입니다. index.ejs에서는 그 배열을 forEach 돌면서 뿌려주는 역할을 합니다.</p>
+<p>이제 app.js를 실행하여 접속하면 2줄의 데이터를 볼 수 있습니다. db에 접속하여 데이터를 추가하거나 삭제 후 새로고침하면 이전과는 다른 화면을 볼 수 있게 되었지요.</p>
+<h2 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h2><p><a href="https://github.com/mysqljs/mysql" target="_blank" rel="external">mysql</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;img src=&quot;https://cloud.githubusercontent.com/assets/14171723/25853095/7bf3be3a-3506-11e7-8421-0a2287dd6278.png&quot;/&gt;&lt;h2 id=&quot;mysql-연결하기&quot;&gt;&lt;a hre
+    
+    </summary>
+    
+      <category term="Node.js" scheme="http://hyc7575.github.com/categories/Node-js/"/>
+    
+    
+      <category term="nodejs" scheme="http://hyc7575.github.com/tags/nodejs/"/>
+    
+      <category term="javascript" scheme="http://hyc7575.github.com/tags/javascript/"/>
+    
+      <category term="javascript server" scheme="http://hyc7575.github.com/tags/javascript-server/"/>
+    
+      <category term="server" scheme="http://hyc7575.github.com/tags/server/"/>
+    
+      <category term="express" scheme="http://hyc7575.github.com/tags/express/"/>
+    
+      <category term="mysql" scheme="http://hyc7575.github.com/tags/mysql/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Node.js(express) - express ejs 템플릿</title>
+    <link href="http://hyc7575.github.com/2017/05/18/2017-05-18-express-ejs/"/>
+    <id>http://hyc7575.github.com/2017/05/18/2017-05-18-express-ejs/</id>
+    <published>2017-05-18T07:29:26.000Z</published>
+    <updated>2017-05-29T07:00:20.000Z</updated>
+    
+    <content type="html"><![CDATA[<img src="https://cloud.githubusercontent.com/assets/14171723/25853095/7bf3be3a-3506-11e7-8421-0a2287dd6278.png"/><h2 id="Render-ejs"><a href="#Render-ejs" class="headerlink" title="Render ejs"></a>Render ejs</h2><h3 id="Directory"><a href="#Directory" class="headerlink" title="Directory"></a>Directory</h3><ul>
+<li>project<ul>
+<li>node_modules</li>
+<li>views<ul>
+<li>index.ejs</li>
+<li>layout.ejs</li>
+</ul>
+</li>
+<li>app.js</li>
+<li>package.json</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">npm init</div><div class="line">.</div><div class="line">.</div><div class="line">.</div><div class="line">npm i --save express ejs express-ejs-layouts</div></pre></td></tr></table></figure>
+<p>프로젝트 폴더에 접속하여 npm init으로 package.json 파일을 생성 후 express와 ejs, express-ejs-layouts를 설치합니다. express-ejs-layouts는 express에서 ejs의 다양한 layout 기능을 추가적으로 제공해줍니다.</p>
+<ul>
+<li>layout.ejs<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"ko"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></div><div class="line">        *&#123;margin: 0; padding: 0;&#125;</div><div class="line">        html, body &#123;</div><div class="line">            height: 100%;</div><div class="line">        &#125;</div><div class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">header</span>&gt;</span></div><div class="line">        헤더영역</div><div class="line">    <span class="tag">&lt;/<span class="name">header</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"main"</span> <span class="attr">style</span>=<span class="string">"border: 1px solid #dedede;"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">%-</span> <span class="attr">body</span> %&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">footer</span>&gt;</span></div><div class="line">        푸터영역</div><div class="line">    <span class="tag">&lt;/<span class="name">footer</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">%-</span> <span class="attr">script</span> %&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>view 페이지들의 layout 페이지입니다. <code>&lt;%- body %&gt;</code>부분에 컨텐츠가 들어가고, <code>&lt;%- script %&gt;</code>부분에 추출된 script 태그들이 들어갑니다. 설정 방법은 app.js에서 살펴보겠습니다.<br><del>code를 html형태로 했더니 하이라이팅이 조금 이상합니다 ㅠㅠ</del></p>
+<ul>
+<li>app.js<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</div><div class="line"><span class="keyword">const</span> app = express();</div><div class="line"><span class="keyword">const</span> expressLayouts = <span class="built_in">require</span>(<span class="string">'express-ejs-layouts'</span>);</div><div class="line">　</div><div class="line">app.set(<span class="string">'views'</span>,__dirname + <span class="string">'/views'</span>);</div><div class="line">app.set(<span class="string">'view engine'</span>, <span class="string">'ejs'</span>);</div><div class="line">　</div><div class="line"><span class="comment">// ejs-layouts setting</span></div><div class="line">app.set(<span class="string">'layout'</span>, <span class="string">'layout'</span>);</div><div class="line">app.set(<span class="string">"layout extractScripts"</span>, <span class="literal">true</span>);</div><div class="line">app.use(expressLayouts);</div><div class="line">　</div><div class="line">app.get(<span class="string">'/'</span>, (req, res) =&gt; &#123;</div><div class="line">    res.render(<span class="string">'index'</span>, &#123;</div><div class="line">        <span class="attr">title</span>: <span class="string">'타이틀 입니다.'</span>,</div><div class="line">        <span class="attr">description</span>: <span class="string">'타이틀에 대한 설명이 들어오게 되겠지요?'</span></div><div class="line">    &#125;)</div><div class="line">&#125;);</div><div class="line">app.listen(<span class="number">3000</span>);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>처음 등장하는 코드 위주로 알아보겠습니다.<br><code>app.set(&#39;views&#39;,__dirname + &#39;/views&#39;);</code> 이 코드는 view 파일들이 있는 경로를 설정하는 영역입니다. <code>__dirname</code>은 현재 app.js가 위치한 경로를 알려주는 Node.js의 전역변수인데, 우리는 이 코드를 통해서 app.js와 같은레벨에 있는 views 라는 폴더에 템플릿 파일들이 있다고 app에게 알려준 것 입니다.</p>
+<p><code>app.set(&#39;view engine&#39;, &#39;ejs&#39;);</code> 템플릿 엔진 ejs 사용하겠다고 선언한 것입니다. 이 선언을 함으로써 우리는 <a href="http://expressjs.com/ko/4x/api.html#res.render" target="_blank" rel="external">res.render</a> 메소드에서 .ejs를 생략할 수 있게되었습니다.</p>
+<p><code>app.set(&#39;layout&#39;, &#39;layout&#39;);</code> views/layout.ejs를 기본 레이아웃으로 설정합니다. layout.ejs의 <code>&lt;%- body %&gt;</code> 부분에 랜더링된 html 문자열이 들어갑니다.</p>
+<p><code>app.set(&quot;layout extractScripts&quot;, true);</code> 랜더링된 html에서 모든 script태그를 추출합니다. 이 script태그들은 layout.ejs에서 <code>&lt;%- script %&gt;</code> 부분에 들어가게 됩니다.</p>
+<p><code>res.render(&#39;index&#39;, [,locals], [,callback])</code> index.ejs 파일을 랜더링 합니다. locals는 객체형태이며 이 객체의 프로퍼티들은 랜더링 되는 view 페이지에서 변수로 사용이 가능합니다.</p>
+<ul>
+<li>index.ejs<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span><span class="tag">&lt;<span class="name">%=</span> <span class="attr">title</span> %&gt;</span><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"><span class="built_in">console</span>.log(<span class="string">'script tag between h1 and p but..'</span>)</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">%=</span> <span class="attr">description</span> %&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>app.js 실행 후 접속하면 완성된 결과를 볼 수 있습니다. express-ejs-layouts 모듈은 이 외에도 꽤 다양한 기능을 제공하고 있으니 <a href="https://github.com/Soarez/express-ejs-layouts" target="_blank" rel="external">링크</a>에 접속하여 한번 읽어보시기 바랍니다.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;img src=&quot;https://cloud.githubusercontent.com/assets/14171723/25853095/7bf3be3a-3506-11e7-8421-0a2287dd6278.png&quot;/&gt;&lt;h2 id=&quot;Render-ejs&quot;&gt;&lt;a hre
+    
+    </summary>
+    
+      <category term="Node.js" scheme="http://hyc7575.github.com/categories/Node-js/"/>
+    
+    
+      <category term="nodejs" scheme="http://hyc7575.github.com/tags/nodejs/"/>
+    
+      <category term="javascript" scheme="http://hyc7575.github.com/tags/javascript/"/>
+    
+      <category term="javascript server" scheme="http://hyc7575.github.com/tags/javascript-server/"/>
+    
+      <category term="server" scheme="http://hyc7575.github.com/tags/server/"/>
+    
+      <category term="express" scheme="http://hyc7575.github.com/tags/express/"/>
+    
+      <category term="ejs" scheme="http://hyc7575.github.com/tags/ejs/"/>
+    
+      <category term="ejs-layout" scheme="http://hyc7575.github.com/tags/ejs-layout/"/>
+    
+      <category term="layout" scheme="http://hyc7575.github.com/tags/layout/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Node.js(express) - Router와 middleware</title>
+    <link href="http://hyc7575.github.com/2017/05/16/2017-05-16-nodejs-express-router-middleware/"/>
+    <id>http://hyc7575.github.com/2017/05/16/2017-05-16-nodejs-express-router-middleware/</id>
+    <published>2017-05-16T08:50:00.000Z</published>
+    <updated>2017-05-29T07:00:20.000Z</updated>
+    
+    <content type="html"><![CDATA[<img src="https://cloud.githubusercontent.com/assets/14171723/25853095/7bf3be3a-3506-11e7-8421-0a2287dd6278.png"/><h2 id="Router"><a href="#Router" class="headerlink" title="Router"></a>Router</h2><p>express에서 router는 기본적으로 아래와 같은 형태를 가집니다.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">app.METHOD(PATH, HANDLER)</div></pre></td></tr></table></figure></p>
+<ul>
+<li>METHOD: http 요청 메서드</li>
+<li>PATH: 경로(엔드포인트)</li>
+<li>HANDLER: 실행될 함수</li>
+</ul>
+<p>몇가지 예를 들어보면</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">app.get(<span class="string">'/home'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</div><div class="line">    res.send(<span class="string">'home 접속'</span>);</div><div class="line">&#125;);</div><div class="line">app.post(<span class="string">'/user'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</div><div class="line">    res.send(<span class="string">'user에 대한 post 요청 처리'</span>);</div><div class="line">&#125;);</div><div class="line">app.put(<span class="string">'/user'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</div><div class="line">    res.send(<span class="string">'user에 대한 put 요청 처리'</span>);</div><div class="line">&#125;);</div><div class="line">app.delete(<span class="string">'/user'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</div><div class="line">    res.send(<span class="string">'user에 대한 delete 요청 처리'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>가장 많이 사용되는 4가지 http 메서드에 대한 예제입니다.<br>보시면 <code>/user</code> 경로가 중복되는 경우가 있는데 이럴 경우 <code>app.route(path)</code>를 사용할 수 있습니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">app.route(<span class="string">'/user'</span>)</div><div class="line">    .post(<span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</div><div class="line">        res.send(<span class="string">'user에 대한 post 요청 처리'</span>);</div><div class="line">    &#125;)</div><div class="line">    .put(<span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</div><div class="line">        res.send(<span class="string">'user에 대한 put 요청 처리'</span>);</div><div class="line">    &#125;)</div><div class="line">    .delete(<span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</div><div class="line">        res.send(<span class="string">'user에 대한 delete 요청 처리'</span>);</div><div class="line">    &#125;);</div></pre></td></tr></table></figure>
+<h3 id="express-Router"><a href="#express-Router" class="headerlink" title="express.Router"></a>express.Router</h3><p>라우터의 기본 사용방법을 보았으니 이를 모듈화 시키는 방법을 보겠습니다.</p>
+<ul>
+<li><p>app.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</div><div class="line"><span class="keyword">const</span> router = <span class="built_in">require</span>(<span class="string">'./route'</span>); <span class="comment">// 모듈화된 router를 불러옵니다.</span></div><div class="line"><span class="keyword">const</span> app = express();</div><div class="line">　</div><div class="line">app.use(router);</div><div class="line">　</div><div class="line"><span class="comment">// 1번쨰 매개변수로 받은 /hi에 대한 라우팅이 가능하도록 해줍니다. ex) /hi, /hi/about, /hi/user</span></div><div class="line"><span class="comment">// app.use('/hi', router);</span></div><div class="line">　</div><div class="line">app.listen(<span class="number">4000</span>);</div></pre></td></tr></table></figure>
+</li>
+<li><p>route.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</div><div class="line"><span class="keyword">const</span> router = express.Router();</div><div class="line">　</div><div class="line">router.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</div><div class="line">  res.send(<span class="string">'Home 접속'</span>);</div><div class="line">&#125;);</div><div class="line">router.get(<span class="string">'/about'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</div><div class="line">  res.send(<span class="string">'About 접속'</span>);</div><div class="line">&#125;);</div><div class="line">router.post(<span class="string">'/user'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</div><div class="line">    res.send(<span class="string">'user에 대한 post 요청'</span>);</div><div class="line">&#125;);</div><div class="line">　</div><div class="line"><span class="built_in">module</span>.exports = router;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>route.js 파일을 만들어서 router 모듈을 만들었습니다. 우리는 app.js에 router를 불러와 <a href="http://expressjs.com/ko/4x/api.html#app.use" target="_blank" rel="external">app.use()</a>를 통하여 지정된 경로에 미들웨어로 마운트한 것 입니다. (경로가 없다면 모든 요청시마다 실행합니다)</p>
+<h2 id="Middleware-미들웨어"><a href="#Middleware-미들웨어" class="headerlink" title="Middleware(미들웨어)"></a>Middleware(미들웨어)</h2><p>express는 일련의 미들웨어(함수)들로 이루어져있습니다. 이 미들웨어는 요청, 응답 사이에서 부가적인 처리를 할 수 있고 다음 미들웨어의 실행권한을 가지게 됩니다. 이해가 부족한지 텍스트로 내용을 풀어쓰기가 쉽지가 않아 예제를 보는게 편할듯 합니다. <code>express.Router() 예제</code>에서 사용한 app.js를 이어서 사용하겠습니다.</p>
+<ul>
+<li>app.js<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</div><div class="line"><span class="keyword">const</span> router = <span class="built_in">require</span>(<span class="string">'./route.js'</span>);</div><div class="line"><span class="keyword">const</span> app = express();</div><div class="line">　</div><div class="line">app.use(<span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</div><div class="line">    req.testValue = <span class="string">'안녕하세요.'</span>;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'1번'</span>);</div><div class="line">    next(); <span class="comment">// 다음 middleware 실행</span></div><div class="line">&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'2번'</span>);</div><div class="line">    next(); <span class="comment">// 다음 middleware 실행</span></div><div class="line">&#125;);</div><div class="line">　</div><div class="line">app.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'home'</span>, req.testValue);</div><div class="line">    res.send(<span class="string">'Home'</span>);</div><div class="line">&#125;);</div><div class="line">app.use(<span class="string">'/path'</span>, router); <span class="comment">// '/path'로 시작하는 경로의 경우에만 실행됩니다.</span></div><div class="line">　</div><div class="line">app.listen(<span class="number">3000</span>);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>서버를 실행 시킨 뒤 <code>localhost:3000</code>에 접속하면 터미널에 3개의 콘솔이 찍힌 것을 볼 수 있습니다.</p>
+<ul>
+<li>terminal<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1번</div><div class="line">2번</div><div class="line">home 안녕하세요.</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>작성한 미들웨어가 위에서부터 순차적으로 실행된다것과(중요!) <code>req.testValue</code>를 보아 미들웨어 스택내에서 같은 request, response를 공유하고 있다는 것을 알 수 있습니다.</p>
+<p>여기서 사용한 <code>app.use()</code>가 미들웨어를 설정하는 부분인데, (app.METHOD도 미들웨어 설정이라고 볼 수 있음)<br>이 메서드는 <code>app.use([path,] callback [, callback...])</code>이러한 형태를 가지게 됩니다.<br>path가 생략되어있다면 모든 요청에서 callback이 실행되고, 그렇지 않다면 해당 path로 시작하는 요청에서 callback이 실행됩니다. 또한 각 미들웨어는 다음에 실행되는 미들웨어의 실행 권한을 가지고 있습니다. 일반적으로는 예제에서 사용한 next라는 이름의 변수를 사용합니다. <code>next()</code>를 호출하지 않는다면 다음 미들웨어를 실행하지 않게 되겠지요. 만약 응답을 보내주지도 않았다면 요청이 온 상태에서 멈춰버리게 됩니다. ( 파비콘자리에 빙글빙글 도는 로딩바를 보실 수 있습니다 ㅠㅠ )</p>
+<p>지금까지 직접 미들웨어를 만드는 방법을 알아보았습니다. 이제는 express에서 기본으로 제공하는 미들웨어와 써드파티 미들웨어를 사용하는 법을 알아보려 합니다. 마찬가지로 app.js를 그대로 사용하겠습니다.</p>
+<p>우선 npm을 통하여 모듈을 설치합니다.</p>
+<ul>
+<li><p>terminal</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm i --save body-parser</div></pre></td></tr></table></figure>
+</li>
+<li><p>app.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</div><div class="line"><span class="keyword">const</span> router = <span class="built_in">require</span>(<span class="string">'./route.js'</span>);</div><div class="line"><span class="keyword">const</span> app = express();</div><div class="line"><span class="keyword">const</span> bodyParser = <span class="built_in">require</span>(<span class="string">'body-parser'</span>); <span class="comment">// 설치한 모듈을 불러옵니다.</span></div><div class="line">　</div><div class="line"><span class="comment">// set static file directory</span></div><div class="line">app.use(express.static(<span class="string">'public'</span>));</div><div class="line"><span class="comment">// parse application/x-www-form-urlencoded</span></div><div class="line">app.use(bodyParser.urlencoded(&#123; <span class="attr">extended</span>: <span class="literal">false</span> &#125;));</div><div class="line"><span class="comment">// parse application/json</span></div><div class="line">app.use(bodyParser.json());</div><div class="line">　</div><div class="line">app.use(<span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</div><div class="line">    req.testValue = <span class="string">'안녕하세요.'</span>;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'1번'</span>);</div><div class="line">    next(); <span class="comment">// 다음 middleware 실행</span></div><div class="line">&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'2번'</span>);</div><div class="line">    next(); <span class="comment">// 다음 middleware 실행</span></div><div class="line">&#125;);</div><div class="line">　</div><div class="line">app.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'home'</span>, req.testValue);</div><div class="line">    res.send(<span class="string">'Home'</span>);</div><div class="line">&#125;);</div><div class="line">app.use(<span class="string">'/path'</span>, router); <span class="comment">// '/path'로 시작하는 경로의 경우에만 실행됩니다.</span></div><div class="line">　</div><div class="line">app.listen(<span class="number">3000</span>);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>express가 4.X 버전에 올라오면서 <code>express.static</code>을 제외한 기본 미들웨어들은 모두 별도의 모듈로 분리 되었습니다. 7번줄에서 사용한 이 메서드는 정적파일들을 제공해주는 역할을 합니다. 지난번 예제에서 <code>staticMap</code>을 만들어서 확장자에 따른 각 헤더값을 정해주는 작업을 이제는 하지 않아도 되는 것이지요.</p>
+<p>다음으로는 써드파트 미들웨어입니다. npm을 통하여 사용할 모듈을 설치하고 app.use() 를 통해 미들웨어로써 마운트한 것입니다. 예제에서는 <a href="https://github.com/expressjs/body-parser" target="_blank" rel="external">body-parser</a>라는 모듈을 설치하였는데 이 모듈은 요청 바디를 파싱하여서 req.body 객체로 접근할 수 있도록 도와줍니다. <code>bodyParser.urlencoded()</code>는 헤더의 Content-Type이 <code>application/x-www-form-urlencoded</code>일 경우(form태그의 기본 인코딩 타입이다)에 대한 파싱을 해주고, <code>bodyParser.json()</code>은 마찬가지로 Content-Type이 <code>application/json</code>일 경우에 대한 파싱을 해줍니다. 추가로 bodyParser.urlencoded의 옵션으로 들어가는 extended는 값에 따라서 데이터 파싱을 <code>querystring</code> 라이브러리를 사용하는지 <code>qs</code> 라이브러리로 하는지의 차이를 가지고 있다고 합니다. 자세한 내용은 하단 참고링크를 걸어두겠습니다.</p>
+<h2 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h2><ul>
+<li><a href="http://expressjs.com/ko/guide/using-middleware.html#middleware.application" target="_blank" rel="external">미들웨어</a></li>
+<li><a href="https://github.com/expressjs/body-parser" target="_blank" rel="external">body-parser</a> - urlencoded를 검색</li>
+<li><a href="http://stackoverflow.com/questions/29175465/body-parser-extended-option-qs-vs-querystring" target="_blank" rel="external">body-parser(qs vs querystring)</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;img src=&quot;https://cloud.githubusercontent.com/assets/14171723/25853095/7bf3be3a-3506-11e7-8421-0a2287dd6278.png&quot;/&gt;&lt;h2 id=&quot;Router&quot;&gt;&lt;a href=&quot;#
+    
+    </summary>
+    
+      <category term="Node.js" scheme="http://hyc7575.github.com/categories/Node-js/"/>
+    
+    
+      <category term="nodejs" scheme="http://hyc7575.github.com/tags/nodejs/"/>
+    
+      <category term="javascript" scheme="http://hyc7575.github.com/tags/javascript/"/>
+    
+      <category term="javascript server" scheme="http://hyc7575.github.com/tags/javascript-server/"/>
+    
+      <category term="server" scheme="http://hyc7575.github.com/tags/server/"/>
+    
+      <category term="express" scheme="http://hyc7575.github.com/tags/express/"/>
+    
+      <category term="Router" scheme="http://hyc7575.github.com/tags/Router/"/>
+    
+      <category term="middleware" scheme="http://hyc7575.github.com/tags/middleware/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Node.js(express) - express 프레임워크</title>
+    <link href="http://hyc7575.github.com/2017/05/13/2017-05-13-Nodejs-express/"/>
+    <id>http://hyc7575.github.com/2017/05/13/2017-05-13-Nodejs-express/</id>
+    <published>2017-05-13T04:47:37.000Z</published>
+    <updated>2017-05-29T07:00:20.000Z</updated>
+    
+    <content type="html"><![CDATA[<img src="https://cloud.githubusercontent.com/assets/14171723/25853095/7bf3be3a-3506-11e7-8421-0a2287dd6278.png"/><h2 id="express"><a href="#express" class="headerlink" title="express"></a>express</h2><p>express.js는 Node.js에서 사용하는 웹 앱 프레임워크입니다.<br>처음 express를 접해보았을 때는 버전이 3.X 가 나온지 얼마 안되었을 때 같은데 어느새 4.X로 올라왔고 Connect 모듈에 대한 종속성이 사라졌다고 합니다. ( 3.X -&gt; 4.X로 버전 업을 할 경우 Connect에 종속된 미들웨어는 따로 처리를 해주셔야 합니다. )</p>
+<h3 id="설치"><a href="#설치" class="headerlink" title="설치"></a>설치</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mkdir express-exam01</div><div class="line">cd express-exam01</div></pre></td></tr></table></figure>
+<p>express 설치할 폴더를 생성 후 해당 폴더로 이동합니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm init</div></pre></td></tr></table></figure>
+<p>npm init을 통해 해당 폴더를 npm project로 만들고 package.json을 생성합니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm i express --save</div></pre></td></tr></table></figure>
+<p>npm을 이용하여 express를 설치 save 옵션을 통해 package.json의 dependencies에 express를 추가해줍니다. ( 임시로 사용할 것 이라면 save 옵션을 주지 않아도 괜찮습니다 )</p>
+<h3 id="실행"><a href="#실행" class="headerlink" title="실행"></a>실행</h3><p>express-exam01폴더에 app.js를 생성합니다.</p>
+<ul>
+<li>app.js  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</div><div class="line"><span class="keyword">const</span> app = express();</div><div class="line">　</div><div class="line">app.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>) </span>&#123;</div><div class="line">    res.send(<span class="string">'생성 완료'</span>);</div><div class="line">&#125;);</div><div class="line">app.listen(<span class="number">4000</span>);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>터미널을 통해 app.js를 실행 후 <code>localhost:4000</code>을 접속하면 웹 서버가 정상적으로 동작하는 것을 확인할 수 있습니다.</p>
+<p><code>express()</code>를 통하여 express 어플리케이션을 객체를 반환 합니다. 우리는 반환된 객체를 통해서 어플리케이션을 작성합니다.<br>4번 라인의 <a href="http://expressjs.com/ko/4x/api.html#app.get" target="_blank" rel="external">app.get</a> 메서드를 사용하여 http get요청에 대한 route를 정의하였고, 5번라인의 <a href="http://expressjs.com/ko/4x/api.html#res.send" target="_blank" rel="external">res.send</a>는 http 응답을 보내는 역할을 해줍니다. 특징이라면 헤더를 자동으로 지정해줍니다. 7번 라인의 <a href="http://expressjs.com/ko/4x/api.html#app.listen" target="_blank" rel="external">app.listen</a> 메서드를 사용하여 서버를 실행 시켰습니다. http 모듈의 listen과 동일한 기능을 수행합니다.</p>
+<!--
+> Express는 자체적인 최소한의 기능을 갖춘 라우팅 및 미들웨어 웹 프레임워크이며, Express 애플리케이션은 기본적으로 일련의 미들웨어 함수 호출입니다. -->
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;img src=&quot;https://cloud.githubusercontent.com/assets/14171723/25853095/7bf3be3a-3506-11e7-8421-0a2287dd6278.png&quot;/&gt;&lt;h2 id=&quot;express&quot;&gt;&lt;a href=&quot;
+    
+    </summary>
+    
+      <category term="Node.js" scheme="http://hyc7575.github.com/categories/Node-js/"/>
+    
+    
+      <category term="nodejs" scheme="http://hyc7575.github.com/tags/nodejs/"/>
+    
+      <category term="javascript" scheme="http://hyc7575.github.com/tags/javascript/"/>
+    
+      <category term="javascript server" scheme="http://hyc7575.github.com/tags/javascript-server/"/>
+    
+      <category term="server" scheme="http://hyc7575.github.com/tags/server/"/>
+    
+      <category term="express" scheme="http://hyc7575.github.com/tags/express/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Node.js - Router 및 static file serve</title>
+    <link href="http://hyc7575.github.com/2017/05/11/2017-05-11-Nodejs-route/"/>
+    <id>http://hyc7575.github.com/2017/05/11/2017-05-11-Nodejs-route/</id>
+    <published>2017-05-11T06:51:32.000Z</published>
+    <updated>2017-05-29T07:00:20.000Z</updated>
+    
+    <content type="html"><![CDATA[<img src="https://cloud.githubusercontent.com/assets/14171723/25853095/7bf3be3a-3506-11e7-8421-0a2287dd6278.png"/><h2 id="라우팅"><a href="#라우팅" class="headerlink" title="라우팅"></a>라우팅</h2><p>라우팅은 Http 요청 메소드(GET, POST 등)에 대한 요청을 어플리케이션이 응답하는 방법을 결정하는 것을 말합니다. 웹 페이지에 접속하는 것 또한 어플리케이션에 GET요청을 보내는 것 이지요.</p>
+<h2 id="static-파일"><a href="#static-파일" class="headerlink" title="static 파일"></a>static 파일</h2><p>static 파일(정적 파일)은 html, css, image, js 와 같이 내용이 변함없이 고정 되어서 별도의 작업을 하지 않고 그대로 보내줄 수 있는 파일을 의미합니다.</p>
+<h2 id="Routing-amp-Serve-static-file-with-node-js"><a href="#Routing-amp-Serve-static-file-with-node-js" class="headerlink" title="Routing &amp; Serve static file with node js"></a>Routing &amp; Serve static file with node js</h2><h3 id="Directory"><a href="#Directory" class="headerlink" title="Directory"></a>Directory</h3><ul>
+<li>project<ul>
+<li>public<ul>
+<li>css<ul>
+<li>styles.css</li>
+</ul>
+</li>
+<li>images<ul>
+<li>image.jpg</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>views<ul>
+<li>404.html</li>
+<li>about.html</li>
+<li>index.html</li>
+</ul>
+</li>
+<li>app.js</li>
+<li>requestHandlers.js</li>
+<li>router.js</li>
+<li>server.js</li>
+</ul>
+</li>
+</ul>
+<h2 id="예제"><a href="#예제" class="headerlink" title="예제"></a>예제</h2><ul>
+<li><p>app.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> server = <span class="built_in">require</span>(<span class="string">'./server'</span>);</div><div class="line"><span class="keyword">const</span> router = <span class="built_in">require</span>(<span class="string">'./router'</span>);</div><div class="line"><span class="keyword">const</span> requestHandlers = <span class="built_in">require</span>(<span class="string">'./requestHandlers'</span>);</div><div class="line">　</div><div class="line"><span class="keyword">var</span> handle = &#123;&#125;</div><div class="line">handle[<span class="string">'/'</span>] = requestHandlers.home;</div><div class="line">handle[<span class="string">'/about'</span>] = requestHandlers.about;</div><div class="line">　</div><div class="line">server.start(router.route, handle);</div></pre></td></tr></table></figure>
+<p>  필요로하는 모든 기능을 app.js에서 수행하기에는 너무 넓은 영역입니다. 각 기능들을 common.js 표준인 <code>exports</code>, <code>module.exports</code>를 통해 모듈화하여서 <code>require</code>을 통해 불러옵니다. 그리고 handle 객체를 만들어서 server를 실행 시키는 함수에 route함수와 함께 넘겨줍니다. 이 handle객체의 key값은 요청 메서드의 경로입니다.</p>
+</li>
+<li><p>server.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</div><div class="line"><span class="keyword">const</span> url = <span class="built_in">require</span>(<span class="string">'url'</span>);</div><div class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line">　</div><div class="line"><span class="keyword">const</span> start = <span class="function">(<span class="params">route, handle</span>) =&gt;</span> &#123;</div><div class="line">    http.createServer(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</div><div class="line">        <span class="keyword">const</span> pathname = url.parse(req.url).pathname;</div><div class="line">        route(handle, pathname, res, req);</div><div class="line">    &#125;).listen(<span class="number">4000</span>);</div><div class="line">&#125;</div><div class="line">　</div><div class="line">exports.start = start;</div></pre></td></tr></table></figure>
+<p>  여태까지는 createServer메서드의 매개변수로 주고있는 request 이벤트 핸들러에서 response(응답)을 처리하였지만, 이제는 route 함수로 response 객체와 handler 들을 넘겨줍니다.</p>
+</li>
+<li><p>router.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>); <span class="comment">// file 경로를 다루기 위한 모듈 (기본)</span></div><div class="line">　</div><div class="line"><span class="keyword">const</span> route = <span class="function">(<span class="params">handle, pathname, res, req</span>) =&gt;</span> &#123;</div><div class="line">    <span class="keyword">const</span> extension = path.extname(pathname); <span class="comment">// 확장자를 구하는 메서드</span></div><div class="line">    <span class="keyword">const</span> staticMap = &#123;</div><div class="line">        <span class="string">'.ico'</span>: <span class="string">'image/x-icon'</span>,</div><div class="line">        <span class="string">'.html'</span>: <span class="string">'text/html'</span>,</div><div class="line">        <span class="string">'.js'</span>: <span class="string">'text/javascript'</span>,</div><div class="line">        <span class="string">'.json'</span>: <span class="string">'application/json'</span>,</div><div class="line">        <span class="string">'.css'</span>: <span class="string">'text/css'</span>,</div><div class="line">        <span class="string">'.png'</span>: <span class="string">'image/png'</span>,</div><div class="line">        <span class="string">'.jpg'</span>: <span class="string">'image/jpeg'</span>,</div><div class="line">        <span class="string">'.mp3'</span>: <span class="string">'audio/mpeg'</span>,</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">const</span> staticPath = __dirname + <span class="string">'/public'</span>;</div><div class="line">　</div><div class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> handle[pathname] === <span class="string">'function'</span>) &#123;</div><div class="line">        handle[pathname](res, req);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">if</span>( staticMap[extension] ) &#123;</div><div class="line">            <span class="comment">//static file</span></div><div class="line">            fs.readFile( staticPath + pathname, (err, data) =&gt; &#123;</div><div class="line">                res.writeHead(<span class="number">200</span>, &#123;<span class="string">'Content-Type'</span>: staticMap[extension]&#125;);</div><div class="line">                res.end(data);</div><div class="line">            &#125;);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            fs.readFile(<span class="string">'./views/404.html'</span>, (err, data) =&gt; &#123;</div><div class="line">                res.writeHead(<span class="number">404</span>, &#123;<span class="string">'Content-Type'</span>: <span class="string">'text/html'</span>&#125;);</div><div class="line">                res.end(data);</div><div class="line">            &#125;);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">　</div><div class="line">exports.route = route;</div></pre></td></tr></table></figure>
+<p>  route는 pathname과 일치하는 handler를 가지고 있다면 handle 함수로 다시 response(응답) 객체를 넘겨주고 그렇지 않다면 여기서 처리해줍니다. handler가 가지고 있지 않는 경우라하면 요청이 static 파일이거나 혹은 유효하지 않은 요청을 하였을 경우입니다.<br>  staticMap을 만들어서 static 파일들일 경우와 아닐 경우를 한번 더 분기 해줍니다.</p>
+</li>
+<li><p>requestHandlers.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line">　</div><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line">    <span class="attr">home</span>: <span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</div><div class="line">        fs.readFile(<span class="string">'./views/index.html'</span>, (err, data) =&gt; &#123;</div><div class="line">            res.writeHead(<span class="number">200</span>, &#123;<span class="string">'Content-Type'</span>: <span class="string">'text/html'</span>&#125;);</div><div class="line">            res.end(data)</div><div class="line">        &#125;);</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">about</span>: <span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</div><div class="line">        fs.readFile(<span class="string">'./views/about.html'</span>, (err, data) =&gt; &#123;</div><div class="line">            res.writeHead(<span class="number">200</span>, &#123;<span class="string">'Content-Type'</span>: <span class="string">'text/html'</span>&#125;);</div><div class="line">            res.end(data);</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>  라우터에서 호출된 각 handler들은 html파일을 읽어서 넘겨받은 response객체를 통해 브라우저에 보내주는 역할을 하게 됩니다.</p>
+</li>
+<li><p>index.html</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"/css/styles.css"</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Home<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"/about"</span>&gt;</span>About으로 이동<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">br</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"/images/image.jpg"</span> <span class="attr">alt</span>=<span class="string">""</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>  <code>localhost:4000</code>을 접속하면 pathname은 <code>/</code>로 정의됩니다, 우리가 라우터로 넘겨준 handle객체에서 <code>/</code> 라는 값은 requestHandlers.js의 home이라는 function을 호출하기 때문에 index.html을 응답해줄 수 있습니다. 반대로 이 index.html에서 요청하는 styles.css와 image.jpg는 handle객체가 가지고 있지 않은 값 이지만 staticMap을 통해서 static한 파일임을 알 수 있으므로 정상적인 헤더값을 정의해줄 수 있게 됩니다.</p>
+</li>
+</ul>
+<p>about.html과 404.html또한 views 폴더에 생성한 뒤  app.js를 실행합니다.<br><code>localhost:4000</code>을 접속하면 index.html<br><code>localhost:4000/about</code>을 접속하면 about.html<br><code>localhost:4000/abc123</code>을 접속하면 404.html 을 보여주는 것을 확인할 수 있습니다.</p>
+<hr>
+<h2 id="맺음"><a href="#맺음" class="headerlink" title="맺음"></a>맺음</h2><p>Node.js의 기본 모듈만을 사용하여 Router와 static 파일들을 제공하는 방법을 알아보았습니다. 외부모듈이나 express와 같은 framework를 사용하면 더 쉽게 사용할 수 있었겠지만 이 부분은 차차 공부해볼려 합니다.</p>
+<h2 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h2><p><a href="http://danialk.github.io/blog/2013/01/23/simple-node-server/" target="_blank" rel="external">Simple node server</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;img src=&quot;https://cloud.githubusercontent.com/assets/14171723/25853095/7bf3be3a-3506-11e7-8421-0a2287dd6278.png&quot;/&gt;&lt;h2 id=&quot;라우팅&quot;&gt;&lt;a href=&quot;#라우팅
+    
+    </summary>
+    
+      <category term="Node.js" scheme="http://hyc7575.github.com/categories/Node-js/"/>
+    
+    
+      <category term="nodejs" scheme="http://hyc7575.github.com/tags/nodejs/"/>
+    
+      <category term="javascript" scheme="http://hyc7575.github.com/tags/javascript/"/>
+    
+      <category term="javascript server" scheme="http://hyc7575.github.com/tags/javascript-server/"/>
+    
+      <category term="server" scheme="http://hyc7575.github.com/tags/server/"/>
+    
+      <category term="route" scheme="http://hyc7575.github.com/tags/route/"/>
+    
+      <category term="router" scheme="http://hyc7575.github.com/tags/router/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Node.js - File System 모듈(readFile)</title>
+    <link href="http://hyc7575.github.com/2017/05/09/2017-05-09-nodeJs-fs-module/"/>
+    <id>http://hyc7575.github.com/2017/05/09/2017-05-09-nodeJs-fs-module/</id>
+    <published>2017-05-09T11:04:00.000Z</published>
+    <updated>2017-05-29T07:00:20.000Z</updated>
+    
+    <content type="html"><![CDATA[<img src="https://cloud.githubusercontent.com/assets/14171723/25853095/7bf3be3a-3506-11e7-8421-0a2287dd6278.png"/><h2 id="fs-모듈"><a href="#fs-모듈" class="headerlink" title="fs 모듈"></a>fs 모듈</h2><p>Node.js 는 fs(file system) 모듈을 이용하여 파일과 디렉토리에 관련된 작업을 할 수 있습니다. 이 fs 모듈의 모든 메서드들은 동기/비동기 양식을 지원하고 있습니다. 동기 방식은 값을 함수에서 바로 return 해주지만 single thread를 사용하는 Node.js는 이 작업이 실행되는 동안은 다른 작업이 실행되는것을 막습니다. 비동기 방식은 다른 작업이 실행되는 것을 막지는 않지만 보장된 순서가 없어 오류가 발생하기 쉽습니다. 어떠한 방식을 사용할지는 경우에따라 본인 판단 후 사용하도록 합시다.</p>
+<h2 id="html-읽기"><a href="#html-읽기" class="headerlink" title="html 읽기"></a>html 읽기</h2><h3 id="Directory"><a href="#Directory" class="headerlink" title="Directory"></a>Directory</h3><ul>
+<li>project<ul>
+<li>app.js</li>
+<li>index.html</li>
+</ul>
+</li>
+</ul>
+<h3 id="예제"><a href="#예제" class="headerlink" title="예제"></a>예제</h3><ul>
+<li><p>index.html</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>안녕하세요.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>app.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</div><div class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line">　</div><div class="line"><span class="keyword">const</span> server = http.createServer(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</div><div class="line">    fs.readFile(<span class="string">'index.html'</span>, (err, data) =&gt; &#123;</div><div class="line">        res.writeHead(<span class="number">200</span>, &#123;<span class="string">'Content-Type'</span>: <span class="string">'text/html'</span>&#125;);</div><div class="line">        res.end(data);</div><div class="line">    &#125;);</div><div class="line">&#125;);</div><div class="line">　</div><div class="line">server.listen(<span class="number">4000</span>, () =&gt; &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'server running'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>app.js 를 실행 후 <code>localhost:4000</code> 을 접속하면 index.html 페이지를 볼 수 있을 것 입니다.</p>
+<hr>
+<h2 id="설명"><a href="#설명" class="headerlink" title="설명"></a>설명</h2><ol>
+<li><p><a href="https://nodejs.org/api/fs.html#fs_fs_readfile_file_options_callback" target="_blank" rel="external">readFile</a><br> 비동기 방식으로 파일을 읽는 메서드 입니다. file, option, callback 3개의 매개변수를 가지며 callback 을 통하여 error 또는 data를 반환합니다.<br> data는 기본적으로 Buffer 객체를 반환 하지만 option을 통하여 encoding type을 지정할 수 있습니다.<br> <code>fs.readFile(&#39;index.html&#39;, &#39;utf-8&#39;, (err, data) =&gt; {});</code> 이와 같이 encoding type을 utf-8로 변환 후 console.log 를 통하여 data를 찍어보면 html 파일을 string 형태로 보여줄 것 입니다.</p>
+</li>
+<li><p>writeHead<br> 시작하기에서 언급했듯이 응답값의 헤더를 작성합니다. 이전 예제에서와는 다르게 html 문서를 응답해주므로 <code>Content-Type</code> 을 text/html로 작성하였습니다.<br> 이는 MIME 형식에서 정의한 문자열 입니다. 자세한 내용은 <a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types" target="_blank" rel="external">링크</a>를 참조</p>
+</li>
+<li><p>end<br> end 메서드가 data를 가지고 있는경우 <code>response.write(data);</code> 를 실행 후 end를 호출 한 것 과 같은 효과를 줍니다. <a href="https://nodejs.org/dist/latest-v6.x/docs/api/http.html#http_response_write_chunk_encoding_callback" target="_blank" rel="external">write</a> 메서드는 응답 body에 chunk를 보내주는 역할을 합니다.</p>
+</li>
+</ol>
+<p>가장 자주 쓰이는 파일을 읽는 방법만 알아보았지만 이 외에도 생성, 삭제, 이름변경 등 많은 기능들을 제공하니 api 문서를 참조해보시기를 바랍니다.<br><a href="https://nodejs.org/dist/latest-v6.x/docs/api/fs.html" target="_blank" rel="external">docs</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;img src=&quot;https://cloud.githubusercontent.com/assets/14171723/25853095/7bf3be3a-3506-11e7-8421-0a2287dd6278.png&quot;/&gt;&lt;h2 id=&quot;fs-모듈&quot;&gt;&lt;a href=&quot;#f
+    
+    </summary>
+    
+      <category term="Node.js" scheme="http://hyc7575.github.com/categories/Node-js/"/>
+    
+    
+      <category term="nodejs" scheme="http://hyc7575.github.com/tags/nodejs/"/>
+    
+      <category term="javascript" scheme="http://hyc7575.github.com/tags/javascript/"/>
+    
+      <category term="javascript server" scheme="http://hyc7575.github.com/tags/javascript-server/"/>
+    
+      <category term="server" scheme="http://hyc7575.github.com/tags/server/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Node.js 시작하기</title>
+    <link href="http://hyc7575.github.com/2017/05/06/2017-05-06-NodeJs-start/"/>
+    <id>http://hyc7575.github.com/2017/05/06/2017-05-06-NodeJs-start/</id>
+    <published>2017-05-06T10:24:20.000Z</published>
+    <updated>2017-05-29T07:00:20.000Z</updated>
+    
+    <content type="html"><![CDATA[<img src="https://cloud.githubusercontent.com/assets/14171723/25853095/7bf3be3a-3506-11e7-8421-0a2287dd6278.png"/><h2 id="설치"><a href="#설치" class="headerlink" title="설치"></a>설치</h2><p>Node js 공식 <a href="https://nodejs.org/ko" target="_blank" rel="external">홈페이지</a> 에서 설치,<br>이 외 여러 package manager를 사용하여 설치가 가능합니다. <a href="https://nodejs.org/ko/download/package-manager/" target="_blank" rel="external">참조</a></p>
+<hr>
+<h2 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h2><p>Node.js 어플리케이션은 javascript로 구현되며, .js 확장자를 사용합니다.<br>http 통신을 하는 hello world 어플리케이션을 만들기 위해 app.js 파일을 생성합니다.</p>
+<ul>
+<li>app.js<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>); <span class="comment">// http 모듈을 불러온다.</span></div><div class="line"><span class="keyword">const</span> port = <span class="number">4000</span>;</div><div class="line">　</div><div class="line">http.createServer(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</div><div class="line">    res.writeHead(<span class="number">200</span>, &#123;<span class="string">'Content-Type'</span>: <span class="string">'text/plain'</span>&#125;);</div><div class="line">    res.end(<span class="string">'Hello World'</span>);</div><div class="line">&#125;).listen(port, () =&gt; &#123;</div><div class="line">    <span class="comment">// callback</span></div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'server running'</span>);    </div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>Node.js 6.x 는 es6의 지원이 원활 하므로 var 이 아닌 const 를 사용 하였습니다. (자세한 사항은 <a href="http://node.green/" target="_blank" rel="external">http://node.green/</a> 를 참조)</p>
+<ul>
+<li>terminal<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">node app</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>app.js 를 생성 후 터미널에 접속하여 node 실행 명령어를 입력합니다.<br><code>server running</code> 이라는 표시가 뜰 것 이고 <code>localhost:4000</code> 에 접속하면 hello world 어플리케이션이 완성 되어있는 것을 볼 수 있습니다.</p>
+<hr>
+<h2 id="설명"><a href="#설명" class="headerlink" title="설명"></a>설명</h2><ol>
+<li><p>http 모듈<br> app.js 의 1번 line을 보면 <code>require(&#39;http&#39;);</code> 를 통하여 http라는 변수(상수)에 선언합니다. http 모듈은 HTTP 웹 서버와 관련된 기능들을 담은 모듈로써 동작됩니다.</p>
+</li>
+<li><p>http.createServer()<br> http 객체의 <code>createServer</code> 메서드는 server 객체를 생성하도록 해줍니다.<br> 반환된 server 객체는 listen, close 메서드를 사용하여 서버를 실행, 종료 할 수 있고, 그 외 request, connection, close 등의 이벤트를 연결할 수 있습니다.</p>
+</li>
+<li><p>requestListener<br> 위에서 언급한 server 객체의 request(요청) 이벤트 핸들러는 따로 지정할 필요 없이 app.js 의 예제와 같이, <code>createServer</code> 메서드의 매개변수로 넘겨 줄 수 있습니다. 이 이벤트는 request와 response 라는 객체를 매개변수로 전달 받습니다.<br> 그 중 response 객체의 <a href="https://nodejs.org/api/http.html#http_response_writehead_statuscode_statusmessage_headers" target="_blank" rel="external">writeHead</a>는 요청에 대한 응답 헤더를 작성하고, <a href="https://nodejs.org/api/http.html#http_response_end_data_encoding_callback" target="_blank" rel="external">end</a>는 응답헤더와 본문이 전달 되었음을 server에 알려줍니다(end 메서드는 각 응답마다 반드시 호출 되어야 합니다).</p>
+</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;img src=&quot;https://cloud.githubusercontent.com/assets/14171723/25853095/7bf3be3a-3506-11e7-8421-0a2287dd6278.png&quot;/&gt;&lt;h2 id=&quot;설치&quot;&gt;&lt;a href=&quot;#설치&quot; 
+    
+    </summary>
+    
+      <category term="Node.js" scheme="http://hyc7575.github.com/categories/Node-js/"/>
+    
+    
+      <category term="nodejs" scheme="http://hyc7575.github.com/tags/nodejs/"/>
+    
+      <category term="javascript" scheme="http://hyc7575.github.com/tags/javascript/"/>
+    
+      <category term="javascript server" scheme="http://hyc7575.github.com/tags/javascript-server/"/>
+    
+      <category term="server" scheme="http://hyc7575.github.com/tags/server/"/>
+    
+  </entry>
+  
+</feed>
