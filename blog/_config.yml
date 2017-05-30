@@ -73,3 +73,14 @@ deploy:
 
 # Comment
 disqus_shortname: hyc7575
+
+# sitemap auto generator
+sitemap:
+    path: sitemap.xml
+
+# rss
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+  hub:
