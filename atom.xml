@@ -4,9 +4,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://hyc7575.github.com/"/>
+  <link href="http://hyc7575.github.io/"/>
   <updated>2017-05-30T07:25:32.000Z</updated>
-  <id>http://hyc7575.github.com/</id>
+  <id>http://hyc7575.github.io/</id>
   
   <author>
     <name>keunhyeok jeon</name>
@@ -17,8 +17,8 @@
   
   <entry>
     <title>Node.js(express) - cookie-parser</title>
-    <link href="http://hyc7575.github.com/2017/05/30/2017-05-30-nodejs-cookie/"/>
-    <id>http://hyc7575.github.com/2017/05/30/2017-05-30-nodejs-cookie/</id>
+    <link href="http://hyc7575.github.io/2017/05/30/2017-05-30-nodejs-cookie/"/>
+    <id>http://hyc7575.github.io/2017/05/30/2017-05-30-nodejs-cookie/</id>
     <published>2017-05-30T05:14:29.000Z</published>
     <updated>2017-05-30T07:25:32.000Z</updated>
     
@@ -46,31 +46,31 @@
     
     </summary>
     
-      <category term="Node.js" scheme="http://hyc7575.github.com/categories/Node-js/"/>
+      <category term="Node.js" scheme="http://hyc7575.github.io/categories/Node-js/"/>
     
     
-      <category term="nodejs" scheme="http://hyc7575.github.com/tags/nodejs/"/>
+      <category term="nodejs" scheme="http://hyc7575.github.io/tags/nodejs/"/>
     
-      <category term="javascript" scheme="http://hyc7575.github.com/tags/javascript/"/>
+      <category term="javascript" scheme="http://hyc7575.github.io/tags/javascript/"/>
     
-      <category term="javascript server" scheme="http://hyc7575.github.com/tags/javascript-server/"/>
+      <category term="javascript server" scheme="http://hyc7575.github.io/tags/javascript-server/"/>
     
-      <category term="server" scheme="http://hyc7575.github.com/tags/server/"/>
+      <category term="server" scheme="http://hyc7575.github.io/tags/server/"/>
     
-      <category term="express" scheme="http://hyc7575.github.com/tags/express/"/>
+      <category term="express" scheme="http://hyc7575.github.io/tags/express/"/>
     
-      <category term="cookie-parser" scheme="http://hyc7575.github.com/tags/cookie-parser/"/>
+      <category term="cookie-parser" scheme="http://hyc7575.github.io/tags/cookie-parser/"/>
     
   </entry>
   
   <entry>
     <title>Node.js(express) - body-parser와 multer</title>
-    <link href="http://hyc7575.github.com/2017/05/24/2017-05-24-node-js-bodyparserAndMulter/"/>
-    <id>http://hyc7575.github.com/2017/05/24/2017-05-24-node-js-bodyparserAndMulter/</id>
+    <link href="http://hyc7575.github.io/2017/05/24/2017-05-24-node-js-bodyparserAndMulter/"/>
+    <id>http://hyc7575.github.io/2017/05/24/2017-05-24-node-js-bodyparserAndMulter/</id>
     <published>2017-05-24T05:31:33.000Z</published>
     <updated>2017-05-30T05:20:19.000Z</updated>
     
-    <content type="html"><![CDATA[<img src="https://cloud.githubusercontent.com/assets/14171723/25853095/7bf3be3a-3506-11e7-8421-0a2287dd6278.png"/><p>Node.js에서 form양식을 submit을 하기위해 사용되는 <a href="https://github.com/expressjs/body-parser" target="_blank" rel="external">body-parser</a>와 <a href="https://github.com/expressjs/multer" target="_blank" rel="external">multer</a> 미들웨어에 대해서 간단하게 알아보려 합니다. 각 미들웨어의 용도를 짧게 소개하면 <code>body-parser</code>는 <a href="https://hyc7575.github.io/2017/05/16/2017-05-16-nodejs-express-router-middleware/" target="_blank" rel="external">라우터와 미들웨어</a> 예제때 언급하였듯 요청 바디를 파싱하여서 req.body 객체로 접근할 수 있도록 도와주고, <code>multer</code>는 파일을 업로드를 도와주는 미들웨어 입니다.</p>
+    <content type="html"><![CDATA[<img src="https://cloud.githubusercontent.com/assets/14171723/25853095/7bf3be3a-3506-11e7-8421-0a2287dd6278.png"/><p>Node.js에서 form양식을 submit을 하기위해 사용되는 <a href="https://github.com/expressjs/body-parser" target="_blank" rel="external">body-parser</a>와 <a href="https://github.com/expressjs/multer" target="_blank" rel="external">multer</a> 미들웨어에 대해서 간단하게 알아보려 합니다. 각 미들웨어의 용도를 짧게 소개하면 <code>body-parser</code>는 <a href="https://hyc7575.github.io/2017/05/16/2017-05-16-nodejs-express-router-middleware/">라우터와 미들웨어</a> 예제때 언급하였듯 요청 바디를 파싱하여서 req.body 객체로 접근할 수 있도록 도와주고, <code>multer</code>는 파일을 업로드를 도와주는 미들웨어 입니다.</p>
 <h2 id="Directory"><a href="#Directory" class="headerlink" title="Directory"></a>Directory</h2><ul>
 <li>project<ul>
 <li>uploads</li>
@@ -122,33 +122,33 @@
     
     </summary>
     
-      <category term="Node.js" scheme="http://hyc7575.github.com/categories/Node-js/"/>
+      <category term="Node.js" scheme="http://hyc7575.github.io/categories/Node-js/"/>
     
     
-      <category term="nodejs" scheme="http://hyc7575.github.com/tags/nodejs/"/>
+      <category term="nodejs" scheme="http://hyc7575.github.io/tags/nodejs/"/>
     
-      <category term="javascript" scheme="http://hyc7575.github.com/tags/javascript/"/>
+      <category term="javascript" scheme="http://hyc7575.github.io/tags/javascript/"/>
     
-      <category term="javascript server" scheme="http://hyc7575.github.com/tags/javascript-server/"/>
+      <category term="javascript server" scheme="http://hyc7575.github.io/tags/javascript-server/"/>
     
-      <category term="server" scheme="http://hyc7575.github.com/tags/server/"/>
+      <category term="server" scheme="http://hyc7575.github.io/tags/server/"/>
     
-      <category term="express" scheme="http://hyc7575.github.com/tags/express/"/>
+      <category term="express" scheme="http://hyc7575.github.io/tags/express/"/>
     
-      <category term="body-parser" scheme="http://hyc7575.github.com/tags/body-parser/"/>
+      <category term="body-parser" scheme="http://hyc7575.github.io/tags/body-parser/"/>
     
-      <category term="bodyParser" scheme="http://hyc7575.github.com/tags/bodyParser/"/>
+      <category term="bodyParser" scheme="http://hyc7575.github.io/tags/bodyParser/"/>
     
-      <category term="multer" scheme="http://hyc7575.github.com/tags/multer/"/>
+      <category term="multer" scheme="http://hyc7575.github.io/tags/multer/"/>
     
-      <category term="form submit" scheme="http://hyc7575.github.com/tags/form-submit/"/>
+      <category term="form submit" scheme="http://hyc7575.github.io/tags/form-submit/"/>
     
   </entry>
   
   <entry>
     <title>Node.js - mysql 연결</title>
-    <link href="http://hyc7575.github.com/2017/05/19/2017-05-19-nodejs-mysql/"/>
-    <id>http://hyc7575.github.com/2017/05/19/2017-05-19-nodejs-mysql/</id>
+    <link href="http://hyc7575.github.io/2017/05/19/2017-05-19-nodejs-mysql/"/>
+    <id>http://hyc7575.github.io/2017/05/19/2017-05-19-nodejs-mysql/</id>
     <published>2017-05-19T08:37:55.000Z</published>
     <updated>2017-05-29T07:00:20.000Z</updated>
     
@@ -206,27 +206,27 @@
     
     </summary>
     
-      <category term="Node.js" scheme="http://hyc7575.github.com/categories/Node-js/"/>
+      <category term="Node.js" scheme="http://hyc7575.github.io/categories/Node-js/"/>
     
     
-      <category term="nodejs" scheme="http://hyc7575.github.com/tags/nodejs/"/>
+      <category term="nodejs" scheme="http://hyc7575.github.io/tags/nodejs/"/>
     
-      <category term="javascript" scheme="http://hyc7575.github.com/tags/javascript/"/>
+      <category term="javascript" scheme="http://hyc7575.github.io/tags/javascript/"/>
     
-      <category term="javascript server" scheme="http://hyc7575.github.com/tags/javascript-server/"/>
+      <category term="javascript server" scheme="http://hyc7575.github.io/tags/javascript-server/"/>
     
-      <category term="server" scheme="http://hyc7575.github.com/tags/server/"/>
+      <category term="server" scheme="http://hyc7575.github.io/tags/server/"/>
     
-      <category term="express" scheme="http://hyc7575.github.com/tags/express/"/>
+      <category term="express" scheme="http://hyc7575.github.io/tags/express/"/>
     
-      <category term="mysql" scheme="http://hyc7575.github.com/tags/mysql/"/>
+      <category term="mysql" scheme="http://hyc7575.github.io/tags/mysql/"/>
     
   </entry>
   
   <entry>
     <title>Node.js(express) - express ejs 템플릿</title>
-    <link href="http://hyc7575.github.com/2017/05/18/2017-05-18-express-ejs/"/>
-    <id>http://hyc7575.github.com/2017/05/18/2017-05-18-express-ejs/</id>
+    <link href="http://hyc7575.github.io/2017/05/18/2017-05-18-express-ejs/"/>
+    <id>http://hyc7575.github.io/2017/05/18/2017-05-18-express-ejs/</id>
     <published>2017-05-18T07:29:26.000Z</published>
     <updated>2017-05-29T07:00:20.000Z</updated>
     
@@ -272,31 +272,31 @@
     
     </summary>
     
-      <category term="Node.js" scheme="http://hyc7575.github.com/categories/Node-js/"/>
+      <category term="Node.js" scheme="http://hyc7575.github.io/categories/Node-js/"/>
     
     
-      <category term="nodejs" scheme="http://hyc7575.github.com/tags/nodejs/"/>
+      <category term="nodejs" scheme="http://hyc7575.github.io/tags/nodejs/"/>
     
-      <category term="javascript" scheme="http://hyc7575.github.com/tags/javascript/"/>
+      <category term="javascript" scheme="http://hyc7575.github.io/tags/javascript/"/>
     
-      <category term="javascript server" scheme="http://hyc7575.github.com/tags/javascript-server/"/>
+      <category term="javascript server" scheme="http://hyc7575.github.io/tags/javascript-server/"/>
     
-      <category term="server" scheme="http://hyc7575.github.com/tags/server/"/>
+      <category term="server" scheme="http://hyc7575.github.io/tags/server/"/>
     
-      <category term="express" scheme="http://hyc7575.github.com/tags/express/"/>
+      <category term="express" scheme="http://hyc7575.github.io/tags/express/"/>
     
-      <category term="ejs" scheme="http://hyc7575.github.com/tags/ejs/"/>
+      <category term="ejs" scheme="http://hyc7575.github.io/tags/ejs/"/>
     
-      <category term="ejs-layout" scheme="http://hyc7575.github.com/tags/ejs-layout/"/>
+      <category term="ejs-layout" scheme="http://hyc7575.github.io/tags/ejs-layout/"/>
     
-      <category term="layout" scheme="http://hyc7575.github.com/tags/layout/"/>
+      <category term="layout" scheme="http://hyc7575.github.io/tags/layout/"/>
     
   </entry>
   
   <entry>
     <title>Node.js(express) - Router와 middleware</title>
-    <link href="http://hyc7575.github.com/2017/05/16/2017-05-16-nodejs-express-router-middleware/"/>
-    <id>http://hyc7575.github.com/2017/05/16/2017-05-16-nodejs-express-router-middleware/</id>
+    <link href="http://hyc7575.github.io/2017/05/16/2017-05-16-nodejs-express-router-middleware/"/>
+    <id>http://hyc7575.github.io/2017/05/16/2017-05-16-nodejs-express-router-middleware/</id>
     <published>2017-05-16T08:50:00.000Z</published>
     <updated>2017-05-29T07:00:20.000Z</updated>
     
@@ -357,29 +357,29 @@
     
     </summary>
     
-      <category term="Node.js" scheme="http://hyc7575.github.com/categories/Node-js/"/>
+      <category term="Node.js" scheme="http://hyc7575.github.io/categories/Node-js/"/>
     
     
-      <category term="nodejs" scheme="http://hyc7575.github.com/tags/nodejs/"/>
+      <category term="nodejs" scheme="http://hyc7575.github.io/tags/nodejs/"/>
     
-      <category term="javascript" scheme="http://hyc7575.github.com/tags/javascript/"/>
+      <category term="javascript" scheme="http://hyc7575.github.io/tags/javascript/"/>
     
-      <category term="javascript server" scheme="http://hyc7575.github.com/tags/javascript-server/"/>
+      <category term="javascript server" scheme="http://hyc7575.github.io/tags/javascript-server/"/>
     
-      <category term="server" scheme="http://hyc7575.github.com/tags/server/"/>
+      <category term="server" scheme="http://hyc7575.github.io/tags/server/"/>
     
-      <category term="express" scheme="http://hyc7575.github.com/tags/express/"/>
+      <category term="express" scheme="http://hyc7575.github.io/tags/express/"/>
     
-      <category term="Router" scheme="http://hyc7575.github.com/tags/Router/"/>
+      <category term="Router" scheme="http://hyc7575.github.io/tags/Router/"/>
     
-      <category term="middleware" scheme="http://hyc7575.github.com/tags/middleware/"/>
+      <category term="middleware" scheme="http://hyc7575.github.io/tags/middleware/"/>
     
   </entry>
   
   <entry>
     <title>Node.js(express) - express 프레임워크</title>
-    <link href="http://hyc7575.github.com/2017/05/13/2017-05-13-Nodejs-express/"/>
-    <id>http://hyc7575.github.com/2017/05/13/2017-05-13-Nodejs-express/</id>
+    <link href="http://hyc7575.github.io/2017/05/13/2017-05-13-Nodejs-express/"/>
+    <id>http://hyc7575.github.io/2017/05/13/2017-05-13-Nodejs-express/</id>
     <published>2017-05-13T04:47:37.000Z</published>
     <updated>2017-05-29T07:00:20.000Z</updated>
     
@@ -407,25 +407,25 @@
     
     </summary>
     
-      <category term="Node.js" scheme="http://hyc7575.github.com/categories/Node-js/"/>
+      <category term="Node.js" scheme="http://hyc7575.github.io/categories/Node-js/"/>
     
     
-      <category term="nodejs" scheme="http://hyc7575.github.com/tags/nodejs/"/>
+      <category term="nodejs" scheme="http://hyc7575.github.io/tags/nodejs/"/>
     
-      <category term="javascript" scheme="http://hyc7575.github.com/tags/javascript/"/>
+      <category term="javascript" scheme="http://hyc7575.github.io/tags/javascript/"/>
     
-      <category term="javascript server" scheme="http://hyc7575.github.com/tags/javascript-server/"/>
+      <category term="javascript server" scheme="http://hyc7575.github.io/tags/javascript-server/"/>
     
-      <category term="server" scheme="http://hyc7575.github.com/tags/server/"/>
+      <category term="server" scheme="http://hyc7575.github.io/tags/server/"/>
     
-      <category term="express" scheme="http://hyc7575.github.com/tags/express/"/>
+      <category term="express" scheme="http://hyc7575.github.io/tags/express/"/>
     
   </entry>
   
   <entry>
     <title>Node.js - Router 및 static file serve</title>
-    <link href="http://hyc7575.github.com/2017/05/11/2017-05-11-Nodejs-route/"/>
-    <id>http://hyc7575.github.com/2017/05/11/2017-05-11-Nodejs-route/</id>
+    <link href="http://hyc7575.github.io/2017/05/11/2017-05-11-Nodejs-route/"/>
+    <id>http://hyc7575.github.io/2017/05/11/2017-05-11-Nodejs-route/</id>
     <published>2017-05-11T06:51:32.000Z</published>
     <updated>2017-05-29T07:00:20.000Z</updated>
     
@@ -491,27 +491,27 @@
     
     </summary>
     
-      <category term="Node.js" scheme="http://hyc7575.github.com/categories/Node-js/"/>
+      <category term="Node.js" scheme="http://hyc7575.github.io/categories/Node-js/"/>
     
     
-      <category term="nodejs" scheme="http://hyc7575.github.com/tags/nodejs/"/>
+      <category term="nodejs" scheme="http://hyc7575.github.io/tags/nodejs/"/>
     
-      <category term="javascript" scheme="http://hyc7575.github.com/tags/javascript/"/>
+      <category term="javascript" scheme="http://hyc7575.github.io/tags/javascript/"/>
     
-      <category term="javascript server" scheme="http://hyc7575.github.com/tags/javascript-server/"/>
+      <category term="javascript server" scheme="http://hyc7575.github.io/tags/javascript-server/"/>
     
-      <category term="server" scheme="http://hyc7575.github.com/tags/server/"/>
+      <category term="server" scheme="http://hyc7575.github.io/tags/server/"/>
     
-      <category term="route" scheme="http://hyc7575.github.com/tags/route/"/>
+      <category term="route" scheme="http://hyc7575.github.io/tags/route/"/>
     
-      <category term="router" scheme="http://hyc7575.github.com/tags/router/"/>
+      <category term="router" scheme="http://hyc7575.github.io/tags/router/"/>
     
   </entry>
   
   <entry>
     <title>Node.js - File System 모듈(readFile)</title>
-    <link href="http://hyc7575.github.com/2017/05/09/2017-05-09-nodeJs-fs-module/"/>
-    <id>http://hyc7575.github.com/2017/05/09/2017-05-09-nodeJs-fs-module/</id>
+    <link href="http://hyc7575.github.io/2017/05/09/2017-05-09-nodeJs-fs-module/"/>
+    <id>http://hyc7575.github.io/2017/05/09/2017-05-09-nodeJs-fs-module/</id>
     <published>2017-05-09T11:04:00.000Z</published>
     <updated>2017-05-29T07:00:20.000Z</updated>
     
@@ -550,23 +550,23 @@
     
     </summary>
     
-      <category term="Node.js" scheme="http://hyc7575.github.com/categories/Node-js/"/>
+      <category term="Node.js" scheme="http://hyc7575.github.io/categories/Node-js/"/>
     
     
-      <category term="nodejs" scheme="http://hyc7575.github.com/tags/nodejs/"/>
+      <category term="nodejs" scheme="http://hyc7575.github.io/tags/nodejs/"/>
     
-      <category term="javascript" scheme="http://hyc7575.github.com/tags/javascript/"/>
+      <category term="javascript" scheme="http://hyc7575.github.io/tags/javascript/"/>
     
-      <category term="javascript server" scheme="http://hyc7575.github.com/tags/javascript-server/"/>
+      <category term="javascript server" scheme="http://hyc7575.github.io/tags/javascript-server/"/>
     
-      <category term="server" scheme="http://hyc7575.github.com/tags/server/"/>
+      <category term="server" scheme="http://hyc7575.github.io/tags/server/"/>
     
   </entry>
   
   <entry>
     <title>Node.js 시작하기</title>
-    <link href="http://hyc7575.github.com/2017/05/06/2017-05-06-NodeJs-start/"/>
-    <id>http://hyc7575.github.com/2017/05/06/2017-05-06-NodeJs-start/</id>
+    <link href="http://hyc7575.github.io/2017/05/06/2017-05-06-NodeJs-start/"/>
+    <id>http://hyc7575.github.io/2017/05/06/2017-05-06-NodeJs-start/</id>
     <published>2017-05-06T10:24:20.000Z</published>
     <updated>2017-05-29T07:00:20.000Z</updated>
     
@@ -600,16 +600,16 @@
     
     </summary>
     
-      <category term="Node.js" scheme="http://hyc7575.github.com/categories/Node-js/"/>
+      <category term="Node.js" scheme="http://hyc7575.github.io/categories/Node-js/"/>
     
     
-      <category term="nodejs" scheme="http://hyc7575.github.com/tags/nodejs/"/>
+      <category term="nodejs" scheme="http://hyc7575.github.io/tags/nodejs/"/>
     
-      <category term="javascript" scheme="http://hyc7575.github.com/tags/javascript/"/>
+      <category term="javascript" scheme="http://hyc7575.github.io/tags/javascript/"/>
     
-      <category term="javascript server" scheme="http://hyc7575.github.com/tags/javascript-server/"/>
+      <category term="javascript server" scheme="http://hyc7575.github.io/tags/javascript-server/"/>
     
-      <category term="server" scheme="http://hyc7575.github.com/tags/server/"/>
+      <category term="server" scheme="http://hyc7575.github.io/tags/server/"/>
     
   </entry>
   

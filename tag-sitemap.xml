@@ -2,126 +2,126 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <url>
-        <loc>http://hyc7575.github.com/tags/route/</loc>
+        <loc>http://hyc7575.github.io/tags/route/</loc>
         <lastmod>2017-05-29T07:00:20.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://hyc7575.github.com/tags/router/</loc>
+        <loc>http://hyc7575.github.io/tags/router/</loc>
         <lastmod>2017-05-29T07:00:20.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://hyc7575.github.com/tags/Router/</loc>
+        <loc>http://hyc7575.github.io/tags/ejs/</loc>
         <lastmod>2017-05-29T07:00:20.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://hyc7575.github.com/tags/middleware/</loc>
+        <loc>http://hyc7575.github.io/tags/ejs-layout/</loc>
         <lastmod>2017-05-29T07:00:20.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://hyc7575.github.com/tags/ejs/</loc>
+        <loc>http://hyc7575.github.io/tags/layout/</loc>
         <lastmod>2017-05-29T07:00:20.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://hyc7575.github.com/tags/ejs-layout/</loc>
+        <loc>http://hyc7575.github.io/tags/mysql/</loc>
         <lastmod>2017-05-29T07:00:20.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://hyc7575.github.com/tags/layout/</loc>
+        <loc>http://hyc7575.github.io/tags/Router/</loc>
         <lastmod>2017-05-29T07:00:20.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://hyc7575.github.com/tags/mysql/</loc>
+        <loc>http://hyc7575.github.io/tags/middleware/</loc>
         <lastmod>2017-05-29T07:00:20.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://hyc7575.github.com/tags/body-parser/</loc>
+        <loc>http://hyc7575.github.io/tags/body-parser/</loc>
         <lastmod>2017-05-30T05:20:19.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://hyc7575.github.com/tags/bodyParser/</loc>
+        <loc>http://hyc7575.github.io/tags/bodyParser/</loc>
         <lastmod>2017-05-30T05:20:19.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://hyc7575.github.com/tags/multer/</loc>
+        <loc>http://hyc7575.github.io/tags/multer/</loc>
         <lastmod>2017-05-30T05:20:19.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://hyc7575.github.com/tags/form-submit/</loc>
+        <loc>http://hyc7575.github.io/tags/form-submit/</loc>
         <lastmod>2017-05-30T05:20:19.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://hyc7575.github.com/tags/nodejs/</loc>
+        <loc>http://hyc7575.github.io/tags/nodejs/</loc>
         <lastmod>2017-05-30T07:25:32.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://hyc7575.github.com/tags/javascript/</loc>
+        <loc>http://hyc7575.github.io/tags/javascript/</loc>
         <lastmod>2017-05-30T07:25:32.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://hyc7575.github.com/tags/javascript-server/</loc>
+        <loc>http://hyc7575.github.io/tags/javascript-server/</loc>
         <lastmod>2017-05-30T07:25:32.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://hyc7575.github.com/tags/server/</loc>
+        <loc>http://hyc7575.github.io/tags/server/</loc>
         <lastmod>2017-05-30T07:25:32.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://hyc7575.github.com/tags/express/</loc>
+        <loc>http://hyc7575.github.io/tags/express/</loc>
         <lastmod>2017-05-30T07:25:32.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://hyc7575.github.com/tags/cookie-parser/</loc>
+        <loc>http://hyc7575.github.io/tags/cookie-parser/</loc>
         <lastmod>2017-05-30T07:25:32.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
