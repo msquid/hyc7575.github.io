@@ -86,20 +86,6 @@
     </url>
 
     <url>
-        <loc>http://hyc7575.github.io/tags/nodejs/</loc>
-        <lastmod>2017-05-30T07:25:32.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://hyc7575.github.io/tags/javascript/</loc>
-        <lastmod>2017-05-30T07:25:32.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://hyc7575.github.io/tags/javascript-server/</loc>
         <lastmod>2017-05-30T07:25:32.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -123,6 +109,27 @@
     <url>
         <loc>http://hyc7575.github.io/tags/cookie-parser/</loc>
         <lastmod>2017-05-30T07:25:32.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hyc7575.github.io/tags/nodejs/</loc>
+        <lastmod>2017-06-01T04:10:17.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hyc7575.github.io/tags/javascript/</loc>
+        <lastmod>2017-06-01T04:10:17.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hyc7575.github.io/tags/javascript-array/</loc>
+        <lastmod>2017-06-01T04:10:17.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
