@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://hyc7575.github.io/"/>
-  <updated>2017-06-01T05:47:45.000Z</updated>
+  <updated>2017-06-02T07:29:44.000Z</updated>
   <id>http://hyc7575.github.io/</id>
   
   <author>
@@ -14,6 +14,81 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Node.js(express) - express-session with 로그인(1/2)</title>
+    <link href="http://hyc7575.github.io/2017/06/02/2017-06-02-Nodejs-session-with-login/"/>
+    <id>http://hyc7575.github.io/2017/06/02/2017-06-02-Nodejs-session-with-login/</id>
+    <published>2017-06-02T04:45:56.000Z</published>
+    <updated>2017-06-02T07:29:44.000Z</updated>
+    
+    <content type="html"><![CDATA[<img src="https://cloud.githubusercontent.com/assets/14171723/25853095/7bf3be3a-3506-11e7-8421-0a2287dd6278.png"/><p>세션은 쿠키와 마찬가지로 웹 사이트로 부터 저장되는 데이터이며 조금 더 발전(?)한 기능입니다. 세션은 쿠키와는 다르게 사용자의 컴퓨터가 아닌 서버에 저장이 되며, 저장된 데이터는 세션을 생성하면서 사용자의 쿠키에 저장된 식별자 정보를 통해 접근할 수 있습니다. 누군가에게 알려져서는 안될 정보들은 보다 안전한 세션에 저장해두어야 합니다. <code>express-session</code>이라는 모듈을 사용하여 사용자의 로그인 인증정보를 세션에 저장하는 방법을 알아보겠습니다.</p>
+<h2 id="Directory"><a href="#Directory" class="headerlink" title="Directory"></a>Directory</h2><ul>
+<li>project<ul>
+<li>views<ul>
+<li>index.ejs</li>
+<li>join.ejs</li>
+<li>login.ejs</li>
+</ul>
+</li>
+<li>app.js</li>
+</ul>
+</li>
+</ul>
+<h2 id="설치"><a href="#설치" class="headerlink" title="설치"></a>설치</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">npm init</div><div class="line">.</div><div class="line">.</div><div class="line">.</div><div class="line">npm i --save express ejs express-session body-parser</div></pre></td></tr></table></figure>
+<p>회원을 추가하는 부분도 포함되었기 때문에 body-parser도 사용하겠습니다.</p>
+<h2 id="예제"><a href="#예제" class="headerlink" title="예제"></a>예제</h2><h3 id="세션-미들웨어-등록"><a href="#세션-미들웨어-등록" class="headerlink" title="세션 미들웨어 등록"></a>세션 미들웨어 등록</h3><ul>
+<li>app.js</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</div><div class="line"><span class="keyword">const</span> app = express();</div><div class="line"><span class="keyword">const</span> bodyParser = <span class="built_in">require</span>(<span class="string">'body-parser'</span>);</div><div class="line"><span class="keyword">const</span> session = <span class="built_in">require</span>(<span class="string">'express-session'</span>);</div><div class="line">　</div><div class="line">app.set(<span class="string">'views'</span>, __dirname + <span class="string">'/views'</span>);</div><div class="line">app.set(<span class="string">'view engine'</span>, <span class="string">'ejs'</span>);</div><div class="line">　</div><div class="line">app.use(bodyParser.urlencoded(&#123;<span class="attr">extended</span>: <span class="literal">false</span>&#125;));</div><div class="line">app.use(session(&#123;</div><div class="line">    <span class="attr">secret</span>: <span class="string">'ambc@!vsmkv#!&amp;*!#EDNAnsv#!$()_*#@'</span>,</div><div class="line">    <span class="attr">resave</span>: <span class="literal">false</span>,</div><div class="line">    <span class="attr">saveUninitialized</span>: <span class="literal">true</span></div><div class="line">&#125;));</div><div class="line">　</div><div class="line">app.listen(<span class="number">3000</span>);</div></pre></td></tr></table></figure>
+<p>우선 세션 미들웨어 등록하는 방법부터 알아보겠습니다. 10번 라인을 보시면 express-session모듈에서 가져온 미들웨어를 등록하는 부분이 있습니다. 이 부분을 등록하면 요청시 마다 req.session으로 세션 객체에 접근할 수 있게 됩니다. 옵션으로 들어간 값을 한번 살펴보겠습니다.</p>
+<ul>
+<li><p>secret: secret은 필수로 들어가야하는 옵션입니다. 세션은 기본적으로 식별자를 쿠키에 저장하게 되는데 그 저장되는 데이터를 <strong>암호화</strong> 하기위해 필요한 옵션입니다.</p>
+</li>
+<li><p>resave: 요청이 왔을때 세션을 수정하지 않더라도 세션을 다시 저장소에 다시 저장되도록 합니다. 2개 이상의 병렬요청이 왔을 경우 원치 않은 저장이 이루어질 수 있으니 유의 해야합니다. (false 권장)</p>
+</li>
+<li><p>saveUninitialized: 초기화 되지 않은 세션을 강제로 저장합니다. 이는 모든 방문자들에게 고유한 식별 값을 주는 것과 같습니다.</p>
+</li>
+</ul>
+<!-- (resave와 saveUninitialized의 **관계**가 조금 헷갈려서 자료를 찾아보았지만 명쾌한 자료를 찾을 수가 없었습니다. 그나마 괜찮은 자료는 [이것][link1] 입니다.) -->
+<p>이제 라우팅 처리를 하기 전 회원과 관련된 몇몇 기능을 미리 만들어 두겠습니다.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// app.js 내부에 선언합니다.</span></div><div class="line"><span class="keyword">const</span> users = [</div><div class="line">    &#123;</div><div class="line">        <span class="attr">user_id</span>: <span class="string">'hyeok'</span>,</div><div class="line">        <span class="attr">user_nickname</span>: <span class="string">'혁'</span>,</div><div class="line">        <span class="attr">user_pwd</span>: <span class="string">'123456'</span></div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">        <span class="attr">user_id</span>: <span class="string">'hyc7575'</span>,</div><div class="line">        <span class="attr">user_nickname</span>: <span class="string">'에이치'</span>,</div><div class="line">        <span class="attr">user_pwd</span>: <span class="string">'1q2w3e4r'</span></div><div class="line">    &#125;</div><div class="line">]</div><div class="line"><span class="keyword">const</span> findUser = <span class="function">(<span class="params">user_id, user_pwd</span>) =&gt;</span> &#123;</div><div class="line">    <span class="comment">// id와 password가 일치하는 유저 찾는 함수, 없으면 undefined 반환</span></div><div class="line">    <span class="keyword">return</span> users.find( <span class="function"><span class="params">v</span> =&gt;</span> (v.user_id === user_id &amp;&amp; v.user_pwd === user_pwd) );</div><div class="line">&#125;</div><div class="line"><span class="keyword">const</span> findUserIndex = <span class="function">(<span class="params">user_id, user_pwd</span>) =&gt;</span> &#123;</div><div class="line">    <span class="comment">// 일치하는 유저의 index값(유니크) 반환</span></div><div class="line">    <span class="keyword">return</span> users.findIndex( <span class="function"><span class="params">v</span> =&gt;</span> (v.user_id === user_id &amp;&amp; v.user_pwd === user_pwd) );</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>users라는 회원 로그인 정보와 해당 유저를 찾는함수 그리고 해당 유저의 인덱스값(유니크한 값으로써 사용)을 구하는 함수를 생성하였습니다. 기본적으로 필요로한 기능들은 만들어졌으니 라우팅 작업을 시작합니다.</p>
+<ul>
+<li>app.js</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 미들웨어 아래쪽으로 배치해주세요.</span></div><div class="line">app.get(<span class="string">'/'</span>, (req, res) =&gt; &#123;</div><div class="line">    <span class="keyword">const</span> sess = req.session; <span class="comment">// 세션 객체에 접근</span></div><div class="line">    res.render(<span class="string">'index'</span>, &#123;</div><div class="line">        <span class="attr">nickname</span>: sess.user_uid+<span class="number">1</span> ? users[sess.user_uid][<span class="string">'user_nickname'</span>] : <span class="string">''</span></div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<ul>
+<li>index.ejs</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Home<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">%</span> <span class="attr">if</span>( !<span class="attr">nickname</span> ) &#123; %&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>로그인을 해주세요.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"/login"</span>&gt;</span>로그인<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"/join"</span>&gt;</span>회원가입<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">%</span> &#125; <span class="attr">else</span> &#123; %&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>안녕하세요. <span class="tag">&lt;<span class="name">%=</span> <span class="attr">nickname</span> %&gt;</span>님<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"/logout"</span>&gt;</span>로그아웃<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">%</span> &#125; %&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>이제 session을 사용하기위한 모든 준비가 끝났습니다. 미들웨어의 옵션으로 <code>saveUninitialized</code>값을 true로 설정해주었기 때문에 app.js를 실행하고 접속하면 아직 세션에 아무런 값도 설정해주지는 않았지만 쿠키에 고유한 식별값을 남겨두었을 것 입니다.<br><img src="https://cloud.githubusercontent.com/assets/14171723/26714475/7a8b74da-47ac-11e7-8a64-522a0f5df510.png" alt="connect.sid"><br>기본적으로 coonect.sid라는 이름으로 저장됩니다. 로그인 및 가입 구현은 2장에서 진행하겠습니다.</p>
+<h2 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h2><p><a href="https://github.com/expressjs/session" target="_blank" rel="external">express-session</a>에서 세션 설정에 관한 많은 옵션들을 살펴보실 수 있습니다.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;img src=&quot;https://cloud.githubusercontent.com/assets/14171723/25853095/7bf3be3a-3506-11e7-8421-0a2287dd6278.png&quot;/&gt;&lt;p&gt;세션은 쿠키와 마찬가지로 웹 사이트로 부터
+    
+    </summary>
+    
+      <category term="Node.js" scheme="http://hyc7575.github.io/categories/Node-js/"/>
+    
+    
+      <category term="nodejs" scheme="http://hyc7575.github.io/tags/nodejs/"/>
+    
+      <category term="javascript" scheme="http://hyc7575.github.io/tags/javascript/"/>
+    
+      <category term="javascript server" scheme="http://hyc7575.github.io/tags/javascript-server/"/>
+    
+      <category term="server" scheme="http://hyc7575.github.io/tags/server/"/>
+    
+      <category term="express" scheme="http://hyc7575.github.io/tags/express/"/>
+    
+      <category term="express-session" scheme="http://hyc7575.github.io/tags/express-session/"/>
+    
+      <category term="nodejs login" scheme="http://hyc7575.github.io/tags/nodejs-login/"/>
+    
+  </entry>
   
   <entry>
     <title>Javascript(잡담) - new Array(n)의 undefined</title>
@@ -60,19 +135,19 @@
     <link href="http://hyc7575.github.io/2017/05/30/2017-05-30-nodejs-cookie/"/>
     <id>http://hyc7575.github.io/2017/05/30/2017-05-30-nodejs-cookie/</id>
     <published>2017-05-30T05:14:29.000Z</published>
-    <updated>2017-05-30T07:25:32.000Z</updated>
+    <updated>2017-06-02T05:05:21.000Z</updated>
     
-    <content type="html"><![CDATA[<img src="https://cloud.githubusercontent.com/assets/14171723/25853095/7bf3be3a-3506-11e7-8421-0a2287dd6278.png"/><p>쿠키란 사용자의 컴퓨터에 웹 사이트로부터 저장된 작은 데이터 조각입니다. 이 데이터를 통하여 사이트 내의 움직임 추적, 중단 시점 체크 등 다양한 기능을 제공할 수 있습니다. 쿠키는 일반적으로 브라우저 하위의 폴더로 저장되게 됩니다. 지금 제가 사용하는 맥의 크롬을 기준으로는 <code>/Users/{username}/Library/Application Support/Google/Chrome/Default</code> 폴더의 Cookies라는 파일이 아닐까 합니다. (파일 내부 내용을 봐서는 맞는 것 같은데 정보의 팩트를 체크할 수 가 없네요 ㅠ) 이 파일의 내부를 살펴보면 각 쿠키당 서버의 정보가 있는걸 봐서는 특정 서버에서 만들어진 쿠키는 그 서버에 종속된다고 생각할 수 있겠습니다. 본격적으로 Node.js에서 쿠키를 사용하는 방법을 알아보겠습니다.</p>
+    <content type="html"><![CDATA[<img src="https://cloud.githubusercontent.com/assets/14171723/25853095/7bf3be3a-3506-11e7-8421-0a2287dd6278.png"/><p>쿠키란 사용자의 컴퓨터에 웹 사이트로부터 저장된 작은 데이터 조각입니다. 이 데이터를 통하여 사용자의 정보 저장, 사이트 내의 움직임 추적, 중단 시점 체크 등 다양한 기능을 제공할 수 있습니다. 쿠키는 일반적으로 브라우저 하위의 폴더로 저장되게 됩니다. 지금 제가 사용하는 맥의 크롬을 기준으로는 <code>/Users/{username}/Library/Application Support/Google/Chrome/Default</code> 폴더의 Cookies라는 파일이 아닐까 합니다. (파일 내부 내용을 봐서는 맞는 것 같은데 정보의 팩트를 체크할 수 가 없네요 ㅠ) 이 파일의 내부를 살펴보면 각 쿠키당 서버의 정보가 있는걸 봐서는 특정 서버에서 만들어진 쿠키는 그 서버에 종속된다고 생각할 수 있겠습니다. 본격적으로 Node.js에서 쿠키를 사용하는 방법을 알아보겠습니다.</p>
 <h2 id="Directory"><a href="#Directory" class="headerlink" title="Directory"></a>Directory</h2><ul>
 <li>project<ul>
 <li>app.js</li>
-<li>package.json<h2 id="설치"><a href="#설치" class="headerlink" title="설치"></a>설치</h2></li>
+<li>package.json</li>
 </ul>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">npm init</div><div class="line">.</div><div class="line">.</div><div class="line">.</div><div class="line">npm i --save express cookie-parser</div></pre></td></tr></table></figure>
+<h2 id="설치"><a href="#설치" class="headerlink" title="설치"></a>설치</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">npm init</div><div class="line">.</div><div class="line">.</div><div class="line">.</div><div class="line">npm i --save express cookie-parser</div></pre></td></tr></table></figure>
 <p>cookie-parser와 express를 설치합니다. <code>parser</code>라는 이름에서 예상하셨을 수 있겠지만 기존에 배웠던 body-parser와 사용법이 거의 비슷합니다.</p>
-<ul>
+<h2 id="예제"><a href="#예제" class="headerlink" title="예제"></a>예제</h2><ul>
 <li>app.js</li>
 </ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</div><div class="line"><span class="keyword">const</span> app = express();</div><div class="line"><span class="keyword">const</span> cookieParser = <span class="built_in">require</span>(<span class="string">'cookie-parser'</span>);</div><div class="line">　</div><div class="line">app.use(cookieParser());</div><div class="line">　</div><div class="line">app.get(<span class="string">'/toggleChk'</span>, (req, res) =&gt; &#123;</div><div class="line">	res.cookie(<span class="string">'checked'</span>, req.cookies.checked ? <span class="string">''</span> : <span class="string">'checked'</span>); <span class="comment">// set cookie</span></div><div class="line">	res.redirect(<span class="string">'/'</span>);</div><div class="line">&#125;);</div><div class="line">app.get(<span class="string">'/'</span>, (req, res) =&gt; &#123;</div><div class="line">    res.send(<span class="string">`</span></div><div class="line">		&lt;input type="checkbox" <span class="subst">$&#123;req.cookies.checked&#125;</span>&gt;</div><div class="line">		&lt;a href="/toggleChk"&gt;쿠키 토글&lt;/a&gt;</div><div class="line">	`);</div><div class="line">&#125;);</div><div class="line">　</div><div class="line">app.listen(<span class="number">3000</span>);</div></pre></td></tr></table></figure>

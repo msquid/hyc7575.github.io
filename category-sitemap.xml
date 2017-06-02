@@ -7,13 +7,6 @@
     </url>
 
     <url>
-        <loc>http://hyc7575.github.io/categories/Node-js/</loc>
-        <lastmod>2017-05-30T07:25:32.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://hyc7575.github.io/categories/Javascript/</loc>
         <lastmod>2017-06-01T05:47:45.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -23,6 +16,13 @@
     <url>
         <loc>http://hyc7575.github.io/categories/Javascript/%EC%9E%A1%EB%8B%B4/</loc>
         <lastmod>2017-06-01T05:47:45.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hyc7575.github.io/categories/Node-js/</loc>
+        <lastmod>2017-06-02T07:29:44.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
