@@ -46,8 +46,8 @@ arr2.indexOf(undefined); // -1
 ```javascript
 var a = new Array(10);
 a.map(function(v, i) {
-	console.log(v, i);
-	return 0;
+    console.log(v, i);
+    return 0;
 });
 ```
 10번의 콘솔과 0이 10개가 담긴 배열을 반환해줘야할 것 처럼 보이지만 값이 할당되지 않은 배열이므로 예상했던 동작은 하지 않습니다.
@@ -55,8 +55,8 @@ a.map(function(v, i) {
 var a = new Array(10);
 a.push('ha');
 a.map(function(v, i) {
-	console.log(v, i);
-	return 0;
+    console.log(v, i);
+    return 0;
 });
 // ha 10
 // [ 빈값 10개 , 0]

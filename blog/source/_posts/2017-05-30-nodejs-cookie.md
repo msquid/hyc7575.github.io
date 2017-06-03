@@ -18,14 +18,14 @@ published: true
 
 [link1]: https://github.com/expressjs/cookie-parser
 
-쿠키란 사용자의 컴퓨터에 웹 사이트로부터 저장된 작은 데이터 조각입니다. 이 데이터를 통하여 사이트 내의 움직임 추적, 중단 시점 체크 등 다양한 기능을 제공할 수 있습니다. 쿠키는 일반적으로 브라우저 하위의 폴더로 저장되게 됩니다. 지금 제가 사용하는 맥의 크롬을 기준으로는 `/Users/{username}/Library/Application Support/Google/Chrome/Default` 폴더의 Cookies라는 파일이 아닐까 합니다. (파일 내부 내용을 봐서는 맞는 것 같은데 정보의 팩트를 체크할 수 가 없네요 ㅠ) 이 파일의 내부를 살펴보면 각 쿠키당 서버의 정보가 있는걸 봐서는 특정 서버에서 만들어진 쿠키는 그 서버에 종속된다고 생각할 수 있겠습니다. 본격적으로 Node.js에서 쿠키를 사용하는 방법을 알아보겠습니다.
+쿠키란 사용자의 컴퓨터에 웹 사이트로부터 저장된 작은 데이터 조각입니다. 이 데이터를 통하여 사용자의 정보 저장, 사이트 내의 움직임 추적, 중단 시점 체크 등 다양한 기능을 제공할 수 있습니다. 쿠키는 일반적으로 브라우저 하위의 폴더로 저장되게 됩니다. 지금 제가 사용하는 맥의 크롬을 기준으로는 `/Users/{username}/Library/Application Support/Google/Chrome/Default` 폴더의 Cookies라는 파일이 아닐까 합니다. (파일 내부 내용을 봐서는 맞는 것 같은데 정보의 팩트를 체크할 수 가 없네요 ㅠ) 이 파일의 내부를 살펴보면 각 쿠키당 서버의 정보가 있는걸 봐서는 특정 서버에서 만들어진 쿠키는 그 서버에 종속된다고 생각할 수 있겠습니다. 본격적으로 Node.js에서 쿠키를 사용하는 방법을 알아보겠습니다.
 
 ## Directory
 - project
 	- app.js
 	- package.json
-## 설치
 
+## 설치
 ```
 npm init
 .
@@ -35,6 +35,7 @@ npm i --save express cookie-parser
 ```
 cookie-parser와 express를 설치합니다. `parser`라는 이름에서 예상하셨을 수 있겠지만 기존에 배웠던 body-parser와 사용법이 거의 비슷합니다.
 
+## 예제
 - app.js
 
 ```javascript
@@ -45,14 +46,14 @@ const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 　
 app.get('/toggleChk', (req, res) => {
-	res.cookie('checked', req.cookies.checked ? '' : 'checked'); // set cookie
-	res.redirect('/');
+    res.cookie('checked', req.cookies.checked ? '' : 'checked'); // set cookie
+    res.redirect('/');
 });
 app.get('/', (req, res) => {
     res.send(`
-		<input type="checkbox" ${req.cookies.checked}>
-		<a href="/toggleChk">쿠키 토글</a>
-	`);
+        <input type="checkbox" ${req.cookies.checked}>
+        <a href="/toggleChk">쿠키 토글</a>
+    `);
 });
 　
 app.listen(3000);
