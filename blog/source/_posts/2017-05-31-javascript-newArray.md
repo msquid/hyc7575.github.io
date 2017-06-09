@@ -7,9 +7,8 @@ categories:
     - Javascript
     - 잡담
 tags:
-    - nodejs
     - javascript
-    - javascript
+    - array
     - javascript array
 
 published: true
