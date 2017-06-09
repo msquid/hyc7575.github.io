@@ -93,21 +93,7 @@
     </url>
 
     <url>
-        <loc>http://hyc7575.github.io/tags/javascript-array/</loc>
-        <lastmod>2017-06-03T15:52:08.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://hyc7575.github.io/tags/nodejs/</loc>
-        <lastmod>2017-06-03T15:56:02.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://hyc7575.github.io/tags/javascript/</loc>
         <lastmod>2017-06-03T15:56:02.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -158,6 +144,41 @@
     <url>
         <loc>http://hyc7575.github.io/tags/%EC%95%94%ED%98%B8%ED%99%94/</loc>
         <lastmod>2017-06-03T15:56:02.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hyc7575.github.io/tags/array/</loc>
+        <lastmod>2017-06-08T12:31:01.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hyc7575.github.io/tags/javascript-array/</loc>
+        <lastmod>2017-06-08T12:31:01.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hyc7575.github.io/tags/javascript/</loc>
+        <lastmod>2017-06-09T05:38:35.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hyc7575.github.io/tags/vue/</loc>
+        <lastmod>2017-06-09T05:38:35.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hyc7575.github.io/tags/vue-js/</loc>
+        <lastmod>2017-06-09T05:38:35.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

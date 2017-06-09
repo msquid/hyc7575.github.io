@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://hyc7575.github.io/"/>
-  <updated>2017-06-03T15:56:02.000Z</updated>
+  <updated>2017-06-09T05:38:35.000Z</updated>
   <id>http://hyc7575.github.io/</id>
   
   <author>
@@ -14,6 +14,53 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Vue.js - 시작하기</title>
+    <link href="http://hyc7575.github.io/2017/06/08/2017-06-08-vueJs-start/"/>
+    <id>http://hyc7575.github.io/2017/06/08/2017-06-08-vueJs-start/</id>
+    <published>2017-06-08T12:29:57.000Z</published>
+    <updated>2017-06-09T05:38:35.000Z</updated>
+    
+    <content type="html"><![CDATA[<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Vue.js_Logo.svg/480px-Vue.js_Logo.svg.png?uselang=ko"/><h2 id="시작하기-앞서"><a href="#시작하기-앞서" class="headerlink" title="시작하기 앞서"></a>시작하기 앞서</h2><p>지난 주말 여기 저기서 들려오고 있으며 엄청난 성장세를 보여주고 있는 Vue.js의 공식 문서를 한번 읽어 보았습니다. 한글화가 굉장히 잘 되어있어서 금방금방 슝슝 스크롤을 내리면서 읽을 수 있더군요.(커뮤니티분들께 감사) 처음 문법을 보면서 느낀점은 마치 angular1 과 react를 합친 듯 한 기분이 들었습니다. 또 ‘러닝커브가 낮고 굉장히 효율적이다.’ 라는 소리가 괜히 나오는게 아닌것 같았습니다. 문서를 한번 읽어보니 어떤 흐름으로 흘러가는지 대충 파악이 가능했습니다. 사용 방법도 매우 간단하여 jquery처럼 문서에 스크립트 한줄 추가(이 방법이 best practice 라는건 아닙니다!)하거나 vue-cli와 같은 제너레이터를 이용하여 쉽게 webpack 혹은 browserify와 함께 사용할 수 있습니다. 진행하는 프로젝트 중 spring 위에서 프레임워크 없이 jquery를 기반으로 사용하는 것이 있는데 Vue.js라면 쉽게 특정 부분에서 사용할 수 있겠다 싶어서 바로 적용해 보았습니다. 결과부터 말하자면 아직 진행중이지만 꽤 괜찮은 것(기존 코드가 너무…) 같더군요. 물론 아직 지식이 부족해서 많은 삽질이 있었지만 나름 만족스럽게 진행되어 가고 있는 듯 합니다. 이 작업을 계기로 장기적으로 프로젝트에 조금씩 도입해가며 기초부터 한번 포스팅을 해보고자 해서 쓰게 되었습니다.</p>
+<h2 id="소개"><a href="#소개" class="headerlink" title="소개"></a>소개</h2><p>Vue.js는 이름에서 예상할 수 있듯 view작업에 초점을 맞춘 프레임워크입니다. 그래서인지 React와 많은 공통점을 가지고 있으며, 디렉티브(지시자)라는 문법이 등장하는데 이는 angular1에서 영감을 받아 상당 부분 개선되었다고 합니다. <a href="https://kr.vuejs.org/v2/guide/comparison.html" target="_blank" rel="external">이곳</a>에서 다른 프레임워크와 Vue.js가 어떻게 다른지 어떠한 부분이 효율적인지에 대해서 자세히 설명되어 있으니 관심이 있으신 분들은 한번 읽어보시길 바랍니다.</p>
+<h2 id="호환"><a href="#호환" class="headerlink" title="호환"></a>호환</h2><p>공식적으로 es5를 지원하는 브라우저에서 사용가능하다고 합니다. es6 문법을 사용한다면 babel 컴파일을 거쳐야합니다.</p>
+<h2 id="설치"><a href="#설치" class="headerlink" title="설치"></a>설치</h2><ul>
+<li>npm</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm i vue</div></pre></td></tr></table></figure>
+<ul>
+<li>cdn</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://unpkg.com/vue"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>프로젝트에 위 스크립트 한줄을 추가 함으로써 Vue.js를 사용할 수 있습니다.<br>ps - <code>create-react-app</code>과 같은 <code>vue-cli</code>라는 어플리케이션을 구성해주는 도구도 있습니다. 위에서 언급 하였듯, webpack or browserify의 설정까지 해주어서 편리합니다.</p>
+<h2 id="간단한-어플리케이션"><a href="#간단한-어플리케이션" class="headerlink" title="간단한 어플리케이션"></a>간단한 어플리케이션</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>Test<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></div><div class="line">            &#123;&#123; message &#125;&#125;</div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://unpkg.com/vue"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></div><div class="line">            var app = new Vue(&#123;</div><div class="line">                el: '#app',</div><div class="line">                data: &#123;</div><div class="line">                    message: '안녕하세요 Vue!'</div><div class="line">                &#125;</div><div class="line">            &#125;);</div><div class="line">        <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h3><p></p><p data-height="300" data-theme-id="11131" data-slug-hash="OgMRyZ" data-default-tab="js,result" data-user="small" data-embed-version="2" data-pen-title="OgMRyZ" class="codepen">See the Pen <a href="https://codepen.io/small/pen/OgMRyZ/" target="_blank" rel="external">OgMRyZ</a> by keun hyeok (<a href="https://codepen.io/small" target="_blank" rel="external">@small</a>) on <a href="https://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+
+<p>Vue.js는 MVVM 패턴에 영감을 받았다고 합니다. 위 예제에서의 <code>Vue 생성자</code>는 MVVM(Model-View-ViewModel)중 VM(ViewModel)을 생성합니다. 인자로 들어가는 객체를 통하여 여러 옵션을 지정해 줄 수 있습니다. 이 부분에 대해서는 차차 알아가 보도록 하겠습니다.</p>
+<h2 id="맺음"><a href="#맺음" class="headerlink" title="맺음"></a>맺음</h2><p>아직 저도 공부를 하는 입장인지라(만만히 보고 도입했다가 삽질 또 삽질…) 공식 문서를 기반으로 한 예제 및 느낀 점을 기록하는 용도로서의 포스팅이 될 것 같습니다.</p>
+<h2 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h2><p><a href="https://kr.vuejs.org/" target="_blank" rel="external">Vue.js 한글 문서</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Vue.js_Logo.svg/480px-Vue.js_Logo.svg.png?uselang=ko&quot;/&gt;&lt;h2 id=&quot;시작하기-앞서&quot;&gt;
+    
+    </summary>
+    
+      <category term="Javascript" scheme="http://hyc7575.github.io/categories/Javascript/"/>
+    
+      <category term="vue" scheme="http://hyc7575.github.io/categories/Javascript/vue/"/>
+    
+    
+      <category term="javascript" scheme="http://hyc7575.github.io/tags/javascript/"/>
+    
+      <category term="vue" scheme="http://hyc7575.github.io/tags/vue/"/>
+    
+      <category term="vue js" scheme="http://hyc7575.github.io/tags/vue-js/"/>
+    
+  </entry>
   
   <entry>
     <title>Node.js(express) - express-session with 로그인(3/3)</title>
@@ -205,7 +252,7 @@
     <link href="http://hyc7575.github.io/2017/05/31/2017-05-31-javascript-newArray/"/>
     <id>http://hyc7575.github.io/2017/05/31/2017-05-31-javascript-newArray/</id>
     <published>2017-05-31T07:33:44.000Z</published>
-    <updated>2017-06-03T15:52:08.000Z</updated>
+    <updated>2017-06-08T12:31:01.000Z</updated>
     
     <content type="html"><![CDATA[<img src="https://cloud.githubusercontent.com/assets/14171723/26621663/7479b128-4622-11e7-9a27-96aa8bb863a6.png"/><p>작업중인 라이브러리의 메서드 중 인자로 들어오는 array들의 중복값을 리턴해주는 것이 있습니다. 이를 튜닝하면서 생긴 뻘짓을 쓰는 글 입니다. 성능 테스트를 하기 위해서 <code>new Array(10000000);</code> 형태로 배열을 만들어서 테스트 하였습니다.</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">1000000000</span>);</div><div class="line"><span class="keyword">var</span> b = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">1000000000</span>);</div><div class="line"><span class="keyword">var</span> c = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">100000000</span>);</div><div class="line"><span class="keyword">var</span> d = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">10000000</span>);</div><div class="line">method(a,b,c,d); <span class="comment">// [];</span></div></pre></td></tr></table></figure>
@@ -232,9 +279,9 @@
       <category term="잡담" scheme="http://hyc7575.github.io/categories/Javascript/%EC%9E%A1%EB%8B%B4/"/>
     
     
-      <category term="nodejs" scheme="http://hyc7575.github.io/tags/nodejs/"/>
-    
       <category term="javascript" scheme="http://hyc7575.github.io/tags/javascript/"/>
+    
+      <category term="array" scheme="http://hyc7575.github.io/tags/array/"/>
     
       <category term="javascript array" scheme="http://hyc7575.github.io/tags/javascript-array/"/>
     
