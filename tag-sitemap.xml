@@ -164,21 +164,28 @@
 
     <url>
         <loc>http://hyc7575.github.io/tags/javascript/</loc>
-        <lastmod>2017-06-09T05:44:01.000Z</lastmod>
+        <lastmod>2017-06-10T12:09:54.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://hyc7575.github.io/tags/vue/</loc>
-        <lastmod>2017-06-09T05:44:01.000Z</lastmod>
+        <lastmod>2017-06-10T12:09:54.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://hyc7575.github.io/tags/vue-js/</loc>
-        <lastmod>2017-06-09T05:44:01.000Z</lastmod>
+        <lastmod>2017-06-10T12:09:54.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hyc7575.github.io/tags/data-bind/</loc>
+        <lastmod>2017-06-10T12:09:54.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
