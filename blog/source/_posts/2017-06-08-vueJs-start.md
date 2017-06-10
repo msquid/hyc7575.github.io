@@ -70,7 +70,7 @@ ps - `create-react-app`과 같은 `vue-cli`라는 어플리케이션을 구성�
 <p data-height="300" data-theme-id="11131" data-slug-hash="OgMRyZ" data-default-tab="js,result" data-user="small" data-embed-version="2" data-pen-title="OgMRyZ" class="codepen">See the Pen <a href="https://codepen.io/small/pen/OgMRyZ/">OgMRyZ</a> by keun hyeok (<a href="https://codepen.io/small">@small</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 
-Vue.js는 MVVM 패턴에 영감을 받았다고 합니다. 위 예제에서의 `Vue 생성자`는 MVVM(Model-View-ViewModel)중 VM(ViewModel)을 생성합니다. 인자로 들어가는 객체를 통하여 여러 옵션을 지정해 줄 수 있습니다. 이 부분에 대해서는 차차 알아가 보도록 하겠습니다.
+Vue.js는 MVVM 패턴에 영감을 받았다고 합니다. 위 예제에서의 Vue 생성자는 MVVM(Model-View-ViewModel)중 `VM(ViewModel)을 생성`합니다. 이때 인자로 들어가는 객체를 통하여 여러 옵션을 지정해 줄 수 있습니다. 현재 예제에서는 정의한 data가 템플릿에서 `{% raw %}{{property}}{% endraw %}` 와 같은 형태로 바인딩 된다는 것 입니다. 다른 옵션들에 대해서는 차차 알아가 보도록 하겠습니다.
 
 
 ## 맺음
