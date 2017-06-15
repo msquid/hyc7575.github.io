@@ -35,7 +35,7 @@ npm i vue
 ```html
 <script src="https://unpkg.com/vue"></script>
 ```
-프로젝트에 위 스크립트 한줄을 추가 함으로써 Vue.js를 사용할 수 있습니다.
+프로젝트에 위 스크립트 한줄을 추가 함으로써 Vue.js를 사용할 수 있습니다. (.Vue 확장자를 쓰면 모듈식으로 사용도 가능하지만 예제는 이런 방식으로 하지 않겠습니다.)
 ps - `create-react-app`과 같은 `vue-cli`라는 어플리케이션을 구성해주는 도구도 있습니다. 위에서 언급 하였듯, webpack or browserify의 설정까지 해주어서 편리합니다.
 
 ## 간단한 어플리케이션

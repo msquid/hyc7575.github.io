@@ -15,6 +15,7 @@ tags:
     - 생명주기
 ---
 [link1]: https://vuejs.org/
+[link2]: https://kr.vuejs.org/v2/guide/render-function.html
 
 라이프사이클이란 Vue 생성자의 호출 시점부터 mount 되기까지, 나아가 destroy 되기까지의 특정 시점들에 실행되는 메서드들 입니다. 아래 그림의 붉은 테두리를 가진 기호들이 Vue.js의 라이프사이클의 각 실행 시점입니다. (Vue.js가 어떤 흐름으로 동작하는지도 잘 나타나 있어서 많은 도움이 됩니다.)
 
@@ -53,9 +54,6 @@ var app = new Vue({
             console.log(this === app);
             console.log(this.$destroy());
             console.groupEnd();
-        },
-        killViewModel: function() {
-            alert('뷰 모델 죽음 ㅠ');
         }
     },
     beforeCreate: function() {
@@ -110,12 +108,16 @@ var app = new Vue({
 
 - created : 이벤트 및 데이터 설정이 완료되었습니다. 하지만 아직 템플릿이나 DOM이 마운트가 되어있지 않습니다. this.data는 제대로 가져오는 반면 this.$el 을 undefined로 반환해주고 있습니다.
 
+- beforeMount : 마운트 바로 이전 시점이며 [render][link2]라는 메서드가 호출되는 시점입니다. 역시 this.$el 은 아직 접근 불가능합니다. 아마 beforeMount는 사용할 일이 많지 않을 것 입니다. (redenr 메서드는 추후에 다뤄보도록 하겠습니다.)
+
 - mounted : 마운트가 완료된 시점이며, this.$el 에 접근이 가능해집니다. 보통 이 부분에서 ajax를 호출하여 데이터를 불러옵니다.
 
 - beforeUpdate : changeText 메서드를 실행시켜 text data를 변경 후 실행됩니다. 데이터는 변경되어있는 상태이며 DOM 랜더링만 되지 않은 상태이기 떄문에 this.text가 `랜더링될 예정`인 반갑습니다! 를 반환해 줍니다.
 
 - updated : beforeUpdate 후 DOM 랜더링 까지 완료 된 후 실행되는 시점입니다.
 
+- beforeDestroy : 파기되기 직전의 상태입니다. 해당 인스턴스는 이 시점까지 완벽한(?) 동작을 수행합니다.
+
 - destroyed : 모든 기능이 파기 된 후 호출됩니다. 모든 이벤트가 제거되어있으며 하위에 존재하는 인스턴스 모두 삭제 됩니다. `this._watcher.active`가 false를 반환하며 더이상 감시하지 않는다는 상태를 알려줍니다.
 
-ps - 예제와 그림에는 없지만 Vue.js 2.2.0 부터 `<keep-alive>` 라는 기본 내장 컴포넌트에서 `activated`와 `deactivated`라는 라이프 사이클이 동작한다고 합니다만 이번 포스팅에서는 넘어가도록 하겠습니다.
+ps - 그림에는 없지만 Vue.js 2.2.0 부터 `<keep-alive>` 라는 기본 내장 컴포넌트에서 `activated`와 `deactivated`라는 라이프 사이클이 동작한다고 합니다만 이번 포스팅에서는 다루지 않겠습니다.
