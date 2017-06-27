@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://hyc7575.github.io/"/>
-  <updated>2017-06-15T01:37:34.000Z</updated>
+  <updated>2017-06-27T01:36:54.000Z</updated>
   <id>http://hyc7575.github.io/</id>
   
   <author>
@@ -16,11 +16,97 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Vue.js - Directive(지시자) 1/2</title>
+    <link href="http://hyc7575.github.io/2017/06/27/2017-06-21-vue-directive/"/>
+    <id>http://hyc7575.github.io/2017/06/27/2017-06-21-vue-directive/</id>
+    <published>2017-06-27T01:36:24.000Z</published>
+    <updated>2017-06-27T01:36:54.000Z</updated>
+    
+    <content type="html"><![CDATA[<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Vue.js_Logo.svg/480px-Vue.js_Logo.svg.png?uselang=ko"/><p>디렉티브란 Vue.js 에서 사용되는 특별한 속성 입니다. Angular1 을 사용해보셨던 분들은 익숙할 것 입니다. Angular에서 <code>ng-</code> 를 사용한다면 Vue 에서는 <code>v-</code> 라는 접두사를 사용합니다. 이번 포스팅에서는 Vue.js 에서 기본적으로 제공하는 디렉티브 몇가지를 알아보려고 합니다.</p>
+<h2 id="v-text와-v-html"><a href="#v-text와-v-html" class="headerlink" title="v-text와 v-html"></a>v-text와 v-html</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></div><div class="line">    &#123;&#123;text&#125;&#125;</div><div class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">v-text</span>=<span class="string">"text"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span> <span class="comment">&lt;!-- &#123;&#123;text&#125;&#125; 와 동일 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">v-html</span>=<span class="string">"htmlText"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;</div><div class="line">    <span class="attr">el</span>: <span class="string">'#app'</span>,</div><div class="line">    <span class="attr">data</span>: &#123;</div><div class="line">        <span class="attr">text</span>: <span class="string">'안녕안녕~'</span>,</div><div class="line">        <span class="attr">htmlText</span>: <span class="string">'&lt;span style="color: red"&gt;하이하이~&lt;/span&gt; !!'</span></div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p></p><p data-height="300" data-theme-id="11131" data-slug-hash="KqmeoZ" data-default-tab="result" data-user="small" data-embed-version="2" data-pen-title="KqmeoZ" class="codepen">See the Pen <a href="https://codepen.io/small/pen/KqmeoZ/" target="_blank" rel="external">KqmeoZ</a> by keun hyeok (<a href="https://codepen.io/small" target="_blank" rel="external">@small</a>) on <a href="https://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+
+<ul>
+<li><p>v-text: <code>{{ }}</code> 와 같은 기능을 합니다. 해당 엘리먼트의 값이 data의 text 값으로 설정 된 것을 볼 수 있습니다.</p>
+</li>
+<li><p>v-html: html 코드를 랜더링 할 경우 사용합니다. v-text나 머스타치 구문을 사용할 경우 해당 string값 그대로 표시됩니다.</p>
+</li>
+</ul>
+<h2 id="v-show와-v-if"><a href="#v-show와-v-if" class="headerlink" title="v-show와 v-if"></a>v-show와 v-if</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">section</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>v-show<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">v-show</span>=<span class="string">"isShow"</span>&gt;</span>&#123;&#123;text&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">section</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">section</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>v-if<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">v-if</span>=<span class="string">"isShow"</span>&gt;</span>&#123;&#123;text&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">section</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">"toggleText"</span>&gt;</span>토글<span class="tag">&lt;/<span class="name">button</span>&gt;</span> <span class="comment">&lt;!-- 이벤트 바인딩 --&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;</div><div class="line">    <span class="attr">el</span>: <span class="string">'#app'</span>,</div><div class="line">    <span class="attr">data</span>: &#123;</div><div class="line">        <span class="attr">isShow</span>: <span class="literal">false</span>,</div><div class="line">        <span class="attr">text</span>: <span class="string">'보일까 말까!'</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attr">methods</span>: &#123;</div><div class="line">        <span class="attr">toggleText</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="keyword">this</span>.isShow = !<span class="keyword">this</span>.isShow;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>v-show와 v-if 모두 화면에 표시하는지 안하는지에 대한 지시자 입니다.</p>
+<ul>
+<li><p>v-show: css의 display 속성에 의하여 컨트롤 됩니다. 값이 false여도 랜더링은 되지만  display: none 처리가 되어있는 것 입니다.</p>
+</li>
+<li><p>v-if: 해당 엘리먼트의 랜더링 여부가 판단됩니다. 값이 false면 랜더링이 되지 않습니다. true라면 랜더링이 될 것이며 true에서 false로 변경될 때는 해당 엘리먼트가 삭제됩니다.</p>
+</li>
+</ul>
+<p>아래 이미지를 보면 v-if는 해당 엘리먼트가 랜더링 되지 않았고, v-show 경우 display: none 처리가 되어있는 것을 보실 수 있습니다.</p>
+<p><img src="https://user-images.githubusercontent.com/14171723/27375487-5582b6dc-56aa-11e7-8426-d13e7ea241c3.png" alt="v-if"></p>
+<p></p><p data-height="300" data-theme-id="11131" data-slug-hash="mwmzRd" data-default-tab="result" data-user="small" data-embed-version="2" data-pen-title="mwmzRd" class="codepen">See the Pen <a href="https://codepen.io/small/pen/mwmzRd/" target="_blank" rel="external">mwmzRd</a> by keun hyeok (<a href="https://codepen.io/small" target="_blank" rel="external">@small</a>) on <a href="https://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+
+<h3 id="v-if의-else"><a href="#v-if의-else" class="headerlink" title="v-if의 else"></a>v-if의 else</h3><p>if문이 있으니 else 와 else if도 자연스럽게 따라오게 됩니다.</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">v-if</span>=<span class="string">"state === 0"</span>&gt;</span></div><div class="line">        if 입니다.</div><div class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">v-else-if</span>=<span class="string">"state === 1"</span>&gt;</span></div><div class="line">        else if 입니다.</div><div class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">v-else</span>&gt;</span></div><div class="line">        else 입니다.</div><div class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">"changeState"</span>&gt;</span>토글<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;</div><div class="line">    <span class="attr">el</span>: <span class="string">'#app'</span>,</div><div class="line">    <span class="attr">data</span>: &#123;</div><div class="line">        <span class="attr">state</span>: <span class="number">0</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attr">methods</span>: &#123;</div><div class="line">        <span class="attr">changeState</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="comment">// 0 ~ 2 랜덤 부여</span></div><div class="line">            <span class="keyword">var</span> state = <span class="built_in">parseInt</span>(<span class="built_in">Math</span>.random() * <span class="number">3</span>, <span class="number">10</span>);</div><div class="line">            alert(state);</div><div class="line">            <span class="keyword">this</span>.state = state;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p></p><p data-height="300" data-theme-id="11131" data-slug-hash="MomzyZ" data-default-tab="result" data-user="small" data-embed-version="2" data-pen-title="MomzyZ" class="codepen">See the Pen <a href="https://codepen.io/small/pen/MomzyZ/" target="_blank" rel="external">MomzyZ</a> by keun hyeok (<a href="https://codepen.io/small" target="_blank" rel="external">@small</a>) on <a href="https://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+
+<p>바로 v-else-if와 v-else는 <code>바로 이전 형제엘리먼트가 v-if</code> 일 경우 사용한다는 점만 기억해두시면 됩니다. ( 우리가 아는 if와 같습니다! )</p>
+<h2 id="v-for-디렉티브"><a href="#v-for-디렉티브" class="headerlink" title="v-for 디렉티브"></a>v-for 디렉티브</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>v-for example<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"array-area"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">h2</span>&gt;</span>array<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">v-for</span>=<span class="string">"(item, index) in arrayItem"</span>&gt;</span>&#123;&#123;index&#125;&#125; : &#123;&#123;item&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"obj-area"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">h2</span>&gt;</span>object<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">dl</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">template</span> <span class="attr">v-for</span>=<span class="string">"(item, key, index) in objItem"</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">dt</span>&gt;</span>&#123;&#123;key&#125;&#125;<span class="tag">&lt;/<span class="name">dt</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">dd</span>&gt;</span>&#123;&#123;item&#125;&#125;<span class="tag">&lt;/<span class="name">dd</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">dl</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"num-area"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">h2</span>&gt;</span>number<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">v-for</span>=<span class="string">"n in 7"</span>&gt;</span>&#123;&#123;n&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"string-area"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">h2</span>&gt;</span>string<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">v-for</span>=<span class="string">"s in text"</span>&gt;</span>&#123;&#123;s&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;</div><div class="line">    <span class="attr">el</span>: <span class="string">'#app'</span>,</div><div class="line">    <span class="attr">data</span>: &#123;</div><div class="line">        <span class="attr">arrayItem</span>: [<span class="string">'arr1'</span>, <span class="string">'arr2'</span>, <span class="string">'arr3'</span>, <span class="string">'arr4'</span>],</div><div class="line">        <span class="attr">objItem</span>: &#123;</div><div class="line">            <span class="attr">name</span>: <span class="string">'hyeok'</span>,</div><div class="line">            <span class="attr">age</span>: <span class="number">22</span>,</div><div class="line">            <span class="attr">job</span>: <span class="string">'front end developer'</span>,</div><div class="line">            <span class="attr">birthday</span>: <span class="string">'0927'</span></div><div class="line">        &#125;,</div><div class="line">        <span class="attr">text</span>: <span class="string">'안녕해요!'</span></div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p></p><p data-height="300" data-theme-id="11131" data-slug-hash="gRRgzX" data-default-tab="result" data-user="small" data-embed-version="2" data-pen-title="gRRgzX" class="codepen">See the Pen <a href="https://codepen.io/small/pen/gRRgzX/" target="_blank" rel="external">gRRgzX</a> by keun hyeok (<a href="https://codepen.io/small" target="_blank" rel="external">@small</a>) on <a href="https://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+
+<p>v-for디렉티브는 굉장히 자주 사용되는 디렉티브 중 하나 입니다. 이 디렉티브는 기본적으로 <code>alias in(of) expression</code> 문법을 사용하며 expression자리에는 뷰모델의 데이터 들 중 Array, Object, Number, String 형태를 가진 값들이 올 수 있습니다.</p>
+<ul>
+<li><p>Array: 배열을 순환하며 alias 에 해당 인덱스의 값을 부여합니다. <code>(alias, index) in expression</code> 형태로 변경하여 인덱스 값 또한 넘겨받을 수 있습니다.</p>
+</li>
+<li><p>Object: 배열과 마찬가지로 객체를 순환합니다. 순환 순서는 Object.keys()로 나열된 키의 순서로 결정됩니다. <code>(alias, key, index) in expression</code> 형태로 사용이 가능합니다.</p>
+</li>
+<li><p>Number: expression의 값 만큼 순환하며 그 값은 1부터 시작합니다.</p>
+</li>
+<li><p>String: 문자열을 한자 한자 쪼개 한 단어씩 순환하며 표기합니다.</p>
+</li>
+</ul>
+<h2 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h2><ul>
+<li><a href="https://kr.vuejs.org/v2/api/#디렉티브" target="_blank" rel="external">Vue 디렉티브</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Vue.js_Logo.svg/480px-Vue.js_Logo.svg.png?uselang=ko&quot;/&gt;&lt;p&gt;디렉티브란 Vue.js 에
+    
+    </summary>
+    
+      <category term="Javascript" scheme="http://hyc7575.github.io/categories/Javascript/"/>
+    
+      <category term="vue" scheme="http://hyc7575.github.io/categories/Javascript/vue/"/>
+    
+    
+      <category term="javascript" scheme="http://hyc7575.github.io/tags/javascript/"/>
+    
+      <category term="vue" scheme="http://hyc7575.github.io/tags/vue/"/>
+    
+      <category term="vue js" scheme="http://hyc7575.github.io/tags/vue-js/"/>
+    
+      <category term="directive" scheme="http://hyc7575.github.io/tags/directive/"/>
+    
+      <category term="디렉티브" scheme="http://hyc7575.github.io/tags/%EB%94%94%EB%A0%89%ED%8B%B0%EB%B8%8C/"/>
+    
+      <category term="지시자" scheme="http://hyc7575.github.io/tags/%EC%A7%80%EC%8B%9C%EC%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Vue.js - LifeCycle</title>
     <link href="http://hyc7575.github.io/2017/06/14/2017-06-14-vue-lifeCycle/"/>
     <id>http://hyc7575.github.io/2017/06/14/2017-06-14-vue-lifeCycle/</id>
     <published>2017-06-14T00:44:26.000Z</published>
-    <updated>2017-06-15T01:37:34.000Z</updated>
+    <updated>2017-06-22T01:33:42.000Z</updated>
     
     <content type="html"><![CDATA[<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Vue.js_Logo.svg/480px-Vue.js_Logo.svg.png?uselang=ko"/><p>라이프사이클이란 Vue 생성자의 호출 시점부터 mount 되기까지, 나아가 destroy 되기까지의 특정 시점들에 실행되는 메서드들 입니다. 아래 그림의 붉은 테두리를 가진 기호들이 Vue.js의 라이프사이클의 각 실행 시점입니다. (Vue.js가 어떤 흐름으로 동작하는지도 잘 나타나 있어서 많은 도움이 됩니다.)</p>
 <p><img src="https://user-images.githubusercontent.com/14171723/27110978-f53bed4c-50e7-11e7-97b0-266c2244487c.png" alt="life-cyle"><br>출처 - <a href="https://vuejs.org/" target="_blank" rel="external">Vue.js 공식문서</a></p>
@@ -29,6 +115,7 @@
 <li>html</li>
 </ul>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></div><div class="line">    &#123;&#123;text&#125;&#125;</div><div class="line">    <span class="tag">&lt;<span class="name">br</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">"changeText"</span>&gt;</span>변경!!<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">br</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">"destroyApp"</span>&gt;</span>파괴!?<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><code>@click</code>이 지난 예제에 있던 <code>v-on</code>의 약자입니다. (이벤트를 등록합니다.)</p>
 <ul>
 <li>script</li>
 </ul>
@@ -221,9 +308,9 @@
       <category term="Node.js" scheme="http://hyc7575.github.io/categories/Node-js/"/>
     
     
-      <category term="nodejs" scheme="http://hyc7575.github.io/tags/nodejs/"/>
-    
       <category term="javascript" scheme="http://hyc7575.github.io/tags/javascript/"/>
+    
+      <category term="nodejs" scheme="http://hyc7575.github.io/tags/nodejs/"/>
     
       <category term="javascript server" scheme="http://hyc7575.github.io/tags/javascript-server/"/>
     
@@ -286,9 +373,9 @@
       <category term="Node.js" scheme="http://hyc7575.github.io/categories/Node-js/"/>
     
     
-      <category term="nodejs" scheme="http://hyc7575.github.io/tags/nodejs/"/>
-    
       <category term="javascript" scheme="http://hyc7575.github.io/tags/javascript/"/>
+    
+      <category term="nodejs" scheme="http://hyc7575.github.io/tags/nodejs/"/>
     
       <category term="javascript server" scheme="http://hyc7575.github.io/tags/javascript-server/"/>
     
@@ -361,9 +448,9 @@
       <category term="Node.js" scheme="http://hyc7575.github.io/categories/Node-js/"/>
     
     
-      <category term="nodejs" scheme="http://hyc7575.github.io/tags/nodejs/"/>
-    
       <category term="javascript" scheme="http://hyc7575.github.io/tags/javascript/"/>
+    
+      <category term="nodejs" scheme="http://hyc7575.github.io/tags/nodejs/"/>
     
       <category term="javascript server" scheme="http://hyc7575.github.io/tags/javascript-server/"/>
     
@@ -451,9 +538,9 @@
       <category term="Node.js" scheme="http://hyc7575.github.io/categories/Node-js/"/>
     
     
-      <category term="nodejs" scheme="http://hyc7575.github.io/tags/nodejs/"/>
-    
       <category term="javascript" scheme="http://hyc7575.github.io/tags/javascript/"/>
+    
+      <category term="nodejs" scheme="http://hyc7575.github.io/tags/nodejs/"/>
     
       <category term="javascript server" scheme="http://hyc7575.github.io/tags/javascript-server/"/>
     
@@ -527,9 +614,9 @@
       <category term="Node.js" scheme="http://hyc7575.github.io/categories/Node-js/"/>
     
     
-      <category term="nodejs" scheme="http://hyc7575.github.io/tags/nodejs/"/>
-    
       <category term="javascript" scheme="http://hyc7575.github.io/tags/javascript/"/>
+    
+      <category term="nodejs" scheme="http://hyc7575.github.io/tags/nodejs/"/>
     
       <category term="javascript server" scheme="http://hyc7575.github.io/tags/javascript-server/"/>
     
@@ -611,9 +698,9 @@
       <category term="Node.js" scheme="http://hyc7575.github.io/categories/Node-js/"/>
     
     
-      <category term="nodejs" scheme="http://hyc7575.github.io/tags/nodejs/"/>
-    
       <category term="javascript" scheme="http://hyc7575.github.io/tags/javascript/"/>
+    
+      <category term="nodejs" scheme="http://hyc7575.github.io/tags/nodejs/"/>
     
       <category term="javascript server" scheme="http://hyc7575.github.io/tags/javascript-server/"/>
     
@@ -677,9 +764,9 @@
       <category term="Node.js" scheme="http://hyc7575.github.io/categories/Node-js/"/>
     
     
-      <category term="nodejs" scheme="http://hyc7575.github.io/tags/nodejs/"/>
-    
       <category term="javascript" scheme="http://hyc7575.github.io/tags/javascript/"/>
+    
+      <category term="nodejs" scheme="http://hyc7575.github.io/tags/nodejs/"/>
     
       <category term="javascript server" scheme="http://hyc7575.github.io/tags/javascript-server/"/>
     
@@ -762,9 +849,9 @@
       <category term="Node.js" scheme="http://hyc7575.github.io/categories/Node-js/"/>
     
     
-      <category term="nodejs" scheme="http://hyc7575.github.io/tags/nodejs/"/>
-    
       <category term="javascript" scheme="http://hyc7575.github.io/tags/javascript/"/>
+    
+      <category term="nodejs" scheme="http://hyc7575.github.io/tags/nodejs/"/>
     
       <category term="javascript server" scheme="http://hyc7575.github.io/tags/javascript-server/"/>
     
@@ -812,9 +899,9 @@
       <category term="Node.js" scheme="http://hyc7575.github.io/categories/Node-js/"/>
     
     
-      <category term="nodejs" scheme="http://hyc7575.github.io/tags/nodejs/"/>
-    
       <category term="javascript" scheme="http://hyc7575.github.io/tags/javascript/"/>
+    
+      <category term="nodejs" scheme="http://hyc7575.github.io/tags/nodejs/"/>
     
       <category term="javascript server" scheme="http://hyc7575.github.io/tags/javascript-server/"/>
     
@@ -896,9 +983,9 @@
       <category term="Node.js" scheme="http://hyc7575.github.io/categories/Node-js/"/>
     
     
-      <category term="nodejs" scheme="http://hyc7575.github.io/tags/nodejs/"/>
-    
       <category term="javascript" scheme="http://hyc7575.github.io/tags/javascript/"/>
+    
+      <category term="nodejs" scheme="http://hyc7575.github.io/tags/nodejs/"/>
     
       <category term="javascript server" scheme="http://hyc7575.github.io/tags/javascript-server/"/>
     
@@ -955,9 +1042,9 @@
       <category term="Node.js" scheme="http://hyc7575.github.io/categories/Node-js/"/>
     
     
-      <category term="nodejs" scheme="http://hyc7575.github.io/tags/nodejs/"/>
-    
       <category term="javascript" scheme="http://hyc7575.github.io/tags/javascript/"/>
+    
+      <category term="nodejs" scheme="http://hyc7575.github.io/tags/nodejs/"/>
     
       <category term="javascript server" scheme="http://hyc7575.github.io/tags/javascript-server/"/>
     
@@ -1005,9 +1092,9 @@
       <category term="Node.js" scheme="http://hyc7575.github.io/categories/Node-js/"/>
     
     
-      <category term="nodejs" scheme="http://hyc7575.github.io/tags/nodejs/"/>
-    
       <category term="javascript" scheme="http://hyc7575.github.io/tags/javascript/"/>
+    
+      <category term="nodejs" scheme="http://hyc7575.github.io/tags/nodejs/"/>
     
       <category term="javascript server" scheme="http://hyc7575.github.io/tags/javascript-server/"/>
     
