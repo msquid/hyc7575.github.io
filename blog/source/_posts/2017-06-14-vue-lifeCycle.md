@@ -36,6 +36,8 @@ tags:
     <button @click="destroyApp">파괴!?</button>
 </div>
 ```
+`@click`이 지난 예제에 있던 `v-on`의 약자입니다. (이벤트를 등록합니다.)
+
 
 - script
 
