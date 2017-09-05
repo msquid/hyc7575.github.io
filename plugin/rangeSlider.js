@@ -87,7 +87,7 @@ $.fn.rangeSlider = function(opts) {
             $handle.on('mousedown', function(e) {
                 // start drag
                 var e = window.event || e;
-
+                $(this).css('background-color', '#ff7359');
                 handles = {
                     minHandle: {
                         mouseX: e.clientX,
@@ -107,7 +107,7 @@ $.fn.rangeSlider = function(opts) {
             $(document).on('mouseup', function() {
                 // end drag
                 if( !handles ) return;
-
+                $handle.css('background-color', 'rgb(255,255,255)');
                 // 최소 간격의 일정 값으로 설정 해주고 ex) 473 -> 450
                 // 표시되는 숫자들 설정해주고
                 // input value들 설정해주자
@@ -175,6 +175,7 @@ $.fn.rangeSlider = function(opts) {
                 // start drag
                 e.preventDefault();
                 var e = e.originalEvent;
+                $(this).css('background-color', '#ff7359');
 
                 handles = {
                     minHandle: {
@@ -228,7 +229,7 @@ $.fn.rangeSlider = function(opts) {
             $handle.on('touchend', function(e) {
                 // end drag
                 if( !handles ) return;
-
+                $handle.css('background-color', 'rgb(255,255,255)');
                 // 최소 간격의 일정 값으로 설정 해주고 ex) 473 -> 450
                 // 표시되는 숫자들 설정해주고
                 // input value들 설정해주자

@@ -7,13 +7,6 @@
     </url>
 
     <url>
-        <loc>http://hyc7575.github.io/categories/Node-js/</loc>
-        <lastmod>2017-06-03T15:56:02.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://hyc7575.github.io/categories/Javascript/%EC%9E%A1%EB%8B%B4/</loc>
         <lastmod>2017-06-08T12:31:01.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -21,15 +14,22 @@
     </url>
 
     <url>
+        <loc>http://hyc7575.github.io/categories/Node-js/</loc>
+        <lastmod>2017-09-05T01:03:12.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://hyc7575.github.io/categories/Javascript/</loc>
-        <lastmod>2017-07-18T05:35:37.000Z</lastmod>
+        <lastmod>2017-09-05T01:59:52.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://hyc7575.github.io/categories/Javascript/vue/</loc>
-        <lastmod>2017-07-18T05:35:37.000Z</lastmod>
+        <lastmod>2017-09-05T01:59:52.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
