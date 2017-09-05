@@ -133,6 +133,8 @@ app.get('/', (req, res) => {
 </body>
 </html>
 ```
+라우터에서 넘겨준 nickname값의 유무를 통해 로그인 여부를 판단하고 각각 다른 값을 랜더링 해주도록 만들었습니다.
+
 이제 session을 사용하기위한 모든 준비가 끝났습니다. 미들웨어의 옵션으로 `saveUninitialized`값을 true로 설정해주었기 때문에 app.js를 실행하고 접속하면 아직 세션에 아무런 값도 설정해주지는 않았지만 쿠키에 고유한 식별값을 남겨두었을 것 입니다.
 ![connect.sid](https://cloud.githubusercontent.com/assets/14171723/26714475/7a8b74da-47ac-11e7-8a64-522a0f5df510.png)
 기본적으로 connect.sid라는 이름으로 저장됩니다. 이 쿠키값을 통해서 메모리에 저장되어있는 세션정보를 읽을 수 있는 것 입니다. 로그인 및 가입 구현은 2장에서 진행하겠습니다.
