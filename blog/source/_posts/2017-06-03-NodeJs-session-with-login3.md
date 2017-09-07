@@ -1,5 +1,5 @@
 ---
-title: Node.js(express) - express-session with 로그인(3/3)
+title: Node.js(express) - express-session 로그인(3/3)
 date: 2017-06-03 21:18:39
 banner:
     url: https://cloud.githubusercontent.com/assets/14171723/25853095/7bf3be3a-3506-11e7-8421-0a2287dd6278.png
