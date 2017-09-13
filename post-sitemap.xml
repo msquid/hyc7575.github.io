@@ -7,6 +7,14 @@
     </url>
 
     <url>
+        <loc>http://hyc7575.github.io/2017/07/18/2017-07-18-vue-directvie2/</loc>
+        <lastmod>2017-09-13T04:42:07.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://hyc7575.github.io/2017/06/03/2017-06-03-NodeJs-session-with-login3/</loc>
         <lastmod>2017-09-07T00:52:54.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -33,14 +41,6 @@
     <url>
         <loc>http://hyc7575.github.io/2017/08/31/2017-08-31-vue-component/</loc>
         <lastmod>2017-09-05T01:59:52.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://hyc7575.github.io/2017/07/18/2017-07-18-vue-directvie2/</loc>
-        <lastmod>2017-09-04T05:32:19.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
