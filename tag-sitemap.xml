@@ -2,20 +2,6 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <url>
-        <loc>http://hyc7575.github.io/tags/route/</loc>
-        <lastmod>2017-09-13T04:47:02.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://hyc7575.github.io/tags/router/</loc>
-        <lastmod>2017-09-13T04:47:02.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://hyc7575.github.io/tags/Router/</loc>
         <lastmod>2017-09-13T04:47:02.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -37,21 +23,14 @@
     </url>
 
     <url>
-        <loc>http://hyc7575.github.io/tags/ejs/</loc>
+        <loc>http://hyc7575.github.io/tags/route/</loc>
         <lastmod>2017-09-13T04:47:02.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://hyc7575.github.io/tags/ejs-layout/</loc>
-        <lastmod>2017-09-13T04:47:02.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://hyc7575.github.io/tags/layout/</loc>
+        <loc>http://hyc7575.github.io/tags/router/</loc>
         <lastmod>2017-09-13T04:47:02.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -86,7 +65,21 @@
     </url>
 
     <url>
-        <loc>http://hyc7575.github.io/tags/cookie-parser/</loc>
+        <loc>http://hyc7575.github.io/tags/ejs/</loc>
+        <lastmod>2017-09-13T04:47:02.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hyc7575.github.io/tags/ejs-layout/</loc>
+        <lastmod>2017-09-13T04:47:02.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hyc7575.github.io/tags/layout/</loc>
         <lastmod>2017-09-13T04:47:02.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -101,6 +94,20 @@
 
     <url>
         <loc>http://hyc7575.github.io/tags/javascript-array/</loc>
+        <lastmod>2017-09-13T04:47:02.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hyc7575.github.io/tags/cookie-parser/</loc>
+        <lastmod>2017-09-13T04:47:02.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hyc7575.github.io/tags/data-bind/</loc>
         <lastmod>2017-09-13T04:47:02.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -122,13 +129,6 @@
 
     <url>
         <loc>http://hyc7575.github.io/tags/%EC%83%9D%EB%AA%85%EC%A3%BC%EA%B8%B0/</loc>
-        <lastmod>2017-09-13T04:47:02.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://hyc7575.github.io/tags/data-bind/</loc>
         <lastmod>2017-09-13T04:47:02.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -256,6 +256,41 @@
     <url>
         <loc>http://hyc7575.github.io/tags/custom-radio/</loc>
         <lastmod>2017-09-25T08:04:19.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hyc7575.github.io/tags/React/</loc>
+        <lastmod>2017-11-10T06:38:56.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hyc7575.github.io/tags/google-map-api/</loc>
+        <lastmod>2017-11-10T06:38:56.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hyc7575.github.io/tags/weather-api/</loc>
+        <lastmod>2017-11-10T06:38:56.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hyc7575.github.io/tags/html5-geolocation/</loc>
+        <lastmod>2017-11-10T06:38:56.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hyc7575.github.io/tags/geolocation/</loc>
+        <lastmod>2017-11-10T06:38:56.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
