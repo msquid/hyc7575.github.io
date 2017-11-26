@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>상세</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+</head>
+<body>
+    <div id="wrap">
+        <div id="layout_wrap">
+            <div id="layout_header">
+                <script>
+                    $('#layout_header').load('./layout/header.html');
+                </script>
+        	</div>
+
+            <div id="layout_body" class="bg-gray">
+                <div class="goods-info-wrap">
+                    <script>
+                        $('.goods-info-wrap').load('./layout/detail-header.html');
+                    </script>
+                </div>
+
+                <div class="goods-review-wrap" style="background-color: #fff;">
+                    <script>
+                        $.get('./layout/detail-tab.html', function(data) {
+                            $('.goods-review-wrap').prepend(data);
+                        });
+                    </script>
+
+                    <div class="goods-review-info wrapper">
+                        <h2>평균 만족도</h2>
+                        <div>
+
+                        </div>
+                        <h2>착화감 평가</h2>
+                        <style>
+
+                            .wf-table .hide-detail {
+                                display: block !important;
+                            }
+                            .wf-table .show-detail {
+                                display: none !important;
+                            }
+                            .wf-table.detail .hide-detail {
+                                display: none !important;
+                            }
+                            .wf-table.detail .show-detail {
+                                display: block !important;
+                            }
+
+                            .wf-table {
+                                font-size: 20px;
+                                text-align: left;
+                            }
+                            .wf-table .detail-col {
+                                width: 10%;
+                            }
+                            .wf-table.detail .detail-col {
+                                width: 1px;
+                            }
+                            .wf-table th,
+                            .wf-table td {
+                                padding: 6px 0;
+                                vertical-align: top;
+                            }
+                            .wf-table .show-detail li {
+                                display: table;
+                                width: 100%;
+                                box-sizing: border-box;
+                            }
+                            .wf-table .show-detail li span {
+                                display: table-cell;
+                                font-size: 16px;
+                            }
+                            .wf-table .show-detail li .detail-text {
+                                width: 80px;
+                            }
+                            .wf-table .show-detail li .detail-percent {
+                                padding-left: 6px;
+                                width: 40px;
+                                text-align: right;
+                                box-sizing: border-box;
+                            }
+                            .wf-table .show-detail li .grade-bar {
+                                position: relative;
+                                display: table-cell;
+                                background-color: #f4f1f1;
+                            }
+                            .wf-table .show-detail li .grade-bar > div {
+                                position: absolute;
+                                left: 0;
+                                top: 0;
+                                bottom: 0;
+                            }
+                            .wf-table .show-detail li > div >
+                            @media only screen and (max-width: 480px) {
+                                .wf-table {
+                                    font-size: 16px;
+                                }
+                                .wf-table .show-detail li span {
+                                    font-size: 12px;
+                                }
+                                .wf-table .show-detail li .detail-text {
+                                    width: 70px;
+                                }
+                                .wf-table .show-detail li .detail-percent {
+                                    width: 35px;
+                                }
+                            }
+                            @media only screen and (max-width: 360px) {
+                                .wf-table {
+                                    font-size: 14px;
+                                }
+                                .wf-table .show-detail li span {
+                                    font-size: 10px;
+                                }
+                                .wf-table .show-detail li .detail-text {
+                                    width: 60px;
+                                }
+                                .wf-table .show-detail li .detail-percent {
+                                    width: 30px;
+                                }
+                            }
+                        </style>
+                        <!-- 아래 테이블에 detail 클래스 주고 안주고를 이용하여 자세히 보기, 접기 상태를 나타냅니다. -->
+                        <table class="table wf-table detail">
+                            <colgroup>
+                                <col style="width: 22%;">
+                                <col style="width: auto;">
+                                <col class="detail-col">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <th class="normal" style="color: #7347da;">사이즈</th>
+                                    <td class="light">
+                                        <span class="hide-detail">딱 맞아요</span>
+                                        <ul class="show-detail">
+                                            <li>
+                                                <span class="detail-text">
+                                                    매우작아요
+                                                </span>
+                                                <div class="grade-bar">
+                                                    <div style="width: 36%; background-color: #ac8ff0;"></div>
+                                                </div>
+                                                <span class="detail-percent">
+                                                    36%
+                                                </span>
+                                            </li>
+                                            <li>
+                                                <span class="detail-text">
+                                                    작아요
+                                                </span>
+                                                <div class="grade-bar">
+                                                    <div style="width: 24%; background-color: #ac8ff0;"></div>
+                                                </div>
+                                                <span class="detail-percent">
+                                                    24%
+                                                </span>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td class="hide-detail">
+                                        30%
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <th class="normal" style="color: #78d0ae;">발볼 넓이</th>
+                                    <td class="light">
+                                        <span class="hide-detail">딱 맞아요</span>
+                                        <ul class="show-detail">
+                                            <li>
+                                                <span class="detail-text">
+                                                    매우작아요
+                                                </span>
+                                                <div class="grade-bar">
+                                                    <div style="width: 36%; background-color: #78d0ae;"></div>
+                                                </div>
+                                                <span class="detail-percent">
+                                                    36%
+                                                </span>
+                                            </li>
+                                            <li>
+                                                <span class="detail-text">
+                                                    작아요
+                                                </span>
+                                                <div class="grade-bar">
+                                                    <div style="width: 24%; background-color: #78d0ae;"></div>
+                                                </div>
+                                                <span class="detail-percent">
+                                                    24%
+                                                </span>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td class="hide-detail">
+                                        30%
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <th class="normal" style="color: #db85c0;">무게감</th>
+                                    <td class="light">
+                                        <span class="hide-detail">딱 맞아요</span>
+                                        <ul class="show-detail">
+                                            <li>
+                                                <span class="detail-text">
+                                                    매우작아요
+                                                </span>
+                                                <div class="grade-bar">
+                                                    <div style="width: 36%; background-color: #db85c0;"></div>
+                                                </div>
+                                                <span class="detail-percent">
+                                                    36%
+                                                </span>
+                                            </li>
+                                            <li>
+                                                <span class="detail-text">
+                                                    작아요
+                                                </span>
+                                                <div class="grade-bar">
+                                                    <div style="width: 24%; background-color: #db85c0;"></div>
+                                                </div>
+                                                <span class="detail-percent">
+                                                    24%
+                                                </span>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td class="hide-detail">
+                                        30%
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!--
+                <div id="goods-fixed-btns">
+                    <script>
+                        $('#goods-fixed-btns').load('./layout/detail-buttons.html');
+                    </script>
+                </div>
+                 -->
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

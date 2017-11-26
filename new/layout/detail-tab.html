@@ -1,0 +1,37 @@
+<script>
+    (function() {
+        var tabFnc = (function() {
+            var testFnc = function() {
+                alert('test');
+            }
+            return {
+                testFnc: testFnc
+            }
+        })();
+
+        $(document).on('click', '.tab li', function() {
+            var $this = $(this);
+            var isSrc = $this.data('src');
+            var fnc = $this.data('callback');
+
+            !isSrc && $this.addClass('on').siblings().removeClass('on'); // && = if() {} 동일.
+            fnc && tabFnc[fnc]();
+        });
+    })();
+</script>
+<ul class="tab">
+    <!-- data-src 가 있을때만 li안에 a 태그가 있어요. 링크이동이 아닌경우 a태그와 data-src를 없애주세요. (3번째 li) -->
+    <!-- data-callback은 tabFnc 객체와 매핑 됩니당. 혹 실행 될 콜백이 있으면 사용해주세요. (3번째 li)  -->
+    <li class="on" data-src="true">
+        <a href="#">상품상세</a>
+    </li>
+    <li data-src="true">
+        <a href="#">구매후기</a>
+    </li>
+    <li data-callback="testFnc">
+        상품문의
+    </li>
+    <li data-src="true">
+        <a href="#">배송/교환</a>
+    </li>
+</ul>

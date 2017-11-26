@@ -1,0 +1,118 @@
+<style>
+    .goods-info-wrap {
+        margin-bottom: 20px;
+        background-color: #fff;
+    }
+    .goods-info-wrap .goods-slide-area + div {
+        position: relative;
+        padding-top: 30px;
+        padding-bottom: 20px;
+    }
+    .goods-info-wrap .goods-slide-area + div h2 {
+        font-size: 22px;
+        font-weight: 700;
+    }
+    .goods-info-wrap .goods-slide-area + div .button-goods-wish {
+        position: absolute;
+        top: 24px;
+        right: 16px;
+        width: 40px;
+        height: 40px;
+        background-image: url(/data/skin/mobile_ver3_itsimply_gls/images/detail/wish_off.png);
+    }
+    .goods-info-wrap .goods-slide-area + div .button-goods-wish.on {
+        background-image: url(/data/skin/mobile_ver3_itsimply_gls/images/detail/wish_on.png);
+    }
+    .goods-info-wrap .goods-slide-area + div .goods-price-info {
+        margin-bottom: 8px;
+    }
+    .goods-info-wrap .goods-slide-area + div s {
+        display: inline-block;
+        margin-right: 4px;
+        font-size: 14px;
+        color: #9b9b9b;
+        vertical-align: middle;
+    }
+    .goods-info-wrap .goods-slide-area + div em {
+        font-size: 22px;
+        font-weight: 700;
+        vertical-align: middle;
+    }
+    .goods-info-wrap .table {
+        margin: 40px 0 20px;
+        padding: 18px 0;
+        border-top: 1px solid #d3d3d3;
+        border-bottom: 1px solid #d3d3d3;
+    }
+    @media only screen and (max-width: 480px) {
+        .goods-info-wrap .goods-slide-area + div {
+            padding-top: 15px;
+            padding-bottom: 10px;
+        }
+        .goods-info-wrap .goods-slide-area + div .button-goods-wish {
+            top: 10px;
+            right: 12px;
+        }
+        .goods-info-wrap .table {
+            margin: 20px 0 10px;
+            padding: 9px 0;
+        }
+    }
+</style>
+<div class="goods-slide-area">
+    <!-- 기존 슬라이드 사용 -->
+    <img src="http://placehold.it/1000x900?text=slide-item" style="max-width: 100%;" alt="">
+</div>
+<div class="wrapper">
+    <h2>리블링 진주로퍼</h2>
+    <!-- on 클래스를 주면 wish_on 입니당. on없으면 wish_off -->
+    <!-- 하단에 이벤트 만들어 둘게요. -->
+    <button class="button button-icon button-transparent button-goods-wish on">
+        <span class="only-sr">위시</span>
+    </button>
+    <div class="goods-price-info">
+        <s>50,000원</s>
+        <em>38,000<span class="normal">원</span></em>
+    </div>
+    <ul class="stars-wrap">
+        <li class="full"></li>
+        <li class="full"></li>
+        <li class="full"></li>
+        <li class="full"></li>
+        <li class="empty"></li>
+    </ul>
+
+
+    <table class="table goods-table">
+        <tbody>
+            <tr>
+                <th>적립금</th>
+                <td>450원</td>
+            </tr>
+            <tr>
+                <th>배송비</th>
+                <td class="main-color">무료배송</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button class="button button-transparent button-recommend-size">
+        <img src="/data/skin/mobile_ver3_itsimply_gls/images/detail/icon_measurement.png" alt="straighten">
+        사이즈 선택이 고민이라면? 내 슈즈 사이즈 추천 받기
+    </button>
+</div>
+
+<script>
+    $('.button-goods-wish').on('click', function() {
+        var $this = $(this);
+
+        $this.toggleClass('on')
+        if( $this.hasClass('on') ) {
+            // wish 등록
+            // todo 욱님
+        } else {
+            // wish 취소
+            // todo 욱님
+        }
+    });
+</script>
