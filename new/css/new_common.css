@@ -74,6 +74,12 @@ a:hover {
 	color: #a5585c !important;;
 }
 
+.line {
+	display: inline-block;
+	width: 1px;
+	height: 15px;
+	background-color: #7d7c7d;;
+}
 
 .badge {
 	padding: 0 10px;
@@ -282,6 +288,8 @@ select.select.select-large {
 .tab {
 	display: table;
 	width: 100%;
+
+	background-color: #fff;
 }
 .tab li {
 	display: table-cell;
@@ -326,6 +334,46 @@ select.select.select-large {
 @media only screen and (max-width: 360px) {
 	.tab li {
 		font-size: 12px;
+	}
+}
+
+/* review filter */
+.reivew-filter {
+	overflow: hidden;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	border-bottom: 2px solid #c4c4c4;
+}
+.reivew-filter li {
+	float: left;
+	margin-right: 15px;
+	padding: 8px 18px;
+	line-height: 1.2;
+	font-size: 22px;
+	color: #d2d2d2;
+	border-radius: 50px;
+	border: solid 2px #d2d2d2;
+}
+.reivew-filter li.on {
+	color: #a5585c;
+	border: solid 2px #a5585c;
+}
+
+@media only screen and (max-width: 480px) {
+	.reivew-filter {
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
+	.reivew-filter li {
+		margin-right: 10px;
+		padding: 6px 12px;
+		font-size: 18px;
+	}
+}
+@media only screen and (max-width: 360px) {
+	.reivew-filter li {
+		padding: 4px 9px;
+		font-size: 14px;
 	}
 }
 /* login & join */
@@ -428,7 +476,8 @@ select.select.select-large {
 	float: left;
 	width: 15px;
 	height: 14px;
-	margin-right: 6px;
+	margin-right: 4px;
+	background-image: url(/data/skin/mobile_ver3_itsimply_gls/images/stars/detail_star_off.png);
 	background-repeat: no-repeat;
 	background-position: 50% 50%;
 	-webkit-background-size: 15px;
@@ -437,8 +486,22 @@ select.select.select-large {
 .stars-wrap li.full {
 	background-image: url(/data/skin/mobile_ver3_itsimply_gls/images/stars/detail_star_on.png);
 }
-.stars-wrap li.empty {
-	background-image: url(/data/skin/mobile_ver3_itsimply_gls/images/stars/detail_star_off.png);
+.stars-wrap-review {
+	overflow: hidden;
+}
+.stars-wrap-review li {
+	float: left;
+	width: 21px;
+	height: 21px;
+	margin-right: 7px;
+	background-repeat: no-repeat;
+		background-image: url(/data/skin/mobile_ver3_itsimply_gls/images/stars/avg_star.png);
+	background-position: 50% 50%;
+	-webkit-background-size: 21px;
+	background-size: 21px;
+}
+.stars-wrap-review li.full {
+	background-image: url(/data/skin/mobile_ver3_itsimply_gls/images/stars/avg_star_full.png);
 }
 
 .button-recommend-size {
@@ -468,4 +531,284 @@ select.select.select-large {
     .button-recommend-size img {
         width: 20px;
     }
+}
+
+
+/* 상품 리뷰 없음 */
+.goods-review-empty {
+	text-align: center;
+}
+.goods-review-empty em {
+	margin-top: 40px;
+	font-size: 16px;
+}
+.goods-review-empty p {
+	margin: 5px 0 35px;
+	font-size: 14px;
+	font-weight: 300;
+}
+.goods-review-empty .button {
+	margin-bottom: 40px;
+}
+@media only screen and (max-width: 360px) {
+	.goods-review-empty em {
+		font-size: 14px;
+	}
+	.goods-review-empty p {
+		margin: 5px 0 25px;
+		font-size: 12px;
+	}
+}
+/* 상품 리뷰 정보 (만족도, 착화감) */
+.goods-review-info {
+	margin-bottom: 20px;
+}
+.goods-review-info h2 {
+	padding: 20px 0 10px;
+	font-size: 20px;
+}
+.goods-review-info .goods-review-info-grade {
+	margin-bottom: 10px;
+}
+.goods-review-info .goods-review-info-grade > * {
+	display: inline-block;
+	vertical-align: middle;
+}
+.goods-review-info .goods-review-info-grade > span {
+	margin-left: 7px;
+	font-size: 12px;
+}
+.wf-table .hide-detail {
+	display: block !important;
+}
+.wf-table .show-detail {
+	display: none !important;
+}
+.wf-table.detail .hide-detail {
+	display: none !important;
+}
+.wf-table.detail .show-detail {
+	display: block !important;
+}
+
+.wf-table {
+	font-size: 20px;
+	text-align: left;
+}
+.wf-table .detail-col {
+	width: 10%;
+}
+.wf-table.detail .detail-col {
+	width: 1px;
+}
+.wf-table th,
+.wf-table td {
+	padding: 6px 0;
+	vertical-align: top;
+}
+.wf-table .show-detail li {
+	display: table;
+	width: 100%;
+	box-sizing: border-box;
+}
+.wf-table .show-detail li span {
+	display: table-cell;
+	font-size: 16px;
+}
+.wf-table .show-detail li .detail-text {
+	width: 80px;
+}
+.wf-table .show-detail li .detail-percent {
+	padding-left: 6px;
+	width: 40px;
+	text-align: right;
+	box-sizing: border-box;
+}
+.wf-table .show-detail li .grade-bar {
+	position: relative;
+	display: table-cell;
+	background-color: #f4f1f1;
+}
+.wf-table .show-detail li .grade-bar > div {
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+}
+.button-wf-table-controller {
+	display: block;
+	margin: 9px auto 15px;
+	width: 100px;
+	font-size: 12px;
+	color: #a5585c;
+}
+.button-wf-table-controller img {
+	width: 8px;
+}
+@media only screen and (max-width: 480px) {
+	.wf-table {
+		font-size: 16px;
+	}
+	.wf-table .show-detail li span {
+		font-size: 12px;
+	}
+	.wf-table .show-detail li .detail-text {
+		width: 70px;
+	}
+	.wf-table .show-detail li .detail-percent {
+		width: 35px;
+	}
+}
+@media only screen and (max-width: 360px) {
+	.wf-table {
+		font-size: 14px;
+	}
+	.wf-table .show-detail li span {
+		font-size: 10px;
+	}
+	.wf-table .show-detail li .detail-text {
+		width: 60px;
+	}
+	.wf-table .show-detail li .detail-percent {
+		width: 30px;
+	}
+}
+/* 상품 리뷰 필터 */
+.review-filter-select-wrap {
+	border-collapse: collapse;
+	margin-top: 10px;
+}
+.review-filter-select-wrap td:nth-child(1) {
+	padding-right: 5px;
+}
+.review-filter-select-wrap td:nth-child(2) {
+	padding: 0 5px;
+}
+.review-filter-select-wrap td:nth-child(3) {
+	padding-left: 5px;
+}
+.review-filter-select-wrap .select {
+	background-color: #fafafa;
+	border: 1px solid #d2d2d2;
+}
+/* 상품 리뷰 리스트 */
+.goods-review-list-wrap > li {
+	padding: 15px 0;
+	font-size: 22px;
+	color: #000;
+	border-bottom: 1px solid #d3d3d3;
+}
+.goods-review-list-wrap .goods-review-list-title-info em {
+	font-weight: 500;
+	font-size: 22px;
+}
+.goods-review-list-wrap .goods-review-list-title-info {
+	font-weight: 300;
+	font-size: 20px;
+}
+.goods-review-list-wrap .stars-wrap {
+	margin: 10px 0 20px;
+}
+.review-images-wrap {
+	margin-right: -16px;
+}
+.review-images-wrap li {
+	float: left;
+	width: 25%;
+	padding-right: 16px;
+	box-sizing: border-box;
+}
+.review-images-wrap li > div {
+	width: 100%;
+	height: 0;
+	padding-bottom: 100%;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	-webkit-background-size: cover;
+	background-size: cover;
+}
+.goods-review-list-wrap > li > h3 {
+	margin: 20px 0 1px;
+	font-weight: 400;
+}
+.goods-review-list-wrap > li .goods-customer-info {
+	margin-top: 30px;
+}
+.goods-review-list-wrap > li .goods-customer-info h4 {
+	margin-bottom: 4px;
+	font-size: 22px;
+	font-weight: 400;
+	color: #a5585c;
+}
+.goods-review-list-wrap > li .goods-customer-info table {
+	border-collapse: collapse;
+}
+.goods-review-list-wrap > li .goods-customer-info th,
+.goods-review-list-wrap > li .goods-customer-info td {
+	padding: 0;
+	line-height: 1.5;
+	font-size: 22px;
+	font-weight: 400;
+	color: #000;
+}
+.goods-review-list-wrap > li .goods-customer-info td {
+	text-align: right;
+	font-weight: 300;
+}
+.goods-review-list-wrap > li .goods-customer-info td:first-child {
+	text-align: left;
+}
+@media only screen and (max-width: 480px) {
+	.goods-review-list-wrap > li {
+		font-size: 18px;
+	}
+	.goods-review-list-wrap .goods-review-list-title-info em {
+		font-size: 18px;
+	}
+	.goods-review-list-wrap .goods-review-list-title-info {
+		font-size: 16px;
+	}
+	.review-images-wrap {
+		margin-right: -12px;
+	}
+	.review-images-wrap li {
+		padding-right: 12px;
+	}
+	.goods-review-list-wrap .stars-wrap {
+		margin: 5px 0 10px;
+	}
+	.goods-review-list-wrap > li > h3 {
+		margin-top: 10px;
+	}
+	.goods-review-list-wrap > li .goods-customer-info {
+		margin-top: 20px;
+	}
+	.goods-review-list-wrap > li .goods-customer-info h4 {
+		font-size: 18px;
+	}
+	.goods-review-list-wrap > li .goods-customer-info th,
+	.goods-review-list-wrap > li .goods-customer-info td {
+		font-size: 18px;
+	}
+}
+@media only screen and (max-width: 360px) {
+	.goods-review-list-wrap > li {
+		font-size: 14px;
+	}
+	.goods-review-list-wrap .goods-review-list-title-info em {
+		font-size: 14px;
+	}
+	.goods-review-list-wrap .goods-review-list-title-info {
+		font-size: 12px;
+	}
+	.goods-review-list-wrap > li .goods-customer-info {
+		margin-top: 15px;
+	}
+	.goods-review-list-wrap > li .goods-customer-info h4 {
+		font-size: 14px;
+	}
+	.goods-review-list-wrap > li .goods-customer-info th,
+	.goods-review-list-wrap > li .goods-customer-info td {
+		font-size: 14px;
+	}
 }

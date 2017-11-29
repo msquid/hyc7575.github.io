@@ -27,108 +27,26 @@
                     </script>
                 </div>
 
-                <div class="goods-review-wrap" style="background-color: #fff;">
+                <div class="goods-review-wrap">
                     <script>
                         $.get('./layout/detail-tab.html', function(data) {
                             $('.goods-review-wrap').prepend(data);
                         });
                     </script>
 
-                    <div class="goods-review-info wrapper">
+                    <div class="goods-review-info wrapper" style="background-color: #fff;">
                         <h2>평균 만족도</h2>
-                        <div>
-
+                        <div class="goods-review-info-grade">
+                            <ul class="stars-wrap-review">
+                                <li class="full"></li>
+                                <li class="full"></li>
+                                <li class="full"></li>
+                                <li class="full"></li>
+                                <li></li>
+                            </ul>
+                            <span>295개의 구매후기</span>
                         </div>
                         <h2>착화감 평가</h2>
-                        <style>
-
-                            .wf-table .hide-detail {
-                                display: block !important;
-                            }
-                            .wf-table .show-detail {
-                                display: none !important;
-                            }
-                            .wf-table.detail .hide-detail {
-                                display: none !important;
-                            }
-                            .wf-table.detail .show-detail {
-                                display: block !important;
-                            }
-
-                            .wf-table {
-                                font-size: 20px;
-                                text-align: left;
-                            }
-                            .wf-table .detail-col {
-                                width: 10%;
-                            }
-                            .wf-table.detail .detail-col {
-                                width: 1px;
-                            }
-                            .wf-table th,
-                            .wf-table td {
-                                padding: 6px 0;
-                                vertical-align: top;
-                            }
-                            .wf-table .show-detail li {
-                                display: table;
-                                width: 100%;
-                                box-sizing: border-box;
-                            }
-                            .wf-table .show-detail li span {
-                                display: table-cell;
-                                font-size: 16px;
-                            }
-                            .wf-table .show-detail li .detail-text {
-                                width: 80px;
-                            }
-                            .wf-table .show-detail li .detail-percent {
-                                padding-left: 6px;
-                                width: 40px;
-                                text-align: right;
-                                box-sizing: border-box;
-                            }
-                            .wf-table .show-detail li .grade-bar {
-                                position: relative;
-                                display: table-cell;
-                                background-color: #f4f1f1;
-                            }
-                            .wf-table .show-detail li .grade-bar > div {
-                                position: absolute;
-                                left: 0;
-                                top: 0;
-                                bottom: 0;
-                            }
-                            .wf-table .show-detail li > div >
-                            @media only screen and (max-width: 480px) {
-                                .wf-table {
-                                    font-size: 16px;
-                                }
-                                .wf-table .show-detail li span {
-                                    font-size: 12px;
-                                }
-                                .wf-table .show-detail li .detail-text {
-                                    width: 70px;
-                                }
-                                .wf-table .show-detail li .detail-percent {
-                                    width: 35px;
-                                }
-                            }
-                            @media only screen and (max-width: 360px) {
-                                .wf-table {
-                                    font-size: 14px;
-                                }
-                                .wf-table .show-detail li span {
-                                    font-size: 10px;
-                                }
-                                .wf-table .show-detail li .detail-text {
-                                    width: 60px;
-                                }
-                                .wf-table .show-detail li .detail-percent {
-                                    width: 30px;
-                                }
-                            }
-                        </style>
                         <!-- 아래 테이블에 detail 클래스 주고 안주고를 이용하여 자세히 보기, 접기 상태를 나타냅니다. -->
                         <table class="table wf-table detail">
                             <colgroup>
@@ -242,7 +160,210 @@
 
                             </tbody>
                         </table>
+                        <button class="button button-transparent button-icon button-wf-table-controller">
+                            접기 <img src="/data/skin/mobile_ver3_itsimply_gls/images/detail/detail_review_fold.png" alt="접기">
+                            <!-- 펼치기 <img src="/data/skin/mobile_ver3_itsimply_gls/images/detail/detail_review_more.png" alt="펼치기"> -->
+                        </button>
+                        <script>
+                            $(document).on('click', '.button-wf-table-controller', function() {
+                                var $this = $(this);
+                                var $table = $('.wf-table');
+
+                                $table.toggleClass('detail');
+
+                                if( $table.hasClass('detail') ) {
+                                    $this.html('접기 <img src="/data/skin/mobile_ver3_itsimply_gls/images/detail/detail_review_fold.png" alt="접기">');
+                                } else {
+                                    $this.html('펼치기 <img src="/data/skin/mobile_ver3_itsimply_gls/images/detail/detail_review_more.png" alt="펼치기">');
+                                }
+                            });
+                        </script>
                     </div>
+
+                    <div style="background-color: #fff;">
+                        <ul class="reivew-filter wrapper">
+                            <li class="on">전체 116</li>
+                            <li>포토후기 120</li>
+                        </ul>
+
+                        <div class="wrapper">
+                            <table class="table review-filter-select-wrap">
+                                <colgroup>
+                                    <col style="width: 33.33%;">
+                                    <col style="width: 33.33%;">
+                                    <col style="width: 33.34%;">
+                                </colgroup>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <select class="select select-full" name="">
+                                                <option value="">1</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="select select-full" name="">
+                                                <option value="">1</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="select select-full" name="">
+                                                <option value="">1</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <ul class="goods-review-list-wrap">
+                                <li>
+                                    <div class="goods-review-list-title-info">
+                                        <em>누구누구</em>
+                                        <span class="line" style="margin-right: 2px;"></span>
+                                        2017.01.01
+                                    </div>
+                                    <ul class="stars-wrap">
+                                        <li class="full"></li>
+                                        <li class="full"></li>
+                                        <li class="full"></li>
+                                        <li class="full"></li>
+                                        <li></li>
+                                    </ul>
+                                    <ul class="review-images-wrap clearbox">
+                                        <!-- max 4개 -->
+                                        <li>
+                                            <div style="background-image: url(http://placehold.it/500x1200)"></div>
+                                        </li>
+                                        <li>
+                                            <div style="background-image: url(http://placehold.it/500x1200)"></div>
+                                        </li>
+                                        <li>
+                                            <div style="background-image: url(http://placehold.it/500x1200)"></div>
+                                        </li>
+                                        <li>
+                                            <div style="background-image: url(http://placehold.it/500x1200)"></div>
+                                        </li>
+                                    </ul>
+                                    <h3>리블링 진주로퍼 <span class="line"></span> 블랙 <span class="line"></span> 245</h3>
+                                    <p>
+                                        인터넷으로 신발사는건 항상 신지못해서 힘들었는데 교환이 무배라고 하길래 주문해봤는데 성공이네요 ㅎㅎ 평소 운동화 240 구두245신어서 애매해서 문의 드렸는데
+                                        친절하게 답변해주시고 오랜만에 기분좋은 쇼핑이었어요 ㅎ 실물은 말할것도 없이 이쁘네요 ㅎㅎ
+                                    </p>
+                                    <div class="goods-customer-info">
+                                        <h4>착화감</h4>
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <th>사이즈</th>
+                                                    <td>딱 맞아요</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>발볼 넓이</th>
+                                                    <td>적당해요</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>무게감</th>
+                                                    <td>보통이에요</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="goods-customer-info">
+                                        <h4>구매자 발 정보</h4>
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <th>자주 신는 사이즈</th>
+                                                    <td>245</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>발볼 넓이</th>
+                                                    <td>넓은 편</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>발 형태</th>
+                                                    <td>로마인 형</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="goods-review-list-title-info">
+                                        <em>누구누구</em>
+                                        <span class="line" style="margin-right: 2px;"></span>
+                                        2017.01.01
+                                    </div>
+                                    <ul class="stars-wrap">
+                                        <li class="full"></li>
+                                        <li class="full"></li>
+                                        <li class="full"></li>
+                                        <li class="full"></li>
+                                        <li></li>
+                                    </ul>
+                                    <ul class="review-images-wrap clearbox">
+                                        <!-- max 4개 -->
+                                        <li>
+                                            <div style="background-image: url(http://placehold.it/500x1200)"></div>
+                                        </li>
+                                        <li>
+                                            <div style="background-image: url(http://placehold.it/500x1200)"></div>
+                                        </li>
+                                        <li>
+                                            <div style="background-image: url(http://placehold.it/500x1200)"></div>
+                                        </li>
+                                        <li>
+                                            <div style="background-image: url(http://placehold.it/500x1200)"></div>
+                                        </li>
+                                    </ul>
+                                    <h3>리블링 진주로퍼 <span class="line"></span> 블랙 <span class="line"></span> 245</h3>
+                                    <p>
+                                        인터넷으로 신발사는건 항상 신지못해서 힘들었는데 교환이 무배라고 하길래 주문해봤는데 성공이네요 ㅎㅎ 평소 운동화 240 구두245신어서 애매해서 문의 드렸는데
+                                        친절하게 답변해주시고 오랜만에 기분좋은 쇼핑이었어요 ㅎ 실물은 말할것도 없이 이쁘네요 ㅎㅎ
+                                    </p>
+                                    <div class="goods-customer-info">
+                                        <h4>착화감</h4>
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <th>사이즈</th>
+                                                    <td>딱 맞아요</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>발볼 넓이</th>
+                                                    <td>적당해요</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>무게감</th>
+                                                    <td>보통이에요</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="goods-customer-info">
+                                        <h4>구매자 발 정보</h4>
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <th>자주 신는 사이즈</th>
+                                                    <td>245</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>발볼 넓이</th>
+                                                    <td>넓은 편</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>발 형태</th>
+                                                    <td>로마인 형</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+
                 </div>
 
                 <!--
