@@ -16,6 +16,20 @@
     </url>
 
     <url>
+        <loc>http://hyc7575.github.io/tags/Router/</loc>
+        <lastmod>2017-11-26T11:33:07.551Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hyc7575.github.io/tags/middleware/</loc>
+        <lastmod>2017-11-26T11:33:07.551Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://hyc7575.github.io/tags/ejs/</loc>
         <lastmod>2017-11-26T11:33:07.551Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -44,27 +58,6 @@
     </url>
 
     <url>
-        <loc>http://hyc7575.github.io/tags/Router/</loc>
-        <lastmod>2017-11-26T11:33:07.551Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://hyc7575.github.io/tags/middleware/</loc>
-        <lastmod>2017-11-26T11:33:07.551Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://hyc7575.github.io/tags/cookie-parser/</loc>
-        <lastmod>2017-11-26T11:33:07.552Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://hyc7575.github.io/tags/body-parser/</loc>
         <lastmod>2017-11-26T11:33:07.552Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -87,6 +80,13 @@
 
     <url>
         <loc>http://hyc7575.github.io/tags/form-submit/</loc>
+        <lastmod>2017-11-26T11:33:07.552Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hyc7575.github.io/tags/cookie-parser/</loc>
         <lastmod>2017-11-26T11:33:07.552Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
