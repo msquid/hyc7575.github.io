@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>상세</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+    <script src="/js/new_common.js"></script> <!-- 추가된 스크립트들 --> 
+</head>
+<body>
+    <div id="wrap">
+        <div id="layout_wrap">
+            <div id="layout_header">
+                <script>
+                    $('#layout_header').load('./layout/header.html');
+                </script>
+        	</div>
+
+            <!-- goods 페이지는 회색 배경 bg-gray 클래스 필요. jquery addclass나 layout_body 영역 전체를 div 로 한번 감싸서 적용해주세요. 편하신대로 -->
+            <div id="layout_body" class="bg-gray">
+                <div class="goods-info-wrap">
+                    <script>
+                        $('.goods-info-wrap').load('./layout/detail-header.html');
+                    </script>
+                </div>
+
+
+                <style>
+                    .goods-contents-wrap .goods-content {
+                        padding-top: 20px;
+                        padding-bottom: 20px;
+                    }
+                    .goods-contents-wrap .goods-content img {
+                        max-width: 100%;
+                    }
+                </style>
+                <div class="goods-contents-wrap" style="background: #fff;">
+                    <script>
+                        $.get('./layout/detail-tab.html', function(data) {
+                            $('.goods-contents-wrap').prepend(data);
+                        });
+                    </script>
+                    <div class="goods-content wrapper">
+                        <img src="/data/skin/mobile_ver3_itsimply_gls/images/detail/detail_page_info_img.png" style="margin-bottom: 50px;"> <!-- 상품상세 고정이미지 -->
+                        <img src="http://placehold.it/1000x2000" alt="">
+                    </div>
+                </div>
+
+                <div id="goods-fixed-btns">
+                    <script>
+                        $('#goods-fixed-btns').load('./layout/detail-buttons.html');
+                    </script>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
