@@ -1,0 +1,263 @@
+<!-- 이 fixed area 높이 만큼 footer 밑에 공간 필요. footer 나오면 진행할게요 -->
+<div style="position: relative;">
+    <div class="goods-option-wrap wrapper">
+        <img class="goods-option-close" src="/data/skin/mobile_ver3_itsimply_gls/images/detail/btn_order_fold.png" alt="">
+        <table class="table goods-table">
+            <tbody>
+                <tr>
+                    <th>
+                        적립금
+                    </th>
+                    <td>
+                        450원
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        배송
+                    </th>
+                    <td class="main-color">
+                        무료배송
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        색상
+                    </th>
+                    <td>
+                        <select name="shoseColor" id="" class="select select-full">
+                            <option value="-1">선택</option>
+                            <option value="1">블랙</option>
+                            <option value="2">그레이</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        사이즈
+                    </th>
+                    <td>
+                        <select name="shoseSize" id="" class="select select-full">
+                            <option value="-1">선택</option>
+                            <option value="1">230</option>
+                            <option value="2">235</option>
+                            <option value="3">240</option>
+                        </select>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <button class="button button-transparent button-recommend-size">
+            <img src="/data/skin/mobile_ver3_itsimply_gls/images/detail/icon_measurement.png" alt="straighten">
+            사이즈 선택이 고민이라면? 내 슈즈 사이즈 추천 받기
+        </button>
+
+        <ul class="goods-buy-list-wrap">
+
+        </ul>
+    </div>
+    <div class="goods-controller-wrap clearbox">
+        <div class="goods-controller">
+            <button class="button button-full button-dark button-open-option">
+                바로구매
+            </button>
+        </div>
+        <div class="goods-controller">
+            <button class="button button-full button-white">
+                장바구니 담기
+            </button>
+        </div>
+    </div>
+
+</div>
+<style>
+    #goods-fixed-btns {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 10000;
+    }
+    #goods-fixed-btns .goods-controller-wrap {
+        position: relative;
+        padding: 10px 10px 10px 20px;
+        background-color: #ebebeb;
+        z-index: 10001;
+    }
+    #goods-fixed-btns .goods-controller {
+        position: relative;
+        float: left;
+        width: 50%;
+    }
+    #goods-fixed-btns .goods-controller:first-child {
+        left: -10px;
+    }
+
+    #goods-fixed-btns .goods-option-wrap {
+        will-change : tansform, top;
+        position: absolute;
+        top: 20px;
+        padding-top: 4px;
+        padding-bottom: 20px;
+        width: 100%;
+        background-color: #fff;
+        transition: transform .5s;
+        -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+        transform: translateY(0);
+    }
+    #goods-fixed-btns .goods-option-wrap.open {
+        top: 0;
+        -webkit-transform: translateY(-100%);
+        -ms-transform: translateY(-100%);
+        transform: translateY(-100%);
+    }
+    #goods-fixed-btns .goods-option-close {
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        margin-left: -32px;
+        width: 63px;
+    }
+    #goods-fixed-btns .goods-option-wrap .goods-table th,
+    #goods-fixed-btns .goods-option-wrap .goods-table td {
+        height: 45px;
+    }
+
+    #goods-fixed-btns .goods-buy-list-wrap {
+        overflow: auto;
+        max-height: 120px;
+    }
+    #goods-fixed-btns .goods-buy-list-wrap li {
+        margin-top: 20px;
+        padding: 16px 20px;
+        font-size: 18px;
+        color: #000;
+        border: 1px solid #d2d2d2;
+        background-color: #fafafa;
+    }
+    #goods-fixed-btns .goods-buy-list-wrap li em,
+    #goods-fixed-btns .goods-buy-list-wrap li .goods-buy-list-price-info span  {
+        display: inline-block;
+        font-size: 14px;
+        font-weight: 300;
+        vertical-align: middle;
+    }
+    #goods-fixed-btns .goods-buy-list-wrap li .goods-buy-list-price-info {
+        line-height: 30px;
+    }
+    #goods-fixed-btns .goods-buy-list-wrap li .goods-buy-list-price-info strong {
+        font-size: 16px;
+        font-weight: 700;
+        vertical-align: middle;
+    }
+    #goods-fixed-btns .goods-buy-list-wrap li .goods-buy-list-price-info .button {
+        padding: 0;
+        width: 30px;
+        height: 30px;
+        border: 1px solid #d2d2d2;
+        vertical-align: middle;
+    }
+    @media only screen and (max-width: 480px) {
+        #goods-fixed-btns .goods-option-wrap {
+            padding-top: 0;
+            padding-bottom: 15px;
+        }
+        #goods-fixed-btns .goods-buy-list-wrap li {
+            margin-top: 15px;
+            padding: 12px 15px;
+            font-size: 14px;
+        }
+    }
+    @media only screen and (max-width: 360px) {
+        #goods-fixed-btns .goods-option-wrap {
+            padding-bottom: 10px;
+        }
+        #goods-fixed-btns .goods-buy-list-wrap li {
+            margin-top: 10px;
+            padding: 8px 10px;
+        }
+    }
+</style>
+<script>
+    (function() {
+        var $openOption = $('.button-open-option');
+        var $optionWrap = $('.goods-option-wrap');
+        var $color = $('.select[name="shoseColor"]');
+        var $size = $('.select[name="shoseSize"]');
+        var totalPrice = 0;
+        var price = 38000;
+
+        $openOption.on('click', function() {
+            if( $optionWrap.hasClass('open') ) {
+                // option 열려있음. 구매 페이지로
+                if( goodsValidate() ) {
+                    // validate 체크
+
+                    // submit 코드
+                    // todo 정욱님
+                }
+            } else {
+                // option 열기
+                $optionWrap.addClass('open');
+            }
+        });
+        $('.goods-option-close').on('click', function() {
+            $optionWrap.removeClass('open');
+        });
+        $('.goods-option-wrap .select').on('change', function() {
+            var $selects = $('.goods-option-wrap .select');
+            var flag = true;
+
+            $selects.each(function(i, v) {
+                if( $(v).val() < 0 ) {
+                    flag = false;
+                }
+            });
+            if( flag ) {
+                $('.goods-buy-list-wrap').append(addGoods());
+                initSelect($selects, '-1'); // 초기화 될 value 선택 ( 첫 번째 option의 value임 )
+            }
+        });
+
+        $(document).on('click', '.button-goods-cancel', function() {
+            var $this = $(this);
+
+            $this.parents('li').remove();
+        });
+        function goodsValidate() {
+            if( +$color[0].value > 0 && +$size[0].value > 0 ) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        function addGoods() {
+            var color = $color.find('option').eq($color[0].selectedIndex)[0].text;
+            var size = $size.find('option').eq($size[0].selectedIndex)[0].text;
+
+            totalPrice += price; // 이 total값을 쓰는 곳이 없음..
+
+            var html =  '<li>' +
+                        '    <em>옵션 : ' + color +' / ' + size + '</em>' +
+                        '    <div class="goods-buy-list-price-info clearbox">' +
+                        '        <span class="pull-left">총 상품금액</span>' + // 총 이 아닐텐데..?
+                        '        <div class="pull-right">' +
+                        '            <strong>' + ( price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") ) + '</strong>' +
+                        '            <button class="button button-icon button-goods-cancel">' +
+                        '                <img src="/data/skin/mobile_ver3_itsimply_gls/images/common/banner-close-icon@2x.png" style="width: 14px;" alt="상품 취소">' +
+                        '            </button>' +
+                        '        </div>' +
+                        '    </div>' +
+                        '</li>';
+
+            return html;
+        }
+        function initSelect(items, initValue) {
+            items.each(function(i, v) {
+                $(v).val(initValue); // 1번째 옵션 value
+            });
+        }
+    })();
+</script>
