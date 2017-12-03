@@ -112,14 +112,23 @@ a:hover {
 	background-image: url(/data/skin/mobile_ver3_itsimply_gls/images/icon/icon_more.png);
 	background-size: 16px 16px;
 }
+.icon-next {
+	width: 8px;
+	height: 16px;
+	background-image: url(/data/skin/mobile_ver3_itsimply_gls/images/common/arrow.png);
+	-webkit-background-size: 8px 16px;
+	background-size: 8px 16px;
+}
 
 .button {
 	display: inline-block;
 	padding: 12px 10px;
+	line-height: 1.4;
 	font-size: 22px;
 	background-color: #fff;
 	border: 1px solid #333;
 	outline: none;
+	text-align: center;
 	box-sizing: border-box;
 }
 .button-full {
@@ -135,6 +144,10 @@ a:hover {
 .button-dark {
 	color: #fff;
 	background-color: #333;
+}
+.button-gray {
+	border: 1px solid #d2d2d2;
+	background: #fafafa;
 }
 .button-transparent {
 	border: none;
@@ -228,6 +241,31 @@ select.select.select-large {
 	line-height: 40px;
 }
 
+/* textarea */
+.textarea {
+	border: none;
+	overflow: auto;
+	outline: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+	resize: none;
+	width: 100%;
+}
+.textarea::-webkit-input-placeholder {
+    color: #7d7d7d;
+}
+.textarea:-moz-placeholder {
+   color: #7d7d7d;
+   opacity:  1;
+}
+.textarea::-moz-placeholder {
+   color: #7d7d7d;
+   opacity:  1;
+}
+.textarea::placeholder {
+   color: #7d7d7d;
+}
 /* label */
 .label-wrapper {
 	display: inline-block;
@@ -239,6 +277,31 @@ select.select.select-large {
 	margin-left: 6px;
 }
 
+.radio-wrap > * {
+	font-size: 16px;
+	vertical-align: middle;
+}
+.radio-wrap input[type="radio"] {
+	opacity: 0;
+	position: absolute;
+	left: -9999px;
+	width: 1px;
+	height: 1px;
+}
+.radio-wrap input[type="radio"]:checked + i {
+	background-image: url(/data/skin/mobile_ver3_itsimply_gls/images/icon/radio_on.png);
+}
+.radio-wrap i {
+	display: inline-block;
+	margin-right: 8px;
+	width: 24px;
+	height: 24px;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	background-image: url(/data/skin/mobile_ver3_itsimply_gls/images/icon/radio.png);
+	-webkit-background-size: 24px;
+	background-size: 24px;
+}
 
 @media only screen and (max-width: 480px) {
 	.wrapper {
@@ -469,7 +532,9 @@ select.select.select-large {
 
 
 /* detail */
-.stars-wrap {
+.stars-wrap,
+.stars-wrap-review,
+.stars-wrap-write-review {
 	overflow: hidden;
 }
 .stars-wrap li {
@@ -486,16 +551,13 @@ select.select.select-large {
 .stars-wrap li.full {
 	background-image: url(/data/skin/mobile_ver3_itsimply_gls/images/stars/detail_star_on.png);
 }
-.stars-wrap-review {
-	overflow: hidden;
-}
 .stars-wrap-review li {
 	float: left;
 	width: 21px;
 	height: 21px;
 	margin-right: 7px;
 	background-repeat: no-repeat;
-		background-image: url(/data/skin/mobile_ver3_itsimply_gls/images/stars/avg_star.png);
+	background-image: url(/data/skin/mobile_ver3_itsimply_gls/images/stars/avg_star.png);
 	background-position: 50% 50%;
 	-webkit-background-size: 21px;
 	background-size: 21px;
@@ -503,6 +565,25 @@ select.select.select-large {
 .stars-wrap-review li.full {
 	background-image: url(/data/skin/mobile_ver3_itsimply_gls/images/stars/avg_star_full.png);
 }
+
+.stars-wrap-write-review li {
+	float: left;
+	width: 30px;
+	height: 30px;
+	margin-right: 10px;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	background-image: url(/data/skin/mobile_ver3_itsimply_gls/images/stars/review_star_write.png);
+	-webkit-background-size: 30px;
+	background-size: 30px;
+}
+.stars-wrap-write-review li.full {
+	background-image: url(/data/skin/mobile_ver3_itsimply_gls/images/stars/review_star_on_write.png);
+}
+.stars-wrap-write-review li {
+
+}
+
 
 .button-recommend-size {
     width: 100%;
@@ -811,4 +892,333 @@ select.select.select-large {
 	.goods-review-list-wrap > li .goods-customer-info td {
 		font-size: 14px;
 	}
+}
+
+
+/* 리뷰 작성 */
+.write-review-header {
+	margin-top: 45px;
+	position: relative;
+}
+.write-review-header h2 {
+	padding-bottom: 10px;
+	line-height: 45px;
+	font-size: 22px;
+	border-bottom: 1px solid #333;
+}
+.write-review-header button {
+	position: absolute;
+	right: 0;
+	top: 0;
+	font-size: 14px;
+}
+.write-review-about {
+	position: relative;
+	overflow: hidden;
+	border-bottom: 1px solid #333;
+}
+.write-review-about > div:first-child {
+	float: left;
+	margin-right: 18px;
+	width: 200px;
+	height: 200px;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	-webkit-background-size: cover;
+	background-size: cover;
+	box-sizing: border-box;
+}
+.write-review-about .write-review-about-info {
+	position: absolute;
+	padding: 18px 0 18px 236px;
+	width: 100%;
+	height: 200px;
+	box-sizing: border-box;
+}
+.write-review-about .write-review-about-info > div {
+	position: relative;
+	height: 100%;
+}
+.write-review-about .write-review-about-info > div > * {
+	word-break: break-all;
+}
+.write-review-about .write-review-about-info em {
+	font-size: 22px;
+}
+.write-review-about .write-review-about-info .about-info {
+	font-size: 20px;
+	color: #7d7c7d;
+	line-height: 1;
+}
+.write-review-about .write-review-about-info .about-time {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	font-size: 18px;
+	color: #7d7c7d;
+}
+
+.review-question-wrap li {
+	margin-top: 12px;
+}
+
+.write-review-body-section {
+	margin-top: 30px;
+	padding-bottom: 25px;
+	border-bottom: 1px solid #e0e0e0;
+}
+.write-review-body-section h3 {
+	padding-bottom: 8px;
+}
+.write-review-body h3 {
+	margin: 20px 0 0;
+	font-size: 20px;
+}
+.write-review-textarea-wrap .textarea {
+	padding: 0;
+	height: 300px;
+	background-color: transparent;
+	font-size: 16px;
+}
+
+
+
+@media only screen and (max-width: 480px) {
+	.write-review-header {
+		margin-top: 20px;
+	}
+	.write-review-header h2 {
+		padding-bottom: 10px;
+		line-height: 32px;
+	}
+	.write-review-header button {
+		padding: 8px;
+		font-size: 12px;
+	}
+	.write-review-about > div:first-child {
+		margin-right: 12px;
+		width: 150px;
+		height: 150px;
+	}
+	.write-review-about .write-review-about-info {
+		position: absolute;
+		padding: 12px 0 12px 174px;
+		width: 100%;
+		height: 150px;
+	}
+	.write-review-about .write-review-about-info em {
+		font-size: 18px;
+	}
+	.write-review-about .write-review-about-info .about-info {
+		font-size: 14px;
+	}
+	.write-review-about .write-review-about-info .about-info > .line {
+		height: 10px;
+	}
+	.write-review-about .write-review-about-info .about-time {
+		font-size: 12px;
+	}
+	.write-review-textarea-wrap .textarea {
+		height: 200px;
+		font-size: 14px;
+	}
+
+	.write-review-body h3 {
+		margin-top: 10px;
+		font-size: 16px;
+	}
+	.write-review-body-section {
+		margin-top: 20px;
+		padding-bottom: 15px;
+	}
+}
+@media only screen and (max-width: 360px) {
+	.write-review-header {
+		position: relative;
+	}
+	.write-review-header h2 {
+		padding-bottom: 7px;
+		font-size: 18px;
+	}
+	.write-review-about > div:first-child {
+		margin-right: 9px;
+		width: 100px;
+		height: 100px;
+	}
+	.write-review-about .write-review-about-info {
+		position: absolute;
+		padding: 9px 0 9px 118px;
+		height: 100px;
+		width: 100%;
+	}
+	.write-review-about .write-review-about-info em {
+		font-size: 16px;
+	}
+	.write-review-about .write-review-about-info .about-time {
+		font-size: 12px;
+	}
+	.write-review-textarea-wrap .textarea {
+		height: 150px;
+	}
+}
+
+
+/* review file upload */
+.write-review-imgs-header {
+	position: relative;
+}
+.write-review-imgs-header span {
+	position: absolute;
+	top: -2px;
+	right: 0;
+	font-size: 20px;
+}
+.write-review-imgs {
+	margin: 30px 0;
+}
+.write-review-imgs li,
+.write-review-imgs label {
+	width: 25%;
+	height: 0;
+	padding-bottom: 25%;
+	box-sizing: border-box;
+}
+.write-review-imgs label {
+	display: block;
+	width: 100%;
+	padding-bottom: 100%;
+	border: 1px solid #7d7c7d;
+	background-image: url(/data/skin/mobile_ver3_itsimply_gls/images/detail/add_photo.png);
+	-webkit-background-size: 100%;
+	background-size: 100%;
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+}
+.write-review-imgs ul {
+	margin-right: -14px;
+}
+.write-review-imgs li {
+	float: left;
+	padding-right: 14px;
+}
+.write-review-imgs li > div {
+	height: 0;
+	padding-bottom: 100%;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	-webkit-background-size: cover;
+	background-size: cover;
+}
+.write-review-imgs li:first-child {
+
+}
+.file-list {
+	visibility: hidden;
+}
+
+@media only screen and (max-width: 480px) {
+
+	.write-review-imgs-header span {
+		font-size: 16px;
+	}
+	.write-review-imgs {
+		margin: 15px 0 10px;
+	}
+}
+
+/* 리뷰작성 모달 */
+.write-review-modal {
+	position: absolute;
+	top: 120px;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	padding: 30px;
+	max-width: 360px;
+	width: 80%;
+	background-color: #fff;
+	z-index: 9999;
+}
+.write-review-modal-header {
+	position: relative;
+	padding-bottom: 15px;
+}
+.write-review-modal-header h2 {
+	font-size: 22px;
+}
+.write-review-modal-header .modal-close {
+	position: absolute;
+	right: 0;
+	top: 0;
+	background-image: url(/data/skin/mobile_ver3_itsimply_gls/images/icon/popup_close.png);
+	-webkit-background-size: 20px;
+	background-size: 20px;
+}
+.write-review-modal-body {
+	padding: 20px 0 10px;
+	border-top: 2px solid #d3d3d3;
+	border-bottom: 2px solid #d3d3d3;
+}
+.write-review-modal-body > ul {
+
+}
+.write-review-modal-body > ul li {
+	display: table;
+	margin-top: 18px;
+}
+.write-review-modal-body > ul li:first-child {
+	margin-top: 0;
+}
+.write-review-modal-body > ul li > div {
+	display: table-cell;
+	vertical-align: top;
+	font-size: 18px;
+	font-weight: 300;
+}
+.write-review-modal-body > ul li > div:first-child {
+	padding-left: 14px;
+	padding-right: 35px;
+}
+.write-review-modal-body > p {
+	margin-top: 10px;
+	font-size: 14px;
+	font-weight: 300;
+	color: #434343;
+}
+.write-review-modal-body + p {
+	margin-top: 15px;
+	font-size: 18px;
+	font-weight: 500;
+	color: #a5585c;
+	text-align: center;
+}
+@media only screen and (max-width: 480px) {
+	.write-review-modal {
+		padding: 15px;
+	}
+	.write-review-modal-header {
+		padding-bottom: 8px;
+	}
+	.write-review-modal-header h2 {
+		font-size: 18px;
+	}
+	.write-review-modal-header .modal-close {
+		top: 2px;
+		width: 18px;
+		height: 18px;
+		-webkit-background-size: 18px;
+		background-size: 18px;
+	}
+	.write-review-modal-body > ul li > div {
+		font-size: 16px;
+	}
+	.write-review-modal-body > p {
+		font-size: 12px;
+	}
+	.write-review-modal-body + p {
+		font-size: 14px;
+	}
+}
+@media only screen and (max-width: 360px) {
+
 }

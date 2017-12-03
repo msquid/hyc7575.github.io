@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>상세</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+    <script src="/js/new_common.js"></script> <!-- 추가된 스크립트들 -->
+</head>
+<body>
+    <div id="wrap">
+        <div id="layout_wrap">
+            <div id="layout_header">
+                <script>
+                    $('#layout_header').load('./layout/header.html');
+                </script>
+        	</div>
+
+            <div id="layout_body">
+                <div class="wrapper more-padding">
+                    <div class="write-review-header">
+                        <h2>구매후기 쓰기</h2>
+                        <button class="button button-gray">적립금 지급 안내</button>
+                    </div>
+                    <div class="write-review-body">
+                        <div class="write-review-about">
+                            <div style="background-image: url(http://placehold.it/500x500)"></div> <!-- 이미지 -->
+                            <div class="write-review-about-info">
+                                <div>
+                                    <em>리블링 진주로퍼</em>
+                                    <p class="about-info">
+                                        리블링 진주로퍼 <span class="line"></span> 블랙 <span class="line"></span> 250
+                                    </p>
+                                    <p class="about-time">
+                                        주문일 2017.10.31
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="write-review-body-section">
+                            <h3>구매하신 슈즈의 만족도를 선택해주세요.</h3>
+                            <input type="hidden" name="">
+                            <ul class="stars-wrap-write-review">
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                        </div>
+
+                        <div class="write-review-body-section">
+                            <h3>구매하신 슈즈의 사이즈는 어땠나요?</h3>
+                            <ul class="review-question-wrap">
+                                <li>
+                                    <label class="radio-wrap">
+                                        <input type="radio" class="input-radio">
+                                        <i></i>
+                                        <sapn>매우 작아요</sapn>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="radio-wrap">
+                                        <input type="radio" class="input-radio">
+                                        <i></i>
+                                        <sapn>작아요</sapn>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="radio-wrap">
+                                        <input type="radio" class="input-radio">
+                                        <i></i>
+                                        <sapn>딱 맞아요</sapn>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="radio-wrap">
+                                        <input type="radio" class="input-radio">
+                                        <i></i>
+                                        <sapn>커요</sapn>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="radio-wrap">
+                                        <input type="radio" class="input-radio">
+                                        <i></i>
+                                        <sapn>매우 커요</sapn>
+                                    </label>
+                                </li>
+                            </ul>
+                        </div>
+
+
+                        <div class="write-review-body-section">
+                            <h3>구매하신 슈즈의 발볼 넓이는 어땠나요?</h3>
+                            <ul class="review-question-wrap">
+                                <li>
+                                    <label class="radio-wrap">
+                                        <input type="radio" class="input-radio">
+                                        <i></i>
+                                        <sapn>매우 좁아요</sapn>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="radio-wrap">
+                                        <input type="radio" class="input-radio">
+                                        <i></i>
+                                        <sapn>좁아요</sapn>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="radio-wrap">
+                                        <input type="radio" class="input-radio">
+                                        <i></i>
+                                        <sapn>적당해요</sapn>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="radio-wrap">
+                                        <input type="radio" class="input-radio">
+                                        <i></i>
+                                        <sapn>넓어요</sapn>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="radio-wrap">
+                                        <input type="radio" class="input-radio">
+                                        <i></i>
+                                        <sapn>매우 넓어요</sapn>
+                                    </label>
+                                </li>
+                            </ul>
+                        </div>
+
+
+                        <div class="write-review-body-section">
+                            <h3>구매하신 슈즈의 무게감은 어땠나요?</h3>
+                            <ul class="review-question-wrap">
+                                <li>
+                                    <label class="radio-wrap">
+                                        <input type="radio" class="input-radio">
+                                        <i></i>
+                                        <sapn>아주 가벼워요</sapn>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="radio-wrap">
+                                        <input type="radio" class="input-radio">
+                                        <i></i>
+                                        <sapn>가벼워요</sapn>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="radio-wrap">
+                                        <input type="radio" class="input-radio">
+                                        <i></i>
+                                        <sapn>보통이에요</sapn>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="radio-wrap">
+                                        <input type="radio" class="input-radio">
+                                        <i></i>
+                                        <sapn>무거워요</sapn>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="radio-wrap">
+                                        <input type="radio" class="input-radio">
+                                        <i></i>
+                                        <sapn>아주 무거워요</sapn>
+                                    </label>
+                                </li>
+                            </ul>
+
+                            <style>
+                                .buttons-wrap {
+                                    padding-right: 10px;
+                                }
+                                .buttons-wrap > * {
+                                    position: relative;
+                                    float: left;
+                                    width: 50%;
+                                }
+                                .buttons-wrap > *:nth-child(2) {
+                                    left: 10px;
+                                }
+                                .buttons-wrap .intro-photo-review {
+                                    position: absolute;
+                                    top: -70px;
+                                    left: 50%;
+                                    padding: 8px 10px;
+                                    line-height: 1.3;
+                                    margin-left: -63px;
+                                    font-size: 14px;
+                                    color: #fff;
+                                    text-align: center;
+                                    font-weight: 500;
+                                    border-radius: 4px;
+                                    background-color: #f8b139;
+                                    box-sizing: border-box;
+                                }
+                                .buttons-wrap .intro-photo-review i {
+                                    position: absolute;
+                                    top: 100%;
+                                    left: 50%;
+                                    margin-left: -8px;
+                                    width: 0;
+                                    height: 0;
+                                    border-style: solid;
+                                    border-width: 8px 8px 0 8px;
+                                    border-color: #f8b239 transparent transparent transparent;
+                                }
+                                @media only screen and (max-width: 480px) {
+                                    .buttons-wrap .intro-photo-review {
+                                        top: -60px;
+                                        font-size: 12px;
+                                        margin-left: -55px;
+                                    }
+                                }
+                            </style>
+                            <div class="buttons-wrap clearbox" style="margin-top: 30px;">
+                                <button class="button button-dark">등록하기</button>
+                                <div>
+                                    <a href="./write-review-step2.html" class="button button-white button-full">
+                                        다음단계
+                                    </a>
+                                    <p class="intro-photo-review">
+                                        포토후기 작성하면<br/>
+                                        3,000원 적립!
+                                        <i></i>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

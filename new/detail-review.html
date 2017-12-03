@@ -10,6 +10,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+    <script src="/js/new_common.js"></script> <!-- 추가된 스크립트들 --> 
 </head>
 <body>
     <div id="wrap">
@@ -164,20 +165,6 @@
                             접기 <img src="/data/skin/mobile_ver3_itsimply_gls/images/detail/detail_review_fold.png" alt="접기">
                             <!-- 펼치기 <img src="/data/skin/mobile_ver3_itsimply_gls/images/detail/detail_review_more.png" alt="펼치기"> -->
                         </button>
-                        <script>
-                            $(document).on('click', '.button-wf-table-controller', function() {
-                                var $this = $(this);
-                                var $table = $('.wf-table');
-
-                                $table.toggleClass('detail');
-
-                                if( $table.hasClass('detail') ) {
-                                    $this.html('접기 <img src="/data/skin/mobile_ver3_itsimply_gls/images/detail/detail_review_fold.png" alt="접기">');
-                                } else {
-                                    $this.html('펼치기 <img src="/data/skin/mobile_ver3_itsimply_gls/images/detail/detail_review_more.png" alt="펼치기">');
-                                }
-                            });
-                        </script>
                     </div>
 
                     <div style="background-color: #fff;">
@@ -198,22 +185,16 @@
                                         <td>
                                             <select class="select select-full" name="">
                                                 <option value="">1</option>
-                                                <option value="">2</option>
-                                                <option value="">3</option>
                                             </select>
                                         </td>
                                         <td>
                                             <select class="select select-full" name="">
                                                 <option value="">1</option>
-                                                <option value="">2</option>
-                                                <option value="">3</option>
                                             </select>
                                         </td>
                                         <td>
                                             <select class="select select-full" name="">
                                                 <option value="">1</option>
-                                                <option value="">2</option>
-                                                <option value="">3</option>
                                             </select>
                                         </td>
                                     </tr>

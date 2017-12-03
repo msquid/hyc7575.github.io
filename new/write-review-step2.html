@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>상세</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+    <script src="/js/new_common.js"></script> <!-- 추가된 스크립트들 -->
+</head>
+<body>
+    <div id="wrap">
+        <div id="layout_wrap">
+            <div id="layout_header">
+                <script>
+                    $('#layout_header').load('./layout/header.html');
+                </script>
+        	</div>
+
+            <div id="layout_body">
+                <div class="wrapper more-padding">
+                    <div class="write-review-header">
+                        <h2>구매후기 쓰기</h2>
+                        <button class="button button-gray">적립금 지급 안내</button>
+                    </div>
+                    <div class="write-review-body">
+                        <div class="write-review-body-section write-review-textarea-wrap">
+                            <h3>구매하신 슈즈의 상품평을 작성해주세요.</h3>
+                            <textarea class="textarea" name="name" rows="" cols="" placeholder="최소 50자 이상의 자세하고 성의 있는 구매후기를 작성해주세요. 다른 고객님들의 구매에 많은 도움이 될거에요:)"></textarea>
+                        </div>
+
+                        <div class="write-review-body-section">
+                            <div class="write-review-imgs-header">
+                                <h3>사진을 첨부해주세요.</h3>
+                                <span>1/10</span>
+                            </div>
+                            <div class="write-review-imgs clearbox">
+                                <div class="file-list">
+                                    <!-- 이곳으로 file들이 clone됨. 이곳에 있는 file들만 업로드 -->
+                                    <!-- 하나 올릴때마다 비동기 호출해서 올린다면 불필요. 편하신 방식 사용하세요. -->
+                                </div>
+                                <ul class="clearbox">
+                                    <li>
+                                        <div>
+                                            <input id="fileUpload" type="file" style="position: absolute; left: -9999px; width: 1px; height: 1px;">
+                                            <label for="fileUpload"></label>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="button button-dark button-full" style="margin-bottom: 20px;">등록하기</button>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
