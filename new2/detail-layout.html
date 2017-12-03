@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>상세</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+    <script src="/js/new_common.js"></script> <!-- 추가된 스크립트들 --> 
+</head>
+<body>
+    <div id="wrap">
+        <div id="layout_wrap">
+            <div id="layout_header">
+                <script>
+                    $('#layout_header').load('./layout/header.html');
+                </script>
+        	</div>
+
+            <div id="layout_body" class="bg-gray">
+                <div class="goods-info-wrap">
+                    <script>
+                        $('.goods-info-wrap').load('./layout/detail-header.html');
+                    </script>
+                </div>
+
+                <div id="tempId" style="background-color: #fff;">
+                    <!-- contents -->
+                    <script>
+                        $.get('./layout/detail-tab.html', function(data) {
+                            $('#tempId').prepend(data);
+                        });
+                    </script>
+                </div>
+
+                <div id="goods-fixed-btns">
+                    <script>
+                        $('#goods-fixed-btns').load('./layout/detail-buttons.html');
+                    </script>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

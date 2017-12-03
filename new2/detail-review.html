@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>상세</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+    <script src="/js/new_common.js"></script> <!-- 추가된 스크립트들 --> 
+</head>
+<body>
+    <div id="wrap">
+        <div id="layout_wrap">
+            <div id="layout_header">
+                <script>
+                    $('#layout_header').load('./layout/header.html');
+                </script>
+        	</div>
+
+            <div id="layout_body" class="bg-gray">
+                <div class="goods-info-wrap">
+                    <script>
+                        $('.goods-info-wrap').load('./layout/detail-header.html');
+                    </script>
+                </div>
+
+                <div class="goods-review-wrap">
+                    <script>
+                        $.get('./layout/detail-tab.html', function(data) {
+                            $('.goods-review-wrap').prepend(data);
+                        });
+                    </script>
+
+                    <div class="goods-review-info wrapper" style="background-color: #fff;">
+                        <h2>평균 만족도</h2>
+                        <div class="goods-review-info-grade">
+                            <ul class="stars-wrap-review">
+                                <li class="full"></li>
+                                <li class="full"></li>
+                                <li class="full"></li>
+                                <li class="full"></li>
+                                <li></li>
+                            </ul>
+                            <span>295개의 구매후기</span>
+                        </div>
+                        <h2>착화감 평가</h2>
+                        <!-- 아래 테이블에 detail 클래스 주고 안주고를 이용하여 자세히 보기, 접기 상태를 나타냅니다. -->
+                        <table class="table wf-table detail">
+                            <colgroup>
+                                <col style="width: 22%;">
+                                <col style="width: auto;">
+                                <col class="detail-col">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <th class="normal" style="color: #7347da;">사이즈</th>
+                                    <td class="light">
+                                        <span class="hide-detail">딱 맞아요</span>
+                                        <ul class="show-detail">
+                                            <li>
+                                                <span class="detail-text">
+                                                    매우작아요
+                                                </span>
+                                                <div class="grade-bar">
+                                                    <div style="width: 36%; background-color: #ac8ff0;"></div>
+                                                </div>
+                                                <span class="detail-percent">
+                                                    36%
+                                                </span>
+                                            </li>
+                                            <li>
+                                                <span class="detail-text">
+                                                    작아요
+                                                </span>
+                                                <div class="grade-bar">
+                                                    <div style="width: 24%; background-color: #ac8ff0;"></div>
+                                                </div>
+                                                <span class="detail-percent">
+                                                    24%
+                                                </span>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td class="hide-detail">
+                                        30%
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <th class="normal" style="color: #78d0ae;">발볼 넓이</th>
+                                    <td class="light">
+                                        <span class="hide-detail">딱 맞아요</span>
+                                        <ul class="show-detail">
+                                            <li>
+                                                <span class="detail-text">
+                                                    매우작아요
+                                                </span>
+                                                <div class="grade-bar">
+                                                    <div style="width: 36%; background-color: #78d0ae;"></div>
+                                                </div>
+                                                <span class="detail-percent">
+                                                    36%
+                                                </span>
+                                            </li>
+                                            <li>
+                                                <span class="detail-text">
+                                                    작아요
+                                                </span>
+                                                <div class="grade-bar">
+                                                    <div style="width: 24%; background-color: #78d0ae;"></div>
+                                                </div>
+                                                <span class="detail-percent">
+                                                    24%
+                                                </span>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td class="hide-detail">
+                                        30%
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <th class="normal" style="color: #db85c0;">무게감</th>
+                                    <td class="light">
+                                        <span class="hide-detail">딱 맞아요</span>
+                                        <ul class="show-detail">
+                                            <li>
+                                                <span class="detail-text">
+                                                    매우작아요
+                                                </span>
+                                                <div class="grade-bar">
+                                                    <div style="width: 36%; background-color: #db85c0;"></div>
+                                                </div>
+                                                <span class="detail-percent">
+                                                    36%
+                                                </span>
+                                            </li>
+                                            <li>
+                                                <span class="detail-text">
+                                                    작아요
+                                                </span>
+                                                <div class="grade-bar">
+                                                    <div style="width: 24%; background-color: #db85c0;"></div>
+                                                </div>
+                                                <span class="detail-percent">
+                                                    24%
+                                                </span>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td class="hide-detail">
+                                        30%
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <button class="button button-transparent button-icon button-wf-table-controller">
+                            접기 <img src="/data/skin/mobile_ver3_itsimply_gls/images/detail/detail_review_fold.png" alt="접기">
+                            <!-- 펼치기 <img src="/data/skin/mobile_ver3_itsimply_gls/images/detail/detail_review_more.png" alt="펼치기"> -->
+                        </button>
+                    </div>
+
+                    <div style="background-color: #fff;">
+                        <ul class="reivew-filter wrapper">
+                            <li class="on">전체 116</li>
+                            <li>포토후기 120</li>
+                        </ul>
+
+                        <div class="wrapper">
+                            <table class="table review-filter-select-wrap">
+                                <colgroup>
+                                    <col style="width: 33.33%;">
+                                    <col style="width: 33.33%;">
+                                    <col style="width: 33.34%;">
+                                </colgroup>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <select class="select select-full" name="">
+                                                <option value="">1</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="select select-full" name="">
+                                                <option value="">1</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="select select-full" name="">
+                                                <option value="">1</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <ul class="goods-review-list-wrap">
+                                <li>
+                                    <div class="goods-review-list-title-info">
+                                        <em>누구누구</em>
+                                        <span class="line" style="margin-right: 2px;"></span>
+                                        2017.01.01
+                                    </div>
+                                    <ul class="stars-wrap">
+                                        <li class="full"></li>
+                                        <li class="full"></li>
+                                        <li class="full"></li>
+                                        <li class="full"></li>
+                                        <li></li>
+                                    </ul>
+                                    <ul class="review-images-wrap clearbox">
+                                        <!-- max 4개 -->
+                                        <li>
+                                            <div style="background-image: url(http://placehold.it/500x1200)"></div>
+                                        </li>
+                                        <li>
+                                            <div style="background-image: url(http://placehold.it/500x1200)"></div>
+                                        </li>
+                                        <li>
+                                            <div style="background-image: url(http://placehold.it/500x1200)"></div>
+                                        </li>
+                                        <li>
+                                            <div style="background-image: url(http://placehold.it/500x1200)"></div>
+                                        </li>
+                                    </ul>
+                                    <h3>리블링 진주로퍼 <span class="line"></span> 블랙 <span class="line"></span> 245</h3>
+                                    <p>
+                                        인터넷으로 신발사는건 항상 신지못해서 힘들었는데 교환이 무배라고 하길래 주문해봤는데 성공이네요 ㅎㅎ 평소 운동화 240 구두245신어서 애매해서 문의 드렸는데
+                                        친절하게 답변해주시고 오랜만에 기분좋은 쇼핑이었어요 ㅎ 실물은 말할것도 없이 이쁘네요 ㅎㅎ
+                                    </p>
+                                    <div class="goods-customer-info">
+                                        <h4>착화감</h4>
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <th>사이즈</th>
+                                                    <td>딱 맞아요</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>발볼 넓이</th>
+                                                    <td>적당해요</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>무게감</th>
+                                                    <td>보통이에요</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="goods-customer-info">
+                                        <h4>구매자 발 정보</h4>
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <th>자주 신는 사이즈</th>
+                                                    <td>245</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>발볼 넓이</th>
+                                                    <td>넓은 편</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>발 형태</th>
+                                                    <td>로마인 형</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="goods-review-list-title-info">
+                                        <em>누구누구</em>
+                                        <span class="line" style="margin-right: 2px;"></span>
+                                        2017.01.01
+                                    </div>
+                                    <ul class="stars-wrap">
+                                        <li class="full"></li>
+                                        <li class="full"></li>
+                                        <li class="full"></li>
+                                        <li class="full"></li>
+                                        <li></li>
+                                    </ul>
+                                    <ul class="review-images-wrap clearbox">
+                                        <!-- max 4개 -->
+                                        <li>
+                                            <div style="background-image: url(http://placehold.it/500x1200)"></div>
+                                        </li>
+                                        <li>
+                                            <div style="background-image: url(http://placehold.it/500x1200)"></div>
+                                        </li>
+                                        <li>
+                                            <div style="background-image: url(http://placehold.it/500x1200)"></div>
+                                        </li>
+                                        <li>
+                                            <div style="background-image: url(http://placehold.it/500x1200)"></div>
+                                        </li>
+                                    </ul>
+                                    <h3>리블링 진주로퍼 <span class="line"></span> 블랙 <span class="line"></span> 245</h3>
+                                    <p>
+                                        인터넷으로 신발사는건 항상 신지못해서 힘들었는데 교환이 무배라고 하길래 주문해봤는데 성공이네요 ㅎㅎ 평소 운동화 240 구두245신어서 애매해서 문의 드렸는데
+                                        친절하게 답변해주시고 오랜만에 기분좋은 쇼핑이었어요 ㅎ 실물은 말할것도 없이 이쁘네요 ㅎㅎ
+                                    </p>
+                                    <div class="goods-customer-info">
+                                        <h4>착화감</h4>
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <th>사이즈</th>
+                                                    <td>딱 맞아요</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>발볼 넓이</th>
+                                                    <td>적당해요</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>무게감</th>
+                                                    <td>보통이에요</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="goods-customer-info">
+                                        <h4>구매자 발 정보</h4>
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <th>자주 신는 사이즈</th>
+                                                    <td>245</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>발볼 넓이</th>
+                                                    <td>넓은 편</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>발 형태</th>
+                                                    <td>로마인 형</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+                <!--
+                <div id="goods-fixed-btns">
+                    <script>
+                        $('#goods-fixed-btns').load('./layout/detail-buttons.html');
+                    </script>
+                </div>
+                 -->
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

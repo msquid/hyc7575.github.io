@@ -1,0 +1,232 @@
+<div class="util_wrap">
+    <form action="../goods/search" class="search_form hide">
+        <input type="hidden" name="keyword_log_flag" value="Y">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+            <tbody><tr>
+                <td><input type="text" name="search_text" value="" class="search_text search_text_bg"></td>
+                <td width="5"></td>
+                <td width="25"><input type="submit" class="search_btn" value="검색"></td>
+            </tr>
+        </tbody></table>
+    </form>
+</div>
+<!-- //상단 메뉴 -->
+<style>
+    #layout_header .logo_wrap {
+        height: 83px;
+        border-bottom: 1px solid rgba(155, 155, 155, 0.5);
+    }
+    #layout_header .logo_wrap h1 img {
+        height: auto;
+    }
+    #layout_header .top_menu,
+    #layout_header .top_search,
+    #layout_header .top_cart,
+    #layout_header .top_user_info {
+        -webkit-background-size: 48px 48px;
+        background-size: 48px 48px;
+    }
+    #layout_header .top_menu {
+        background-image: url(/data/skin/mobile_ver3_itsimply_gls/images/header/icon_menu.png);
+    }
+    #layout_header .top_search {
+        background-image: url(/data/skin/mobile_ver3_itsimply_gls/images/header/icon_search.png);
+    }
+    #layout_header .top_cart {
+        background-image: url(/data/skin/mobile_ver3_itsimply_gls/images/header/icon_shopping-cart.png);
+    }
+    #layout_header .top_user_info {
+        background-image: url(/data/skin/mobile_ver3_itsimply_gls/images/header/icon_user.png);
+    }
+    #layout_header .logo_wrap > a {
+        position: absolute;
+        top: 17px !important;
+        text-indent: -9999px;
+        width: 48px;
+        height: 48px;
+    }
+    #layout_header .logo_wrap a[href='#category'] {
+        left: 13px;
+    }
+    #layout_header .logo_wrap a[href='#search'] {
+        left: 74px;
+    }
+    #layout_header .logo_wrap a[href='#cart'] {
+        right: 74px;
+    }
+    #layout_header .logo_wrap a[href='#cart'] > span {
+        position: absolute;
+        top: 0;
+        right: -3px;
+        text-indent: 0;
+
+        width: 24px;
+        height: 24px;
+        line-height: 24px;
+
+        color: #fff;
+        font-size: 16px;
+        font-weight: 700;
+
+        border-radius: 50%;
+        background-color: #a5585c;
+    }
+    #layout_header .logo_wrap a[href='#userInfo'] {
+        right: 12px;
+    }
+    @media only screen and (max-width: 481px) {
+        #layout_header .logo_wrap {
+            height: 67px;
+        }
+        #layout_header .logo_wrap h1 img {
+            width: 100px;
+        }
+        #layout_header .logo_wrap h1 {
+            line-height: 63px;
+        }
+        #layout_header .logo_wrap > a {
+            width: 30px;
+            height: 30px;
+        }
+        #layout_header .top_menu,
+        #layout_header .top_search,
+        #layout_header .top_cart,
+        #layout_header .top_user_info {
+            background-size: 30px 30px;
+            background-repeat: no-repeat;
+            background-position: 50% 50%;
+        }
+        #layout_header .logo_wrap > a {
+            top: 19px !important;
+        }
+
+        #layout_header .logo_wrap a[href='#category'] {
+            left: 8px;
+        }
+        #layout_header .logo_wrap a[href='#search'] {
+            left: 44px;
+        }
+        #layout_header .logo_wrap a[href='#cart'] {
+            right: 44px;
+        }
+        #layout_header .logo_wrap a[href='#cart'] > span {
+
+        }
+        #layout_header .logo_wrap a[href='#userInfo'] {
+            right: 8px;
+        }
+    }
+</style>
+<div class="logo_wrap">
+    <h1><a href="/main/index" target="_self"><img src="/data/skin/mobile_ver3_itsimply_gls/images/common/title_logo.png" srcset="/data/skin/mobile_ver3_itsimply_gls/images/common/title_logo.png 1x, /data/skin/mobile_ver3_itsimply_gls/images/common/title_logo@2x.png 2x, /data/skin/mobile_ver3_itsimply_gls/images/common/title_logo@3x.png 3x" alt="어썸"></a></h1>
+    <a href="#category" class="top_menu">카테고리</a>
+    <a href="#search" class="top_search">검색</a>
+    <a href="#cart" class="top_cart" id="top_cart">장바구니</a>
+    <a href="#userInfo" class="top_user_info">유저 정보</a>
+</div>
+<!-- //로고 영역 -->
+<div class="nav_wrap">
+    <style>
+        #layout_header {
+            border-top: none;
+            border-bottom: 1px solid rgba(155, 155, 155, 0.5);
+        }
+        #layout_header .nav_wrap .nav_category {
+            position: relative;
+        }
+        #layout_header .nav_wrap .nav_category > ul {
+            overflow-x: auto;
+            padding-right: 42px;
+            white-space: nowrap;
+        }
+        #layout_header .nav_wrap .nav_category li {
+            float: none;
+            display: inline-block;
+            padding: 14px 0;
+            margin-right: -4px;
+            width: auto;
+            font-size: 18px;
+            box-sizing: border-box;
+        }
+        #layout_header .nav_wrap .nav_category li > a {
+            padding: 0 20px;
+            font-size: inherit;
+            border: none;
+        }
+        #layout_header .nav_wrap .nav_category > button {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            width: 42px;
+            border: none;
+            border-left: 1px solid rgba(155, 155, 155, 0.5);
+            background-color: #fff;
+
+            background-image: url(/data/skin/mobile_ver3_itsimply_gls/images/header/category_more_arrow@2x.png);
+            background-size: 40px;
+            background-repeat: no-repeat;
+            background-position: 50% 50%;
+        }
+        @media only screen and (max-width: 481px) {
+            #layout_header .nav_wrap .nav_category li {
+                padding: 8px 0 9px;
+                font-size: 16px;
+            }
+
+        }
+        @media only screen and (max-width: 401px) {
+            #layout_header .nav_wrap .nav_category li > a {
+                padding: 0 12px;
+            }
+        }
+    </style>
+    <div class="nav_category">
+        <!-- 이거 일단은 메인에서만 보인다고 합니다! -->
+        <ul>
+            <li class="">
+                <a href="#">EVENT</a>
+            </li>
+            <li>
+                <a href="#">BEST</a>
+            </li>
+            <li>
+                <a href="#">HEEL</a>
+            </li>
+            <li>
+                <a href="#">BOOTS</a>
+            </li>
+            <li>
+                <a href="#">LOAFER</a>
+            </li>
+            <li>
+                <a href="#">FLAT</a>
+            </li>
+            <li>
+                <a href="#">SNEAKERS</a>
+            </li>
+            <li>
+                <a href="#">HAND-MADE</a>
+            </li>
+            <li>
+                <a href="#">선주문</a>
+            </li>
+        </ul>
+        <button>
+            <span class="only-sr">카테고리 넘기기</span>
+        </button>
+    </div>
+    <script>
+        $('.nav_category > button').on('click', function() {
+            var $this = $(this);
+            var w = $(window).width();
+            var $ul = $this.prev('ul');
+
+            $ul.animate({
+                scrollLeft: $ul.scrollLeft() + (w - $this.width())
+            }, 1500);
+
+            console.log( $ul.scrollLeft() + (w - $this.width()));
+        });
+    </script>
+</div>
