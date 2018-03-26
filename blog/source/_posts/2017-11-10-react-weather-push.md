@@ -216,9 +216,9 @@ google의 geoCoder 를 이용하여 상세한 지역 정보를 가져옵니다. 
 더보기를 누르면 state.weatherDate 값이 증가하며 그 다음날의 날씨를 불러올 수 있습니다. 해외에서 제공하는 api때문인지 날씨가 묘하게 다른감이 없지 않아 있더군요. 개인 연습용으로 작업하는 것이라 무시하고 진행하였습니다.
 
 ## apis
-날씨 : [링크][https://openweathermap.org/current]
-지역(freegeoip) : [링크][https://freegeoip.net/]
-지도 : [api 링크][https://developers.google.com/maps/?hl=ko], [외부 컴포넌트 링크][https://github.com/istarkov/google-map-react]
+날씨 : [링크](https://openweathermap.org/current)
+지역(freegeoip) : [링크](https://freegeoip.net/)
+지도 : [api 링크](https://developers.google.com/maps/?hl=ko), [외부 컴포넌트 링크](https://github.com/istarkov/google-map-react)
 
 ## 마치며
 firebase에서 제공하는 메세징 서비스(fcm)와 service worker를 추가하여 웹앱 형태로 동작하도록 추가적인 작업을 진행 해보려합니다.
