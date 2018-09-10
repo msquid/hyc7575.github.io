@@ -14,20 +14,6 @@
     </url>
 
     <url>
-        <loc>http://hyc7575.github.io/categories/Node-js/</loc>
-        <lastmod>2017-11-26T11:33:07.554Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://hyc7575.github.io/categories/html-css/</loc>
-        <lastmod>2017-11-26T11:33:07.557Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://hyc7575.github.io/categories/Javascript/React/</loc>
         <lastmod>2017-12-20T08:58:45.188Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -58,6 +44,20 @@
     <url>
         <loc>http://hyc7575.github.io/categories/%EA%B8%B0%ED%83%80/SVG/</loc>
         <lastmod>2018-04-03T08:21:12.939Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hyc7575.github.io/categories/Node-js/</loc>
+        <lastmod>2018-09-10T06:01:23.059Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://hyc7575.github.io/categories/html-css/</loc>
+        <lastmod>2018-09-10T07:18:58.166Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
