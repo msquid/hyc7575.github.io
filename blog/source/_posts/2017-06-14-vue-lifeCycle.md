@@ -2,7 +2,7 @@
 title: Vue.js - LifeCycle
 date: 2017-06-14 09:44:26
 banner:
-    url: https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Vue.js_Logo.svg/480px-Vue.js_Logo.svg.png?uselang=ko
+    url: https://upload.wikimedia.org/wikipedia/commons/f/f1/Vue.png
 categories:
     - Javascript
     - vue
@@ -14,8 +14,10 @@ tags:
     - 라이프사이클
     - 생명주기
 ---
+이미지 출처(https://vuejs.org/images/logo.png)
 [link1]: https://vuejs.org/
 [link2]: https://kr.vuejs.org/v2/guide/render-function.html
+
 
 라이프사이클이란 Vue 생성자의 호출 시점부터 mount 되기까지, 나아가 destroy 되기까지의 특정 시점들에 실행되는 메서드들 입니다. 아래 그림의 붉은 테두리를 가진 기호들이 Vue.js의 라이프사이클의 각 실행 시점입니다. (Vue.js가 어떤 흐름으로 동작하는지도 잘 나타나 있어서 많은 도움이 됩니다.)
 

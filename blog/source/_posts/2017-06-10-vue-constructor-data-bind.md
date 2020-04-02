@@ -2,7 +2,7 @@
 title: Vue.js - 뷰 모델 생성과 데이터 바인딩
 date: 2017-06-10 18:26:31
 banner:
-    url: https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Vue.js_Logo.svg/480px-Vue.js_Logo.svg.png?uselang=ko
+    url: https://upload.wikimedia.org/wikipedia/commons/f/f1/Vue.png
 categories:
     - Javascript
     - vue
@@ -12,7 +12,10 @@ tags:
     - vue js
     - data bind
 ---
+이미지 출처(https://vuejs.org/images/logo.png)
 [link1]: https://kr.vuejs.org/v2/api/#옵션-데이터
+
+
 ## 뷰 모델 생성
 ViewModel을 생성하는 방법은 간단합니다. 전역에 부여되는 `Vue` 생성자로 생성한 인스턴스가 ViewModel이 됩니다. 인스턴스를 생성할 때 여러 옵션을 넘겨 줄 수 있는데 이번 예제로 어떠한 옵션들이 있는지 살펴보고자 합니다.
 

@@ -8,13 +8,15 @@ tags:
   - vue project
 banner:
   url: >-
-    https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Vue.js_Logo.svg/480px-Vue.js_Logo.svg.png?uselang=ko
+    https://upload.wikimedia.org/wikipedia/commons/f/f1/Vue.png
 categories:
   - Javascript
   - vue
 published: true
 date: 2017-12-20 17:25:13
 ---
+이미지 출처(https://vuejs.org/images/logo.png)
+
 ## 프로젝트 생성
 
 여태까지 Vue.js에 대한 아주아주 기본적인 문법들을 살펴보았습니다. 이제 Vue.js를 사용하여 프로젝트를 구성해보려고 합니다.

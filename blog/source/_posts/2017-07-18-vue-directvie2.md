@@ -10,11 +10,13 @@ tags:
   - 지시자
 banner:
   url: >-
-    https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Vue.js_Logo.svg/480px-Vue.js_Logo.svg.png?uselang=ko
+    https://upload.wikimedia.org/wikipedia/commons/f/f1/Vue.png
 categories:
   - Javascript
   - vue
 ---
+이미지 출처(https://vuejs.org/images/logo.png)
+
 
 이번 2장에서 아직 다루지 않은 디렉티브들을 살펴볼 예정입니다. ( 요즘 프로그래밍 외 적으로 하고 있는 게 많아서 포스팅이 순위에서 많이 밀리네요 ㅠ )
 

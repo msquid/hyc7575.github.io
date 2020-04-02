@@ -9,13 +9,14 @@ tags:
   - vue component
 banner:
   url: >-
-    https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Vue.js_Logo.svg/480px-Vue.js_Logo.svg.png?uselang=ko
+    https://upload.wikimedia.org/wikipedia/commons/f/f1/Vue.png
 categories:
   - Javascript
   - vue
 published: true
 date: 2018-03-22 17:18:37
 ---
+이미지 출처(https://vuejs.org/images/logo.png)
 
 ## 컴포넌트 사용하기
 [이전 글](/2017/12/21/2017-12-21-vue-prject-example/)에서 예제로 사용한 카운트 앱을 통하여 학습해봅시다.

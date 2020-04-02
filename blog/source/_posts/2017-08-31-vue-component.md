@@ -9,13 +9,14 @@ tags:
   - 지시자
 banner:
   url: >-
-    https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Vue.js_Logo.svg/480px-Vue.js_Logo.svg.png?uselang=ko
+    https://upload.wikimedia.org/wikipedia/commons/f/f1/Vue.png
 categories:
   - Javascript
   - vue
 published: true
 date: 2017-08-31 14:04:42
 ---
+이미지 출처(https://vuejs.org/images/logo.png)
 
 
 컴포넌트라 함은 웹 어플리케이션을 구성하는 하나하나의 부품입니다. Vue.js에서는 이 컴포넌트를 가장 강력한 기능 중 하나라고 소개하고 있습니다. 컴포넌트란 무엇인가 이런 자세한 설명은 생략하고 Vue.js에서 컴포넌트를 사용하는 방법을 바로 알아보도록 하겠습니다.

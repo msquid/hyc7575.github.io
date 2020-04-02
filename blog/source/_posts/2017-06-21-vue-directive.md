@@ -9,12 +9,13 @@ tags:
   - 지시자
 banner:
   url: >-
-    https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Vue.js_Logo.svg/480px-Vue.js_Logo.svg.png?uselang=ko
+    https://upload.wikimedia.org/wikipedia/commons/f/f1/Vue.png
 categories:
   - Javascript
   - vue
 date: 2017-06-27 10:36:24
 ---
+이미지 출처(https://vuejs.org/images/logo.png)
 
 
 디렉티브란 Vue.js 에서 사용되는 특별한 속성 입니다. Angular1 을 사용해보셨던 분들은 익숙할 것 입니다. Angular에서 `ng-` 를 사용한다면 Vue 에서는 `v-` 라는 접두사를 사용합니다. 이번 포스팅에서는 Vue.js 에서 기본적으로 제공하는 디렉티브 몇가지를 알아보려고 합니다.

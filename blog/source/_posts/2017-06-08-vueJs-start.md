@@ -2,7 +2,7 @@
 title: Vue.js - 시작하기
 date: 2017-06-08 21:29:57
 banner:
-    url: https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Vue.js_Logo.svg/480px-Vue.js_Logo.svg.png?uselang=ko
+    url: https://upload.wikimedia.org/wikipedia/commons/f/f1/Vue.png
 categories:
     - Javascript
     - vue
@@ -11,9 +11,10 @@ tags:
     - vue
     - vue js
 ---
-
+이미지 출처(https://vuejs.org/images/logo.png)
 [link-other-framework]: https://kr.vuejs.org/v2/guide/comparison.html
 [vue-kr]: https://kr.vuejs.org/
+
 
 ## 시작하기 앞서
 지난 주말 여기 저기서 들려오고 있으며 엄청난 성장세를 보여주고 있는 Vue.js의 공식 문서를 한번 읽어 보았습니다. 한글화가 굉장히 잘 되어있어서 금방금방 슝슝 스크롤을 내리면서 읽을 수 있더군요.(커뮤니티분들께 감사) 처음 문법을 보면서 느낀점은 마치 angular1 과 react를 합친 듯 한 기분이 들었습니다. 또 '러닝커브가 낮고 굉장히 효율적이다.' 라는 소리가 괜히 나오는게 아닌것 같았습니다. 문서를 한번 읽어보니 어떤 흐름으로 흘러가는지 대충 파악이 가능했습니다. 사용 방법도 매우 간단하여 jquery처럼 문서에 스크립트 한줄 추가(이 방법이 best practice 라는건 아닙니다!)하거나 vue-cli와 같은 제너레이터를 이용하여 쉽게 webpack 혹은 browserify와 함께 사용할 수 있습니다. 진행하는 프로젝트 중 spring 위에서 프레임워크 없이 jquery를 기반으로 사용하는 것이 있는데 Vue.js라면 쉽게 특정 부분에서 사용할 수 있겠다 싶어서 바로 적용해 보았습니다. 결과부터 말하자면 아직 진행중이지만 꽤 괜찮은 것(기존 코드가 너무...) 같더군요. 물론 아직 지식이 부족해서 많은 삽질이 있었지만 나름 만족스럽게 진행되어 가고 있는 듯 합니다. 이 작업을 계기로 장기적으로 프로젝트에 조금씩 도입해가며 기초부터 한번 포스팅을 해보고자 해서 쓰게 되었습니다.

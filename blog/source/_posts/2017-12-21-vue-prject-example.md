@@ -8,13 +8,15 @@ tags:
   - vue project
 banner:
   url: >-
-    https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Vue.js_Logo.svg/480px-Vue.js_Logo.svg.png?uselang=ko
+    https://upload.wikimedia.org/wikipedia/commons/f/f1/Vue.png
 categories:
   - Javascript
   - vue
 published: true
 date: 2017-12-21 11:52:54
 ---
+이미지 출처(https://vuejs.org/images/logo.png)
+
 
 이번에는 vue-cli가 만들어준 Vue 프로젝트를 살펴보도록 하겠습니다.
 그전에 한가지 짚고 가야 할 점이 있습니다.

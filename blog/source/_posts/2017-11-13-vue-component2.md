@@ -9,13 +9,15 @@ tags:
   - 지시자
 banner:
   url: >-
-    https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Vue.js_Logo.svg/480px-Vue.js_Logo.svg.png?uselang=ko
+    https://upload.wikimedia.org/wikipedia/commons/f/f1/Vue.png
 categories:
   - Javascript
   - vue
 published: true
 date: 2017-11-13 17:32:25
 ---
+이미지 출처(https://vuejs.org/images/logo.png)
+
 지난 시간에 이어 컴포넌트를 사용하는 몇가지 방법을 더 알아보고자 합니다.
 조금 더 쉽게 템플릿을 만드는 방법과 각 컴포넌트의 통신 방법을 예제를 들어 설명 하도록 하겠습니다.
 
